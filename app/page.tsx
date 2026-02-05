@@ -1,7 +1,7 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/lib/supabase/client";
 
 export default async function Home() {
-  const supabase = await createClient();
+  const supabase = createClient();
 
   const { data, error } = await supabase.from("Todos").select("*");
 
@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16  sm:items-start">
+      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center py-2 sm:items-start">
         <h1 className="text-4xl font-bold">Welcome to AI Text Editor</h1>
         <p>{JSON.stringify(data, null, 2)}</p>
       </main>
