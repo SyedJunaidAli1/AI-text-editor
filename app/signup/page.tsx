@@ -40,7 +40,7 @@ export default function SignUp() {
   };
 
   return (
-    <section className=" grid place-items-center h-screen">
+    <section className="flex items-center justify-center h-screen px-4">
       <Card className="z-50 rounded-md rounded-t-none max-w-md">
         <CardHeader>
           <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
