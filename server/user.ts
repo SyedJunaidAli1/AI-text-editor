@@ -1,20 +1,31 @@
-import { createClient } from "@/lib/supabase/client";
+"use server";
+import { createClient } from "@/lib/supabase/server";
 
-const supabase = createClient();
+interface SigUpParams {
+  email: string;
+  password: string;
+  name: string;
+}
 
-export async function signUpNewUser(email: string, password: string) {
+export async function signUpNewUser({ email, password, name }: SigUpParams) {
+  const supabase = await createClient();
   try {
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
-        emailRedirectTo: "https://example.com/welcome",
+        data: {
+          full_name: name,
+        },
       },
     });
-    if (error) throw error;
+
+    if (error) {
+      throw new Error(error.message);
+    }
     return data;
   } catch (error) {
     console.error(error);
-    throw error;
+    throw new Error("SignUp failed");
   }
 }
