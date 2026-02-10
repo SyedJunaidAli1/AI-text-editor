@@ -54,6 +54,7 @@ export default function SignUp() {
 
       router.push("/"); // ⭐ better than "/"
     } catch (err: any) {
+      setError(err.message);
       toast.error(err.message);
     } finally {
       setLoading(false);
@@ -139,7 +140,7 @@ export default function SignUp() {
                 "Create your account"
               )}
             </Button>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="text-red-500 text-center">{error}</p>}
           </form>
         </CardContent>
       </Card>
