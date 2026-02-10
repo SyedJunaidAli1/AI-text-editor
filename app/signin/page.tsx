@@ -37,9 +37,9 @@ export default function SignIn() {
 
       setLoading(false);
       router.push("/dashboard");
-    } catch (err) {
+    } catch (err: any) {
       setLoading(false);
-      setError("Invalid email or password");
+      setError(err.message);
     }
   };
 
@@ -114,20 +114,20 @@ export default function SignIn() {
                 variant="outline"
                 className="w-full gap-2"
                 disabled={loading}
-                onClick={async () => {
-                  await signIn.social({
-                    provider: "google",
-                    callbackURL: "/dashboard",
-                    fetchOptions: {
-                      onRequest: () => {
-                        setLoading(true);
-                      },
-                      onResponse: () => {
-                        setLoading(false);
-                      },
-                    },
-                  });
-                }}
+                // onClick={async () => {
+                //   await signIn.social({
+                //     provider: "google",
+                //     callbackURL: "/dashboard",
+                //     fetchOptions: {
+                //       onRequest: () => {
+                //         setLoading(true);
+                //       },
+                //       onResponse: () => {
+                //         setLoading(false);
+                //       },
+                //     },
+                //   });
+                // }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
