@@ -1,0 +1,4 @@
+- [x] signup using supabase done
+- [x] signin using email and password with supabase done
+- [] oauth using supabse google 
+- [] logout using supabase 
