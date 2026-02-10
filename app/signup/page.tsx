@@ -23,6 +23,7 @@ export default function SignUp() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ export default function SignUp() {
         name: `${firstName} ${lastName}`.trim(),
       });
 
-      router.push("/check-email"); // ⭐ better than "/"
+      router.push("/"); // ⭐ better than "/"
     } catch (err: any) {
       toast.error(err.message);
     } finally {
@@ -138,6 +139,7 @@ export default function SignUp() {
                 "Create your account"
               )}
             </Button>
+            {error && <p className="text-red-500">{error}</p>}
           </form>
         </CardContent>
       </Card>
