@@ -17,6 +17,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { signinUser } from "@/server/user";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -43,6 +44,8 @@ export default function SignIn() {
       setError(err.message);
     }
   };
+
+  const supabase = createClient();
 
   return (
     <section className="flex items-center justify-center min-h-screen px-4">
@@ -115,20 +118,14 @@ export default function SignIn() {
                 variant="outline"
                 className="w-full gap-2"
                 disabled={loading}
-                // onClick={async () => {
-                //   await signIn.social({
-                //     provider: "google",
-                //     callbackURL: "/dashboard",
-                //     fetchOptions: {
-                //       onRequest: () => {
-                //         setLoading(true);
-                //       },
-                //       onResponse: () => {
-                //         setLoading(false);
-                //       },
-                //     },
-                //   });
-                // }}
+                onClick={async () => {
+                  await supabase.auth.signInWithOAuth({
+                    provider: "google",
+                    options: {
+                      redirectTo: `http://localhost:3000/`,
+                    },
+                  });
+                }}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
