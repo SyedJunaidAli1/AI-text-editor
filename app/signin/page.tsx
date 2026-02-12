@@ -153,6 +153,12 @@ export default function SignIn() {
                 Sign in with Google
               </Button>
             </div>
+            <div className="flex items-center justify-center">
+              <p className="">Don't have an account?</p>
+              <Button variant="link">
+                <Link href="/signup">Sign up </Link>
+              </Button>
+            </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
           </form>
         </CardContent>

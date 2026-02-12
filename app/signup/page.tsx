@@ -15,6 +15,7 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signUpNewUser } from "@/server/user";
+import Link from "next/link";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -141,6 +142,12 @@ export default function SignUp() {
                 "Create your account"
               )}
             </Button>
+            <div className="flex items-center justify-center">
+              <p>Already have an account?</p>
+              <Link href="/signin">
+                <Button variant="link">Log in</Button>
+              </Link>
+            </div>
             {error && <p className="text-red-500 text-center">{error}</p>}
           </form>
         </CardContent>
