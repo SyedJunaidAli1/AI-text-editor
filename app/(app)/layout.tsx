@@ -8,7 +8,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       style={
         {
           "--sidebar-width": "14rem",
-          "--sidebar-width-mobile": "7rem",
+          "--sidebar-width-mobile": "8rem",
         } as React.CSSProperties
       }
     >
