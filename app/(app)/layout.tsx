@@ -7,13 +7,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <SidebarProvider
       style={
         {
-          "--sidebar-width": "14rem",
+          "--sidebar-width": "12rem",
           "--sidebar-width-mobile": "8rem",
         } as React.CSSProperties
       }
     >
       <AppSidebar />
-
       <SidebarTrigger />
       {children}
     </SidebarProvider>
