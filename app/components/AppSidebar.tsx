@@ -15,7 +15,7 @@ import { Plus, User2 } from "lucide-react";
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader />
       <SidebarContent>
         <SidebarGroup>
