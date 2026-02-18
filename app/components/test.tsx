@@ -7,7 +7,7 @@ export default async function Test() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user);
+ 
 
   return <div>Hello {user?.email}
 

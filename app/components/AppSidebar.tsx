@@ -12,8 +12,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Plus, User2 } from "lucide-react";
+import Image from "next/image";
 
 export function AppSidebar({ user }: any) {
+  console.log(user.user_metadata);
+
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader />
@@ -31,7 +34,7 @@ export function AppSidebar({ user }: any) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <User2 /> {user.email}
+              <Image src={user.user_metadata.avatar_url} width={20} height={20} /> <p>{user.user_metadata.name}</p>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

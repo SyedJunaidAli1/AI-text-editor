@@ -1,4 +1,5 @@
 - [x] signup using supabase done
 - [x] signin using email and password with supabase done
-- [] oauth using supabse google 
-- [] logout using supabase 
+- [x] oauth using supabse google
+- [] dashboard UI/UX is in the works
+- [] logout using supabase
