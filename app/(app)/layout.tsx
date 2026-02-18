@@ -1,8 +1,14 @@
 import "../globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/app/components/AppSidebar";
+import { getUser } from "@/server/user";
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // const user = await getUser();
   return (
     <SidebarProvider
       style={
