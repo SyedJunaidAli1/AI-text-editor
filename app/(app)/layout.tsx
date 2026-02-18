@@ -1,14 +1,15 @@
 import "../globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/app/components/AppSidebar";
-import { getUser } from "@/server/user";
+import { getUser } from "@/server/data";
 
 export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // const user = await getUser();
+  const user = await getUser();
+
   return (
     <SidebarProvider
       style={
@@ -18,7 +19,7 @@ export default async function AppLayout({
         } as React.CSSProperties
       }
     >
-      <AppSidebar />
+      <AppSidebar user={user} />
       <SidebarTrigger />
       {children}
     </SidebarProvider>

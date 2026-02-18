@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Plus, User2 } from "lucide-react";
 
-export function AppSidebar() {
+export function AppSidebar({ user }: any) {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader />
@@ -31,7 +31,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <User2 /> Username
+              <User2 /> {user.email}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
