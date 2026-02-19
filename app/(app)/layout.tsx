@@ -11,14 +11,7 @@ export default async function AppLayout({
   const user = await getUser();
 
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "12rem",
-          "--sidebar-width-mobile": "8rem",
-        } as React.CSSProperties
-      }
-    >
+    <SidebarProvider>
       <AppSidebar user={user} />
       <SidebarTrigger />
       {children}

@@ -1,3 +1,5 @@
+"use client";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Sidebar,
   SidebarContent,
@@ -10,12 +12,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { Plus, User2 } from "lucide-react";
-import Image from "next/image";
+import { Plus } from "lucide-react";
 
 export function AppSidebar({ user }: any) {
   console.log(user.user_metadata);
+
+  const { state } = useSidebar();
 
   return (
     <Sidebar variant="sidebar" collapsible="icon">
@@ -33,14 +37,28 @@ export function AppSidebar({ user }: any) {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton>
-              <Image
-                src={user.user_metadata.avatar_url}
-                width={30}
-                height={20}
-                alt={user.user_metadata.name}
-              />{" "}
-              <p>{user.user_metadata.name}</p>
+            <SidebarMenuButton
+              className={`h-16 transition-all ${
+                state === "collapsed"
+                  ? "justify-center px-0"
+                  : "justify-start px-3 gap-2"
+              }`}
+            >
+              <Avatar>
+                <AvatarImage src={user.user_metadata.avatar_url} />
+                <AvatarFallback>
+                  {user.email?.charAt(0).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+
+              {state !== "collapsed" && (
+                <div className="flex flex-col leading-tight">
+                  <p className="font-semibold text-sm">
+                    {user.user_metadata.full_name}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
+                </div>
+              )}
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
