@@ -24,7 +24,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Plus } from "lucide-react";
+import { ChevronsUpDown, LogOut, Plus } from "lucide-react";
 
 export function AppSidebar({ user }: any) {
   console.log(user.user_metadata);
@@ -72,6 +72,7 @@ export function AppSidebar({ user }: any) {
                       </p>
                     </div>
                   )}
+                  <ChevronsUpDown className="ml-auto size-4" />
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -82,8 +83,9 @@ export function AppSidebar({ user }: any) {
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Team</DropdownMenuItem>
-                  <DropdownMenuItem>Subscription</DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <LogOut /> Log out
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
