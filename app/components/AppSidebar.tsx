@@ -34,7 +34,13 @@ export function AppSidebar({ user }: any) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <Image src={user.user_metadata.avatar_url} width={20} height={20} /> <p>{user.user_metadata.name}</p>
+              <Image
+                src={user.user_metadata.avatar_url}
+                width={30}
+                height={20}
+                alt={user.user_metadata.name}
+              />{" "}
+              <p>{user.user_metadata.name}</p>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

@@ -1,5 +1,5 @@
 - [x] signup using supabase done
 - [x] signin using email and password with supabase done
 - [x] oauth using supabse google
-- [] dashboard UI/UX is in the works
+- [] dashboard UI/UX is in the works using tanstack query (for now i am doing as props)
 - [] logout using supabase
