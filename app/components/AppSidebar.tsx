@@ -82,8 +82,6 @@ export function AppSidebar({ user }: any) {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        <SidebarSeparator />
       </SidebarContent>
 
       <SidebarFooter>
