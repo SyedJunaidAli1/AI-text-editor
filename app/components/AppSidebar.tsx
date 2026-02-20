@@ -30,9 +30,6 @@ import { useRouter } from "next/navigation";
 
 export function AppSidebar({ user }: any) {
   const router = useRouter();
-
-  console.log(user.user_metadata);
-
   const { state } = useSidebar();
 
   return (
