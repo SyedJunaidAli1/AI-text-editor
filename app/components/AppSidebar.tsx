@@ -39,7 +39,7 @@ export function AppSidebar({ user }: any) {
             <SidebarMenuButton>
               <div className="flex items-center justify-center gap-2 ">
                 <Sparkle />
-                AI text editor
+                {state !== "collapsed" && "AI text editor"}
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -83,7 +83,9 @@ export function AppSidebar({ user }: any) {
                       </p>
                     </div>
                   )}
-                  <ChevronsUpDown className="ml-auto size-4" />
+                  {state !== "collapsed" && (
+                    <ChevronsUpDown className="ml-auto size-4" />
+                  )}
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
