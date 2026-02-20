@@ -22,9 +22,17 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { ChevronsUpDown, LogOut, Plus, Sparkle } from "lucide-react";
+import {
+  ChevronsUpDown,
+  History,
+  LogOut,
+  Pencil,
+  Plus,
+  Sparkle,
+} from "lucide-react";
 
 export function AppSidebar({ user }: any) {
   console.log(user.user_metadata);
@@ -45,16 +53,39 @@ export function AppSidebar({ user }: any) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Applicatisadsasn</SidebarGroupLabel>
-          <SidebarGroupAction>
-            <Plus /> <span className="sr-only">Add Project</span>
-          </SidebarGroupAction>
-          <SidebarGroupContent>dasdasd</SidebarGroupContent>
+          <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {/* Editor */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href="/editor">
+                    <Pencil className="size-4" />
+                    <span>Editor</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {/* History */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <a href="/history">
+                    <History className="size-4" />
+                    <span>History</span>
+                  </a>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup />
+
+        <SidebarSeparator />
       </SidebarContent>
+
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
