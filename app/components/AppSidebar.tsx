@@ -15,27 +15,22 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarSeparator,
   useSidebar,
 } from "@/components/ui/sidebar";
-import {
-  ChevronsUpDown,
-  History,
-  LogOut,
-  Pencil,
-  Plus,
-  Sparkle,
-} from "lucide-react";
+import { signoutUser } from "@/server/user";
+import { ChevronsUpDown, History, LogOut, Pencil, Sparkle } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function AppSidebar({ user }: any) {
+  const router = useRouter();
+
   console.log(user.user_metadata);
 
   const { state } = useSidebar();
@@ -127,7 +122,12 @@ export function AppSidebar({ user }: any) {
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={async () => {
+                      await signoutUser();
+                      router.push("/signin");
+                    }}
+                  >
                     <LogOut /> Log out
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
