@@ -33,6 +33,7 @@ import {
   Plus,
   Sparkle,
 } from "lucide-react";
+import Link from "next/link";
 
 export function AppSidebar({ user }: any) {
   console.log(user.user_metadata);
@@ -63,20 +64,20 @@ export function AppSidebar({ user }: any) {
               {/* Editor */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/editor">
+                  <Link href="/editor">
                     <Pencil className="size-4" />
                     <span>Editor</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
               {/* History */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <a href="/history">
+                  <Link href="/history">
                     <History className="size-4" />
                     <span>History</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -120,8 +121,9 @@ export function AppSidebar({ user }: any) {
               <DropdownMenuContent>
                 <DropdownMenuGroup>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Billing</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>Terms</DropdownMenuItem>
+                  <DropdownMenuItem>Privacy & Policy</DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
