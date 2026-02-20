@@ -28,7 +28,15 @@ import { ChevronsUpDown, History, LogOut, Pencil, Sparkle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export function AppSidebar({ user }: any) {
+interface userProps {
+  email: string;
+  user_metadata: {
+    full_name: string;
+    avatar_url: string;
+  };
+}
+
+export function AppSidebar({ user }: userProps) {
   const router = useRouter();
   const { state } = useSidebar();
 

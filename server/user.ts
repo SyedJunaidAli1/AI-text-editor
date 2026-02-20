@@ -55,9 +55,14 @@ export async function signinUser({ email, password }: SignInParams) {
 export async function signoutUser() {
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.signOut();
+  try {
+    const { error } = await supabase.auth.signOut();
 
-  if (error) {
-    console.error(error.message);
+    if (error) {
+      console.error(error.message);
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error("SignOut failed");
   }
 }
