@@ -24,7 +24,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { ChevronsUpDown, LogOut, Plus } from "lucide-react";
+import { ChevronsUpDown, LogOut, Plus, Sparkle } from "lucide-react";
 
 export function AppSidebar({ user }: any) {
   console.log(user.user_metadata);
@@ -33,7 +33,18 @@ export function AppSidebar({ user }: any) {
 
   return (
     <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarHeader />
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <div className="flex items-center justify-center gap-2 ">
+                <Sparkle />
+                AI text editor
+              </div>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Applicatisadsasn</SidebarGroupLabel>
