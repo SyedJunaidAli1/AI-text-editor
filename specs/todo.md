@@ -3,3 +3,6 @@
 - [x] oauth using supabse google
 - [] dashboard UI/UX is in the works (for now i am doing as props for ssr)
 - [x] logout using supabase
+- [ ] about page completed them for ai editor (for now placeholder)
+- [ ] privacy page completed them for ai editor (for now placeholder)
+- [ ] terms page completed them for ai editor (for now placeholder)
