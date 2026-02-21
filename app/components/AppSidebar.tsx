@@ -127,6 +127,9 @@ export function AppSidebar({ user }: userProps) {
                   <DropdownMenuItem>
                     <Link href="/privacy">Privacy & Policy</Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/about">About</Link>
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
