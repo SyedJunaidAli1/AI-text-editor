@@ -58,7 +58,6 @@ export function AppSidebar({ user }: userProps) {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Workspace</SidebarGroupLabel>
-
           <SidebarGroupContent>
             <SidebarMenu>
               {/* Editor */}
@@ -122,8 +121,12 @@ export function AppSidebar({ user }: userProps) {
                 <DropdownMenuGroup>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem><Link href="/terms">Terms</Link></DropdownMenuItem>
-                  <DropdownMenuItem><Link href="/privacy">Privacy & Policy</Link></DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/terms">Terms</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/privacy">Privacy & Policy</Link>
+                  </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
