@@ -4,15 +4,15 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
+import StarterKit from "@tiptap/starter-kit";
 
 const Tiptap = () => {
   const editor = useEditor({
-    // element: document.querySelector('.element'),
     // onUpdate({ editor }) {
-    //    const json = editor.getJSON();
-    //    console.log("Document JSON:", json);
-    //  },
-    extensions: [Document, Paragraph, Text],
+    //   const json = editor.getJSON();
+    //   console.log("Document JSON:", json);
+    // },
+    extensions: [StarterKit, Document, Paragraph, Text],
     content: "<p>Hello World! 🌎️</p>",
     autofocus: true,
     editable: true,
