@@ -4,7 +4,7 @@
 - [] dashboard UI/UX is in the works (for now i am doing as props for ssr)
 - [x] logout using supabase
 - [x] using tiptap for text editor (lexical alternative)
-- [ ] need to figure out why starter kit not working
-- [ ] about page completed them for ai editor (for now placeholder)
+- [x] need to figure out why starter kit not working (it was working but i have to create my own component)
+- [x] about page completed them for ai editor (for now placeholder)
 - [ ] privacy page completed them for ai editor (for now placeholder)
 - [ ] terms page completed them for ai editor (for now placeholder)
