@@ -8,6 +8,8 @@ import {
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Button } from "@/components/ui/button";
+import { Toggle } from "@/components/ui/toggle";
+import { BoldIcon, ItalicIcon, StrikethroughIcon } from "lucide-react";
 
 const Tiptap = () => {
   const editor = useEditor({
@@ -45,26 +47,24 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   });
   return (
     <>
-      <Button
-        onClick={() => editor.chain().focus().toggleBold().run()}
-        className={editorState.isBold ? "is-active" : ""}
+      <Toggle
+        pressed={editorState.isBold}
+        onPressedChange={() => editor.chain().focus().toggleBold().run()}
       >
-        Bold
-      </Button>
-      <Button
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-  
-        className={editorState.isItalic ? "is-active" : ""}
+        <BoldIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isItalic}
+        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
       >
-        Italic
-      </Button>
-      <Button
-        onClick={() => editor.chain().focus().toggleStrike().run()}
-
-        className={editorState.isStrike ? "is-active" : ""}
+        <ItalicIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isStrike}
+        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
-        Strike
-      </Button>
+        <StrikethroughIcon className="w-4 h-4" />
+      </Toggle>
     </>
   );
 };
