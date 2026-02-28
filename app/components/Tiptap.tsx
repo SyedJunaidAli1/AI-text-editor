@@ -18,6 +18,7 @@ import {
   Underline,
   Undo2Icon,
 } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const Tiptap = () => {
   const editor = useEditor({
@@ -59,54 +60,62 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   });
   return (
     <>
-      <section className="flex items-center justify-start border-2 border-red-500">
-        <Button
-          onClick={() => editor.chain().focus().undo().run()}
-          variant="ghost"
-        >
-          <Undo2Icon />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().redo().run()}
-          variant="ghost"
-        >
-          <Redo2Icon />
-        </Button>
-        <Toggle
-          pressed={editorState.isBold}
-          onPressedChange={() => editor.chain().focus().toggleBold().run()}
-          aria-label="Bold"
-        >
-          <BoldIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isItalic}
-          onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-          aria-label="Italic"
-        >
-          <ItalicIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isStrike}
-          onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-          aria-label="Strike"
-        >
-          <StrikethroughIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isCode}
-          onPressedChange={() => editor.chain().focus().toggleCode().run()}
-          aria-label="Code"
-        >
-          <Code className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isUnderline}
-          onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-          aria-label="Underline"
-        >
-          <Underline className="w-4 h-4" />
-        </Toggle>
+      <section className="flex gap-2 h-8 items-center justify-start">
+        <div>
+          <Button
+            onClick={() => editor.chain().focus().undo().run()}
+            variant="ghost"
+          >
+            <Undo2Icon />
+          </Button>
+          <Button
+            onClick={() => editor.chain().focus().redo().run()}
+            variant="ghost"
+          >
+            <Redo2Icon />
+          </Button>
+        </div>
+
+        <Separator orientation="vertical" />
+        <div>
+          <Toggle
+            pressed={editorState.isBold}
+            onPressedChange={() => editor.chain().focus().toggleBold().run()}
+            aria-label="Bold"
+          >
+            <BoldIcon className="w-4 h-4" />
+          </Toggle>
+          <Toggle
+            pressed={editorState.isItalic}
+            onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+            aria-label="Italic"
+          >
+            <ItalicIcon className="w-4 h-4" />
+          </Toggle>
+          <Toggle
+            pressed={editorState.isStrike}
+            onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+            aria-label="Strike"
+          >
+            <StrikethroughIcon className="w-4 h-4" />
+          </Toggle>
+          <Toggle
+            pressed={editorState.isCode}
+            onPressedChange={() => editor.chain().focus().toggleCode().run()}
+            aria-label="Code"
+          >
+            <Code className="w-4 h-4" />
+          </Toggle>
+          <Toggle
+            pressed={editorState.isUnderline}
+            onPressedChange={() =>
+              editor.chain().focus().toggleUnderline().run()
+            }
+            aria-label="Underline"
+          >
+            <Underline className="w-4 h-4" />
+          </Toggle>
+        </div>
       </section>
     </>
   );
