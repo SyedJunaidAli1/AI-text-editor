@@ -74,18 +74,21 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
       <Toggle
         pressed={editorState.isBold}
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
+        aria-label="Bold"
       >
         <BoldIcon className="w-4 h-4" />
       </Toggle>
       <Toggle
         pressed={editorState.isItalic}
         onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+        aria-label="Italic"
       >
         <ItalicIcon className="w-4 h-4" />
       </Toggle>
       <Toggle
         pressed={editorState.isStrike}
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+        aria-label="Strike"
       >
         <StrikethroughIcon className="w-4 h-4" />
       </Toggle>
@@ -99,6 +102,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
       <Toggle
         pressed={editorState.isCode}
         onPressedChange={() => editor.chain().focus().toggleCode().run()}
+        aria-label="Code"
       >
         <Code className="w-4 h-4" />
       </Toggle>
