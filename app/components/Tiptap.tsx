@@ -12,8 +12,10 @@ import { Toggle } from "@/components/ui/toggle";
 import {
   BoldIcon,
   ItalicIcon,
+  Redo2Icon,
   StrikethroughIcon,
   Underline,
+  Undo2Icon,
 } from "lucide-react";
 
 const Tiptap = () => {
@@ -55,8 +57,16 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   });
   return (
     <>
-      <Button onClick={() => editor.chain().focus().undo().run()}>Undo</Button>
-      <Button onClick={() => editor.chain().focus().redo().run()}>Redo</Button>
+      <Button onClick={() => editor.chain().focus().undo().run()}
+        variant="ghost"
+      >
+        <Undo2Icon />
+      </Button>
+      <Button onClick={() => editor.chain().focus().redo().run()}
+        variant="ghost"
+      >
+        <Redo2Icon />
+      </Button>
       <Toggle
         pressed={editorState.isBold}
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
