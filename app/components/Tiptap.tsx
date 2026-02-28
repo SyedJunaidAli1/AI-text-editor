@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import {
   BoldIcon,
+  Code,
   ItalicIcon,
   Redo2Icon,
   StrikethroughIcon,
@@ -52,17 +53,20 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isUnderline: ctx.editor.isActive("underline") ?? false,
         isUndoable: ctx.editor.isActive("undo") ?? false,
         isRedoable: ctx.editor.isActive("redo") ?? false,
+        isCode: ctx.editor.isActive("code") ?? false,
       };
     },
   });
   return (
     <>
-      <Button onClick={() => editor.chain().focus().undo().run()}
+      <Button
+        onClick={() => editor.chain().focus().undo().run()}
         variant="ghost"
       >
         <Undo2Icon />
       </Button>
-      <Button onClick={() => editor.chain().focus().redo().run()}
+      <Button
+        onClick={() => editor.chain().focus().redo().run()}
         variant="ghost"
       >
         <Redo2Icon />
@@ -88,8 +92,15 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
       <Toggle
         pressed={editorState.isUnderline}
         onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+        aria-label="Underline"
       >
         <Underline className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isCode}
+        onPressedChange={() => editor.chain().focus().toggleCode().run()}
+      >
+        <Code className="w-4 h-4" />
       </Toggle>
     </>
   );
