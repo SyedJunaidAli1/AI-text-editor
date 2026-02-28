@@ -9,7 +9,7 @@ import {
 import StarterKit from "@tiptap/starter-kit";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import { BoldIcon, ItalicIcon, StrikethroughIcon } from "lucide-react";
+import { BoldIcon, ItalicIcon, StrikethroughIcon, Underline } from "lucide-react";
 
 const Tiptap = () => {
   const editor = useEditor({
@@ -42,6 +42,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isBold: ctx.editor.isActive("bold") ?? false,
         isItalic: ctx.editor.isActive("italic") ?? false,
         isStrike: ctx.editor.isActive("strike") ?? false,
+        isUnderline: ctx.editor.isActive("underline") ?? false,
       };
     },
   });
@@ -64,6 +65,12 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
       >
         <StrikethroughIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isUnderline}
+        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+      >
+        <Underline className="w-4 h-4" />
       </Toggle>
     </>
   );
