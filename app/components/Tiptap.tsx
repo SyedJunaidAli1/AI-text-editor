@@ -35,7 +35,14 @@ const Tiptap = () => {
     //   const json = editor.getJSON();
     //   console.log("Document JSON:", json);
     // },
-    extensions: [StarterKit, Superscript, Subscript],
+    extensions: [
+      StarterKit,
+      Superscript,
+      Subscript,
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+      }),
+    ],
     content: "<p>Hello World! 🌎️</p>",
     // autofocus: true,
     // editable: true,
@@ -67,6 +74,9 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isSuperscript: ctx.editor.isActive("superscript") ?? false,
         isSubscript: ctx.editor.isActive("subscript") ?? false,
         isAlignLeft: ctx.editor.isActive("alignLeft") ?? false,
+        isAlignCenter: ctx.editor.isActive("alignCenter") ?? false,
+        isAlignRight: ctx.editor.isActive("alignRight") ?? false,
+        isAlignJustify: ctx.editor.isActive("alignJustify") ?? false,
       };
     },
   });
@@ -159,7 +169,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <Toggle
             pressed={editorState.isAlignLeft}
             onPressedChange={() =>
-              editor.chain().focus().toggleAlignLeft().run()
+              editor.chain().focus().setTextAlign("left").run()
             }
             aria-label="Align Left"
           >
@@ -168,7 +178,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <Toggle
             pressed={editorState.isAlignCenter}
             onPressedChange={() =>
-              editor.chain().focus().toggleAlignCenter().run()
+              editor.chain().focus().setTextAlign("center").run()
             }
             aria-label="Align Center"
           >
@@ -177,7 +187,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <Toggle
             pressed={editorState.isAlignRight}
             onPressedChange={() =>
-              editor.chain().focus().toggleAlignRight().run()
+              editor.chain().focus().setTextAlign("right").run()
             }
             aria-label="Align Right"
           >
@@ -186,13 +196,12 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <Toggle
             pressed={editorState.isAlignJustify}
             onPressedChange={() =>
-              editor.chain().focus().toggleAlignJustify().run()
+              editor.chain().focus().setTextAlign("justify").run()
             }
             aria-label="Align Justify"
           >
             <AlignJustifyIcon className="w-4 h-4" />
           </Toggle>
-         
         </div>
       </section>
     </>
