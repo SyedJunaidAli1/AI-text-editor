@@ -7,6 +7,7 @@ import {
   Editor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import Superscript from '@tiptap/extension-superscript'
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import {
@@ -15,6 +16,7 @@ import {
   ItalicIcon,
   Redo2Icon,
   StrikethroughIcon,
+  Superscript as SuperscriptIcon,
   Underline,
   Undo2Icon,
 } from "lucide-react";
@@ -26,7 +28,7 @@ const Tiptap = () => {
     //   const json = editor.getJSON();
     //   console.log("Document JSON:", json);
     // },
-    extensions: [StarterKit],
+    extensions: [StarterKit,Superscript],
     content: "<p>Hello World! 🌎️</p>",
     // autofocus: true,
     // editable: true,
@@ -55,6 +57,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isUndoable: ctx.editor.isActive("undo") ?? false,
         isRedoable: ctx.editor.isActive("redo") ?? false,
         isCode: ctx.editor.isActive("code") ?? false,
+        isSuperscript: ctx.editor.isActive("superscript") ?? false,
       };
     },
   });
@@ -114,6 +117,21 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             aria-label="Underline"
           >
             <Underline className="w-4 h-4" />
+          </Toggle>
+
+        </div>
+
+        <Separator orientation="vertical" />
+
+        <div>
+          <Toggle
+            pressed={editorState.isSuperscript}
+            onPressedChange={() =>
+              editor.chain().focus().toggleSuperscript().run()
+            }
+            aria-label="Superscript"
+          >
+            <SuperscriptIcon className="w-4 h-4" />
           </Toggle>
         </div>
       </section>
