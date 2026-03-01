@@ -23,6 +23,9 @@ import {
   Underline,
   Undo2Icon,
   AlignLeft,
+  AlignJustifyIcon,
+  AlignRightIcon,
+  AlignCenterIcon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -69,7 +72,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   });
   return (
     <>
-      <section className="flex gap-2 h-8 items-center justify-start">
+      <section className="flex gap-2 h-8 mb-2 items-center justify-start">
         <div>
           <Button
             onClick={() => editor.chain().focus().undo().run()}
@@ -162,6 +165,34 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           >
             <AlignLeft className="w-4 h-4" />
           </Toggle>
+          <Toggle
+            pressed={editorState.isAlignCenter}
+            onPressedChange={() =>
+              editor.chain().focus().toggleAlignCenter().run()
+            }
+            aria-label="Align Center"
+          >
+            <AlignCenterIcon className="w-4 h-4" />
+          </Toggle>
+          <Toggle
+            pressed={editorState.isAlignRight}
+            onPressedChange={() =>
+              editor.chain().focus().toggleAlignRight().run()
+            }
+            aria-label="Align Right"
+          >
+            <AlignRightIcon className="w-4 h-4" />
+          </Toggle>
+          <Toggle
+            pressed={editorState.isAlignJustify}
+            onPressedChange={() =>
+              editor.chain().focus().toggleAlignJustify().run()
+            }
+            aria-label="Align Justify"
+          >
+            <AlignJustifyIcon className="w-4 h-4" />
+          </Toggle>
+         
         </div>
       </section>
     </>
