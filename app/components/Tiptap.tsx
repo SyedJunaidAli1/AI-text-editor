@@ -18,11 +18,11 @@ import {
   ItalicIcon,
   Redo2Icon,
   StrikethroughIcon,
-  Superscript as SuperscriptIcon,
-  Subscript as SubscriptIcon,
+  SuperscriptIcon,
+  SubscriptIcon,
   Underline,
   Undo2Icon,
-  AlignLeft,
+  AlignLeftIcon,
   AlignJustifyIcon,
   AlignRightIcon,
   AlignCenterIcon,
@@ -46,6 +46,12 @@ const Tiptap = () => {
       }),
     ],
     content: "<p>Hello World! 🌎️</p>",
+    editorProps: {
+      attributes: {
+        class:
+          "prose dark:prose-invert prose-sm sm:prose-base focus:outline-none max-w-none",
+      },
+    },
     // autofocus: true,
     // editable: true,
     // Don't render immediately on the server to avoid SSR issues
@@ -201,7 +207,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             }
             aria-label="Align Left"
           >
-            <AlignLeft className="w-4 h-4" />
+            <AlignLeftIcon className="w-4 h-4" />
           </Toggle>
           <Toggle
             pressed={editorState.isAlignCenter}
