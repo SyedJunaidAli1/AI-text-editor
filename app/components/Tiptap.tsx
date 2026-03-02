@@ -48,7 +48,7 @@ const Tiptap = () => {
     content: "<p>Hello World! 🌎️</p>",
     editorProps: {
       attributes: {
-        class: `prose dark:prose-invert prose-blockquote:border-l-4 prose-blockquote:border-indigo-500 prose-blockquote: pl-4 prose-blockquote:italic prose-code:bg-indigo-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-4 focus:outline-none max-w-none`,
+        class: `prose dark:prose-invert prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote: pl-4 prose-code:bg-indigo-500/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:rounded-lg prose-pre:p-4 prose-code:before:content-noneprose-code:after:content-none focus:outline-none max-w-none`,
       },
     },
     // autofocus: true,
