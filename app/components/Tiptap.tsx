@@ -26,6 +26,8 @@ import {
   AlignJustifyIcon,
   AlignRightIcon,
   AlignCenterIcon,
+  TextQuoteIcon,
+  SquareCodeIcon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -77,6 +79,8 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isAlignCenter: ctx.editor.isActive("alignCenter") ?? false,
         isAlignRight: ctx.editor.isActive("alignRight") ?? false,
         isAlignJustify: ctx.editor.isActive("alignJustify") ?? false,
+        isBlockquote: ctx.editor.isActive("blockquote") ?? false,
+        isCodeBlock: ctx.editor.isActive("codeBlock") ?? false,
       };
     },
   });
@@ -96,6 +100,28 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           >
             <Redo2Icon />
           </Button>
+        </div>
+
+        <Separator orientation="vertical" />
+        
+        <div>
+          <Toggle
+            pressed={editorState.isBlockquote}
+            onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
+            aria-label="Blockquote"
+          >
+           <TextQuoteIcon className="w-4 h-4" />
+          </Toggle>
+          
+          <Toggle
+            pressed={editorState.isCodeBlock}
+            onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
+            aria-label="Code Block"
+          >
+           <SquareCodeIcon  className="w-4 h-4" />
+          </Toggle>
+          
+        
         </div>
 
         <Separator orientation="vertical" />
