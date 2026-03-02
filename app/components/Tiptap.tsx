@@ -103,25 +103,27 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         </div>
 
         <Separator orientation="vertical" />
-        
+
         <div>
           <Toggle
             pressed={editorState.isBlockquote}
-            onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
+            onPressedChange={() =>
+              editor.chain().focus().toggleBlockquote().run()
+            }
             aria-label="Blockquote"
           >
-           <TextQuoteIcon className="w-4 h-4" />
+            <TextQuoteIcon className="w-4 h-4" />
           </Toggle>
-          
+
           <Toggle
             pressed={editorState.isCodeBlock}
-            onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
+            onPressedChange={() =>
+              editor.chain().focus().toggleCodeBlock().run()
+            }
             aria-label="Code Block"
           >
-           <SquareCodeIcon  className="w-4 h-4" />
+            <SquareCodeIcon className="w-4 h-4" />
           </Toggle>
-          
-        
         </div>
 
         <Separator orientation="vertical" />
