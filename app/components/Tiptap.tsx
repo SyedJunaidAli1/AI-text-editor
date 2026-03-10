@@ -28,6 +28,7 @@ import {
   AlignCenterIcon,
   TextQuoteIcon,
   SquareCodeIcon,
+  Heading1Icon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
@@ -45,10 +46,10 @@ const Tiptap = () => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: "<p>Hello World! 🌎️</p>",
+    content: "<h1>abc</h1><p>Hello World! 🌎️</p>",
     editorProps: {
       attributes: {
-        class: `prose dark:prose-invert prose-blockquote:border-l-3 prose-blockquote:border-primary [&_blockquote_p:first-of-type]:before:content-none [&_blockquote_p:last-of-type]:after:content-none prose-code:px-1.5 prose-code:bg-secondary prose-code:text-foreground prose-pre:bg-secondary prose-code:font-normal prose-code:text-sm prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none focus:outline-none max-w-none`,
+        class: `prose dark:prose-invert border-2 prose-blockquote:border-l-3 prose-blockquote:border-primary [&_blockquote_p:first-of-type]:before:content-none [&_blockquote_p:last-of-type]:after:content-none prose-code:px-1.5 prose-code:bg-secondary prose-code:text-foreground prose-pre:bg-secondary prose-code:font-normal prose-code:text-sm prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none focus:outline-none max-w-none`,
       },
     },
     // autofocus: true,
@@ -86,6 +87,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isAlignJustify: ctx.editor.isActive("alignJustify") ?? false,
         isBlockquote: ctx.editor.isActive("blockquote") ?? false,
         isCodeBlock: ctx.editor.isActive("codeBlock") ?? false,
+        isHeading: ctx.editor.isActive("heading") ?? false,
       };
     },
   });
@@ -110,6 +112,16 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         <Separator orientation="vertical" />
 
         <div>
+          <Toggle
+            pressed={editorState.isHeading}
+            onPressedChange={() =>
+              editor.chain().focus().toggleHeading({ level: 1 }).run()
+            }
+            aria-label="Heading"
+          >
+            <Heading1Icon className="w-4 h-4" />
+          </Toggle>
+          
           <Toggle
             pressed={editorState.isBlockquote}
             onPressedChange={() =>
