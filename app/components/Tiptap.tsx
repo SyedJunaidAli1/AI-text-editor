@@ -31,6 +31,13 @@ import {
   Heading1Icon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const Tiptap = () => {
   const editor = useEditor({
@@ -87,10 +94,33 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isAlignJustify: ctx.editor.isActive("alignJustify") ?? false,
         isBlockquote: ctx.editor.isActive("blockquote") ?? false,
         isCodeBlock: ctx.editor.isActive("codeBlock") ?? false,
-        isHeading: ctx.editor.isActive("heading") ?? false,
+        isHeading1: ctx.editor.isActive("heading", { level: 1 }) ?? false,
+        isHeading2: ctx.editor.isActive("heading", { level: 2 }) ?? false,
+        isHeading3: ctx.editor.isActive("heading", { level: 3 }) ?? false,
+        isHeading4: ctx.editor.isActive("heading", { level: 4 }) ?? false,
+        isHeading5: ctx.editor.isActive("heading", { level: 5 }) ?? false,
+        isHeading6: ctx.editor.isActive("heading", { level: 6 }) ?? false,
+        isParagraph: ctx.editor.isActive("paragraph") ?? false,
       };
     },
   });
+
+  const handleToggleHeading = (value: string) => {
+    if (value === "paragraph") {
+      editor.chain().focus().setParagraph().run();
+      return;
+    } else {
+      const level = Number.parseInt(value.replace("heading", "")) as
+        | 1
+        | 2
+        | 3
+        | 4
+        | 5
+        | 6;
+      editor.chain().focus().toggleHeading({ level }).run();
+    }
+  };
+
   return (
     <>
       <section className="flex gap-2 h-8 mb-2 items-center justify-start">
@@ -111,17 +141,40 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
         <Separator orientation="vertical" />
 
-        <div>
-          <Toggle
-            pressed={editorState.isHeading}
-            onPressedChange={() =>
-              editor.chain().focus().toggleHeading({ level: 1 }).run()
+        <div className="flex">
+          <Select
+            onValueChange={handleToggleHeading}
+            value={
+              editorState.isHeading1
+                ? "heading1"
+                : editorState.isHeading2
+                  ? "heading2"
+                  : editorState.isHeading3
+                    ? "heading3"
+                    : editorState.isHeading4
+                      ? "heading4"
+                      : editorState.isHeading5
+                        ? "heading5"
+                        : editorState.isHeading6
+                          ? "heading6"
+                          : "paragraph"
             }
-            aria-label="Heading"
           >
-            <Heading1Icon className="w-4 h-4" />
-          </Toggle>
-          
+            <SelectTrigger>
+              <SelectValue placeholder="Paragraph" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="heading1">Heading 1</SelectItem>
+              <SelectItem value="heading2">Heading 2</SelectItem>
+              <SelectItem value="heading3">Heading 3</SelectItem>
+              <SelectItem value="heading4">Heading 4</SelectItem>
+              <SelectItem value="heading5">Heading 5</SelectItem>
+              <SelectItem value="heading6">Heading 6</SelectItem>
+              <Separator />
+              <SelectItem value="paragraph">Paragraph</SelectItem>
+            </SelectContent>
+          </Select>
+
           <Toggle
             pressed={editorState.isBlockquote}
             onPressedChange={() =>
