@@ -164,14 +164,14 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
               <SelectValue placeholder="Paragraph" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="heading1">Heading 1</SelectItem>
-              <SelectItem value="heading2">Heading 2</SelectItem>
-              <SelectItem value="heading3">Heading 3</SelectItem>
-              <SelectItem value="heading4">Heading 4</SelectItem>
-              <SelectItem value="heading5">Heading 5</SelectItem>
-              <SelectItem value="heading6">Heading 6</SelectItem>
+              <SelectItem value="heading1">H1</SelectItem>
+              <SelectItem value="heading2">H2</SelectItem>
+              <SelectItem value="heading3">H3</SelectItem>
+              <SelectItem value="heading4">H4</SelectItem>
+              <SelectItem value="heading5">H5</SelectItem>
+              <SelectItem value="heading6">H6</SelectItem>
               <Separator />
-              <SelectItem value="paragraph">Paragraph</SelectItem>
+              <SelectItem value="paragraph">P</SelectItem>
             </SelectContent>
           </Select>
 
