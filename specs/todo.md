@@ -5,7 +5,7 @@
 - [x] logout using supabase
 - [x] using tiptap for text editor (lexical alternative)
 - [x] need to figure out why starter kit not working (it was working but i have to create my own component)
-- [ ] creating tiptap states(bold)
+- [ ] creating tiptap states(list, highlight, and link remaind)
 - [ ] about page completed them for ai editor (for now placeholder)
 - [ ] privacy page completed them for ai editor (for now placeholder)
 - [ ] terms page completed them for ai editor (for now placeholder)
