@@ -28,7 +28,6 @@ import {
   AlignCenterIcon,
   TextQuoteIcon,
   SquareCodeIcon,
-  Heading1Icon,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
