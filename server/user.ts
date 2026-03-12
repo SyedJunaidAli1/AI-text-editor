@@ -81,3 +81,16 @@ export async function forgotPassword({ email }: { email: string }) {
 
   return { success: true };
 }
+
+export async function resetPassoword({ password }: { password: string }) {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.updateUser({ password });
+
+  if (error) {
+    console.error(error);
+    throw new Error(error.message);
+  }
+
+  return { success: true };
+}
