@@ -70,16 +70,14 @@ export async function signoutUser() {
 export async function forgotPassword({ email }: { email: string }) {
   const supabase = await createClient();
 
-  try {
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "http://localhost:3000/reset-password",
-    });
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password`,
+  });
 
-    if (error) {
-      throw new Error(error.message);
-    }
-  } catch (error) {
+  if (error) {
     console.error(error);
-    throw new Error("ResetPassword failed");
+    throw new Error(error.message);
   }
+
+  return { success: true };
 }

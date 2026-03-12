@@ -16,6 +16,7 @@ import { forgotPassword } from "@/server/user";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -28,6 +29,7 @@ export default function SignIn() {
         email,
       });
       setLoading(false);
+      setMessage("Password reset email sent successfully");
     } catch (err: any) {
       setLoading(false);
       setError(err.message);
@@ -66,6 +68,7 @@ export default function SignIn() {
                 <p>Reset Password</p>
               )}
             </Button>
+            {message && <p className="text-center">{message}</p>}
             {error && <p className="text-red-500 text-center">{error}</p>}
           </form>
         </CardContent>
