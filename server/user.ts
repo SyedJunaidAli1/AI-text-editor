@@ -66,3 +66,20 @@ export async function signoutUser() {
     throw new Error("SignOut failed");
   }
 }
+
+export async function resetPassword({ email }: { email: string }) {
+  const supabase = await createClient();
+
+  try {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: "http://example.com/account/update-password",
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error("ResetPassword failed");
+  }
+}

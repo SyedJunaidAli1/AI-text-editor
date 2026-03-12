@@ -36,9 +36,9 @@ export async function proxy(request: NextRequest) {
   }
 
   // ✅ Logged in → accessing auth pages
-  if (user && authPaths.some((path) => pathname.startsWith(path))) {
-    return NextResponse.redirect(new URL("/app", request.url));
-  }
+  // if (user && authPaths.some((path) => pathname.startsWith(path))) {
+  //   return NextResponse.redirect(new URL("/app", request.url));
+  // }
 
   return NextResponse.next();
 }
