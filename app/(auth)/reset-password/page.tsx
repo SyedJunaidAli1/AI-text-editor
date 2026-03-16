@@ -12,8 +12,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { signinUser } from "@/server/user";
+import { resetPassword } from "@/server/user";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Page() {
   const [confirmpassword, setConfirmPassword] = useState("");
@@ -27,13 +28,17 @@ export default function Page() {
 
     setLoading(true);
     try {
-      await signinUser({
-        email,
+      if (password !== confirmpassword) {
+        setLoading(false);
+        toast.error("Passwords do not match");
+        return;
+      }
+      await resetPassword({
         password,
       });
 
       setLoading(false);
-      router.push("/dashboard");
+      // router.push("/dashboard");
     } catch (err: any) {
       setLoading(false);
       setError(err.message);
