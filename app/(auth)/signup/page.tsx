@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { signUpNewUser } from "@/server/user";
 import Link from "next/link";
 
-export default function page() {
+export default function Page() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");

@@ -14,7 +14,7 @@ import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { forgotPassword } from "@/server/user";
 
-export default function page() {
+export default function Page() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);

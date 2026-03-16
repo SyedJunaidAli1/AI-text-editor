@@ -15,7 +15,7 @@ import { Loader2 } from "lucide-react";
 import { signinUser } from "@/server/user";
 import { useRouter } from "next/navigation";
 
-export default function SignIn() {
+export default function Page() {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
