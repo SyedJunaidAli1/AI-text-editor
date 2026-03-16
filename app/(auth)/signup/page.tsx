@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { signUpNewUser } from "@/server/user";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Page() {
   const [firstName, setFirstName] = useState("");
@@ -136,11 +137,7 @@ export default function Page() {
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                "Create your account"
-              )}
+              {loading ? <Spinner className="size-6" /> : "Create your account"}
             </Button>
             <div className="flex items-center justify-center">
               <p>Already have an account?</p>

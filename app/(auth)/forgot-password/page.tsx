@@ -11,8 +11,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
 import { forgotPassword } from "@/server/user";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Page() {
   const [email, setEmail] = useState("");
@@ -62,11 +62,7 @@ export default function Page() {
             </div>
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                <p>Reset Password</p>
-              )}
+              {loading ? <Spinner className="size-6" /> : <p>Reset Password</p>}
             </Button>
             {message && <p className="text-center">{message}</p>}
             {error && <p className="text-red-500 text-center">{error}</p>}

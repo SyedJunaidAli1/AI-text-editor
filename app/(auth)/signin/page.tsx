@@ -12,12 +12,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { signinUser } from "@/server/user";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Page() {
   const [email, setEmail] = useState("");
@@ -102,11 +102,7 @@ export default function Page() {
               <Label htmlFor="remember">Remember me</Label>
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? (
-                <Loader2 size={16} className="animate-spin" />
-              ) : (
-                <p>Login</p>
-              )}
+              {loading ? <Spinner className="size-6" /> : <p>Login</p>}
             </Button>
             <div
               className={cn(
