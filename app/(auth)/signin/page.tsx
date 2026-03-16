@@ -38,7 +38,7 @@ export default function Page() {
       });
 
       setLoading(false);
-      router.push("/dashboard");
+      router.push("/app");
     } catch (err: any) {
       setLoading(false);
       setError(err.message);

@@ -13,7 +13,6 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { resetPassword } from "@/server/user";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function Page() {
@@ -21,7 +20,6 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,7 +36,7 @@ export default function Page() {
       });
 
       setLoading(false);
-      // router.push("/dashboard");
+      toast.success("Password reset successful");
     } catch (err: any) {
       setLoading(false);
       setError(err.message);
@@ -82,7 +80,7 @@ export default function Page() {
               {loading ? (
                 <Loader2 size={16} className="animate-spin" />
               ) : (
-                <p>Login</p>
+                <p>Reset Password</p>
               )}
             </Button>
             {error && <p className="text-red-500 text-center">{error}</p>}
