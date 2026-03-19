@@ -7,6 +7,7 @@ import {
   Editor,
 } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { TaskItem, TaskList } from "@tiptap/extension-list";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
 import TextAlign from "@tiptap/extension-text-align";
@@ -48,6 +49,10 @@ const Tiptap = () => {
       StarterKit,
       Superscript,
       Subscript,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -100,6 +105,9 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isHeading5: ctx.editor.isActive("heading", { level: 5 }) ?? false,
         isHeading6: ctx.editor.isActive("heading", { level: 6 }) ?? false,
         isParagraph: ctx.editor.isActive("paragraph") ?? false,
+        isBulletedList: ctx.editor.isActive("bulletedList") ?? false,
+        isOrderedList: ctx.editor.isActive("orderedList") ?? false,
+        isTaskList: ctx.editor.isActive("taskList") ?? false,
       };
     },
   });
@@ -117,6 +125,26 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         | 5
         | 6;
       editor.chain().focus().toggleHeading({ level }).run();
+    }
+  };
+
+  const handleToggleList = (value: string) => {
+    switch (value) {
+      case "bulletedList":
+        editor.chain().focus().toggleBulletList().run();
+        break;
+
+      case "orderedList":
+        editor.chain().focus().toggleOrderedList().run();
+        break;
+
+      case "taskList":
+        editor.chain().focus().toggleTaskList().run();
+        break;
+
+      case "paragraph":
+        editor.chain().focus().clearNodes().run();
+        break;
     }
   };
 
@@ -171,6 +199,28 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
               <SelectItem value="heading6">H6</SelectItem>
               <Separator />
               <SelectItem value="paragraph">P</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <Select
+            onValueChange={handleToggleList}
+            value={
+              editorState.isBulletedList
+                ? "bulletedList"
+                : editorState.isOrderedList
+                  ? "orderedList"
+                  : editorState.isTaskList
+                    ? "taskList"
+                    : "paragraph"
+            }
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="List" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="bulletedList">Bulleted List</SelectItem>
+              <SelectItem value="orderedList">Ordered List</SelectItem>
+              <SelectItem value="taskList">Task List</SelectItem>
             </SelectContent>
           </Select>
 
