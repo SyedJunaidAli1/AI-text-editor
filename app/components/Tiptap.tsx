@@ -29,6 +29,9 @@ import {
   AlignCenterIcon,
   TextQuoteIcon,
   SquareCodeIcon,
+  ListOrdered,
+  ListTodo,
+  List,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -103,8 +106,8 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isHeading3: ctx.editor.isActive("heading", { level: 3 }) ?? false,
         isHeading4: ctx.editor.isActive("heading", { level: 4 }) ?? false,
         isParagraph: ctx.editor.isActive("paragraph") ?? false,
-        isBulletedList: ctx.editor.isActive("bulletedList") ?? false,
-        isOrderedList: ctx.editor.isActive("orderedList") ?? false,
+        isBulletList: ctx.editor.isActive("bulletList") ?? false,
+        isOrderList: ctx.editor.isActive("orderList") ?? false,
         isTaskList: ctx.editor.isActive("taskList") ?? false,
       };
     },
@@ -164,7 +167,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
         <Separator orientation="vertical" />
 
-        <div className="flex">
+        <div className="flex gap-1">
           <Select
             onValueChange={handleToggleHeading}
             value={
@@ -191,26 +194,43 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
               <SelectItem value="paragraph">P</SelectItem>
             </SelectContent>
           </Select>
-
           <Select
             onValueChange={handleToggleList}
             value={
-              editorState.isBulletedList
+              editorState.isBulletList
                 ? "bulletedList"
-                : editorState.isOrderedList
+                : editorState.isOrderList
                   ? "orderedList"
                   : editorState.isTaskList
                     ? "taskList"
                     : "paragraph"
             }
           >
-            <SelectTrigger>
+            <SelectTrigger className="flex items-center gap-2">
               <SelectValue placeholder="List" />
             </SelectTrigger>
+
             <SelectContent>
-              <SelectItem value="bulletedList">Bulleted List</SelectItem>
-              <SelectItem value="orderedList">Ordered List</SelectItem>
-              <SelectItem value="taskList">Task List</SelectItem>
+              <SelectItem value="bulletedList">
+                <div className="flex items-center gap-2">
+                  <List className="w-4 h-4" />
+                  Bulleted List
+                </div>
+              </SelectItem>
+
+              <SelectItem value="orderedList">
+                <div className="flex items-center gap-2">
+                  <ListOrdered className="w-4 h-4" />
+                  Ordered List
+                </div>
+              </SelectItem>
+
+              <SelectItem value="taskList">
+                <div className="flex items-center gap-2">
+                  <ListTodo className="w-4 h-4" />
+                  Task List
+                </div>
+              </SelectItem>
             </SelectContent>
           </Select>
 
