@@ -102,8 +102,6 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isHeading2: ctx.editor.isActive("heading", { level: 2 }) ?? false,
         isHeading3: ctx.editor.isActive("heading", { level: 3 }) ?? false,
         isHeading4: ctx.editor.isActive("heading", { level: 4 }) ?? false,
-        isHeading5: ctx.editor.isActive("heading", { level: 5 }) ?? false,
-        isHeading6: ctx.editor.isActive("heading", { level: 6 }) ?? false,
         isParagraph: ctx.editor.isActive("paragraph") ?? false,
         isBulletedList: ctx.editor.isActive("bulletedList") ?? false,
         isOrderedList: ctx.editor.isActive("orderedList") ?? false,
@@ -121,9 +119,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         | 1
         | 2
         | 3
-        | 4
-        | 5
-        | 6;
+        | 4;
       editor.chain().focus().toggleHeading({ level }).run();
     }
   };
@@ -180,11 +176,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
                     ? "heading3"
                     : editorState.isHeading4
                       ? "heading4"
-                      : editorState.isHeading5
-                        ? "heading5"
-                        : editorState.isHeading6
-                          ? "heading6"
-                          : "paragraph"
+                      : "paragraph"
             }
           >
             <SelectTrigger>
@@ -195,8 +187,6 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
               <SelectItem value="heading2">H2</SelectItem>
               <SelectItem value="heading3">H3</SelectItem>
               <SelectItem value="heading4">H4</SelectItem>
-              <SelectItem value="heading5">H5</SelectItem>
-              <SelectItem value="heading6">H6</SelectItem>
               <Separator />
               <SelectItem value="paragraph">P</SelectItem>
             </SelectContent>
