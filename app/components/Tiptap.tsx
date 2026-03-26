@@ -32,6 +32,7 @@ import {
   ListOrdered,
   ListTodo,
   List,
+  ChevronDown,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -104,7 +105,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   });
 
   return (
-    <section className="flex gap-2 h-8 mb-2 items-center justify-start">
+    <section className="flex mb-1 items-center justify-start">
       <div>
         <Button
           onClick={() => editor.chain().focus().undo().run()}
@@ -174,16 +175,22 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
       {/* ✅ Fixed: value now reflects orderedList correctly */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="px-2">
+          <Button variant="ghost" size="sm" className="px-2 gap-0">
             {editorState.isBulletList && <List className="w-4 h-4" />}
             {editorState.isOrderedList && <ListOrdered className="w-4 h-4" />}
             {editorState.isTaskList && <ListTodo className="w-4 h-4" />}
             {!editorState.isBulletList &&
               !editorState.isOrderedList &&
-              !editorState.isTaskList && <List className="w-4 h-4" />}
+              !editorState.isTaskList && (
+                <div className="flex gap-0 p-0">
+                  <List />
+                  <ChevronDown />
+                </div>
+              )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
