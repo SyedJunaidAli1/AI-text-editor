@@ -109,6 +109,13 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
     },
   });
 
+  const headings = [
+    { level: 1, label: "Heading 1", icon: <Heading1 /> },
+    { level: 2, label: "Heading 2", icon: <Heading2 /> },
+    { level: 3, label: "Heading 3", icon: <Heading3 /> },
+    { level: 4, label: "Heading 4", icon: <Heading4 /> },
+  ];
+
   return (
     <section className="flex mb-1 items-center justify-start">
       <div>
@@ -131,74 +138,39 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm" className="px-2">
-            {editorState.isHeading1 && (
-              <div className="flex gap-0 p-0">
-                <Heading1 />
-                <ChevronDown />
-              </div>
-            )}
-            {editorState.isHeading2 && (
-              <div className="flex gap-0 p-0">
-                <Heading2 />
-                <ChevronDown />
-              </div>
-            )}
-            {editorState.isHeading3 && (
-              <div className="flex gap-0 p-0">
-                <Heading3 />
-                <ChevronDown />
-              </div>
-            )}
-            {editorState.isHeading4 && (
-              <div className="flex gap-0 p-0">
-                <Heading4 />
-                <ChevronDown />
-              </div>
-            )}
-            {!editorState.isHeading1 &&
-              !editorState.isHeading2 &&
-              !editorState.isHeading3 &&
-              !editorState.isHeading4 && (
-                <div className="flex gap-0 p-0">
-                  <Heading />
-                  <ChevronDown />
-                </div>
-              )}
+            <div className="flex items-center gap-1">
+              {headings.find((h) =>
+                editor.isActive("heading", { level: h.level }),
+              )?.icon || <Heading />}
+              <ChevronDown />
+            </div>
           </Button>
         </DropdownMenuTrigger>
+
         <DropdownMenuContent>
-          <DropdownMenuItem
-            onClick={() =>
-              editor.chain().focus().toggleHeading({ level: 1 }).run()
-            }
-            className={editorState.isHeading1 ? "bg-accent" : ""}
-          >
-            Heading 1
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() =>
-              editor.chain().focus().toggleHeading({ level: 2 }).run()
-            }
-            className={editorState.isHeading2 ? "bg-accent" : ""}
-          >
-            Heading 2
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() =>
-              editor.chain().focus().toggleHeading({ level: 3 }).run()
-            }
-            className={editorState.isHeading3 ? "bg-accent" : ""}
-          >
-            Heading 3
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() =>
-              editor.chain().focus().toggleHeading({ level: 4 }).run()
-            }
-            className={editorState.isHeading4 ? "bg-accent" : ""}
-          >
-            Heading 4
-          </DropdownMenuItem>
+          {headings.map((h) => {
+            const isActive = editor.isActive("heading", { level: h.level });
+
+            return (
+              <DropdownMenuItem
+                key={h.level}
+                onClick={() => {
+                  if (isActive) {
+                    editor.chain().focus().setParagraph().run();
+                  } else {
+                    editor
+                      .chain()
+                      .focus()
+                      .toggleHeading({ level: h.level })
+                      .run();
+                  }
+                }}
+                className={isActive ? "bg-accent" : ""}
+              >
+                {h.label}
+              </DropdownMenuItem>
+            );
+          })}
         </DropdownMenuContent>
       </DropdownMenu>
 
