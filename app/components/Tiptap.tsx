@@ -33,6 +33,11 @@ import {
   ListTodo,
   List,
   ChevronDown,
+  Heading,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -125,12 +130,40 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="px-2 min-w-10">
-            {editorState.isHeading1 && "H1"}
-            {editorState.isHeading2 && "H2"}
-            {editorState.isHeading3 && "H3"}
-            {editorState.isHeading4 && "H4"}
-            {editorState.isParagraph && "P"}
+          <Button variant="ghost" size="sm" className="px-2">
+            {editorState.isHeading1 && (
+              <div className="flex gap-0 p-0">
+                <Heading1 />
+                <ChevronDown />
+              </div>
+            )}
+            {editorState.isHeading2 && (
+              <div className="flex gap-0 p-0">
+                <Heading2 />
+                <ChevronDown />
+              </div>
+            )}
+            {editorState.isHeading3 && (
+              <div className="flex gap-0 p-0">
+                <Heading3 />
+                <ChevronDown />
+              </div>
+            )}
+            {editorState.isHeading4 && (
+              <div className="flex gap-0 p-0">
+                <Heading4 />
+                <ChevronDown />
+              </div>
+            )}
+            {!editorState.isHeading1 &&
+              !editorState.isHeading2 &&
+              !editorState.isHeading3 &&
+              !editorState.isHeading4 && (
+                <div className="flex gap-0 p-0">
+                  <Heading />
+                  <ChevronDown />
+                </div>
+              )}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
@@ -140,7 +173,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             }
             className={editorState.isHeading1 ? "bg-accent" : ""}
           >
-            H1
+            Heading 1
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
@@ -148,7 +181,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             }
             className={editorState.isHeading2 ? "bg-accent" : ""}
           >
-            H2
+            Heading 2
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
@@ -156,7 +189,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             }
             className={editorState.isHeading3 ? "bg-accent" : ""}
           >
-            H3
+            Heading 3
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
@@ -164,14 +197,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             }
             className={editorState.isHeading4 ? "bg-accent" : ""}
           >
-            H4
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => editor.chain().focus().setParagraph().run()}
-            className={editorState.isParagraph ? "bg-accent" : ""}
-          >
-            Paragraph
+            Heading 4
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
