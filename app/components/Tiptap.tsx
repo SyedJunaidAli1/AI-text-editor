@@ -351,9 +351,9 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
         <DropdownMenuContent className="flex items-center gap-2 px-2 py-2">
           {colors.map((color) => (
-            <button
+            <DropdownMenuItem
               key={color}
-              className="w-5 h-5 rounded-full border"
+              className="w-5 h-5 p-0 rounded-full border"
               style={{ backgroundColor: color }}
               onClick={() => {
                 editor.chain().focus().setHighlight({ color }).run();
