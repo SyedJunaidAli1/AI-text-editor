@@ -362,7 +362,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           ))}
           <Separator orientation="vertical" />
           <DropdownMenuItem
-            className="p-0 w-0"
+            className="p-0"
             onClick={() => editor.chain().focus().unsetHighlight().run()}
           >
             <Ban />
