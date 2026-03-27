@@ -10,6 +10,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { TaskItem, TaskList } from "@tiptap/extension-list";
 import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
+import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
@@ -38,6 +39,8 @@ import {
   Heading2,
   Heading3,
   Heading4,
+  Highlighter,
+  Ban,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -59,6 +62,9 @@ const Tiptap = () => {
       }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
+      }),
+      Highlight.configure({
+        multicolor: true,
       }),
     ],
     content: `
@@ -164,6 +170,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isBulletList: ctx.editor.isActive("bulletList") ?? false,
         isOrderedList: ctx.editor.isActive("orderedList") ?? false, // ✅ Fixed typo
         isTaskList: ctx.editor.isActive("taskList") ?? false,
+        isHighlight: ctx.editor.isActive("highlight") ?? false,
       };
     },
   });
@@ -173,6 +180,14 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
     { level: 2, label: "Heading 2", icon: <Heading2 /> },
     { level: 3, label: "Heading 3", icon: <Heading3 /> },
     { level: 4, label: "Heading 4", icon: <Heading4 /> },
+  ];
+
+  const colors = [
+    "#facc15", // yellow
+    "#4ade80", // green
+    "#60a5fa", // blue
+    "#c084fc", // purple
+    "#f87171", // red
   ];
 
   return (
@@ -326,6 +341,34 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <Underline className="w-4 h-4" />
         </Toggle>
       </div>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm">
+            <Highlighter className="w-4 h-4" />
+          </Button>
+        </DropdownMenuTrigger>
+
+        <DropdownMenuContent className="flex items-center gap-2 px-2 py-2">
+          {colors.map((color) => (
+            <button
+              key={color}
+              className="w-5 h-5 rounded-full border"
+              style={{ backgroundColor: color }}
+              onClick={() => {
+                editor.chain().focus().setHighlight({ color }).run();
+              }}
+            />
+          ))}
+          <Separator orientation="vertical" />
+          <DropdownMenuItem
+            className="p-0 w-0"
+            onClick={() => editor.chain().focus().unsetHighlight().run()}
+          >
+            <Ban />
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
       <Separator orientation="vertical" />
 
