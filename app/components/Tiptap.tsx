@@ -192,20 +192,18 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
   return (
     <section className="flex mb-1 items-center justify-start">
-      <div>
-        <Button
-          onClick={() => editor.chain().focus().undo().run()}
-          variant="ghost"
-        >
-          <Undo2Icon />
-        </Button>
-        <Button
-          onClick={() => editor.chain().focus().redo().run()}
-          variant="ghost"
-        >
-          <Redo2Icon />
-        </Button>
-      </div>
+      <Button
+        onClick={() => editor.chain().focus().undo().run()}
+        variant="ghost"
+      >
+        <Undo2Icon />
+      </Button>
+      <Button
+        onClick={() => editor.chain().focus().redo().run()}
+        variant="ghost"
+      >
+        <Redo2Icon />
+      </Button>
 
       <Separator orientation="vertical" />
 
@@ -304,43 +302,41 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
       <Separator orientation="vertical" />
 
-      <div>
-        <Toggle
-          pressed={editorState.isBold}
-          onPressedChange={() => editor.chain().focus().toggleBold().run()}
-          aria-label="Bold"
-        >
-          <BoldIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isItalic}
-          onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-          aria-label="Italic"
-        >
-          <ItalicIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isStrike}
-          onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-          aria-label="Strike"
-        >
-          <StrikethroughIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isCode}
-          onPressedChange={() => editor.chain().focus().toggleCode().run()}
-          aria-label="Code"
-        >
-          <Code className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isUnderline}
-          onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-          aria-label="Underline"
-        >
-          <Underline className="w-4 h-4" />
-        </Toggle>
-      </div>
+      <Toggle
+        pressed={editorState.isBold}
+        onPressedChange={() => editor.chain().focus().toggleBold().run()}
+        aria-label="Bold"
+      >
+        <BoldIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isItalic}
+        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+        aria-label="Italic"
+      >
+        <ItalicIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isStrike}
+        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+        aria-label="Strike"
+      >
+        <StrikethroughIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isCode}
+        onPressedChange={() => editor.chain().focus().toggleCode().run()}
+        aria-label="Code"
+      >
+        <Code className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isUnderline}
+        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+        aria-label="Underline"
+      >
+        <Underline className="w-4 h-4" />
+      </Toggle>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -372,65 +368,59 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
 
       <Separator orientation="vertical" />
 
-      <div>
-        <Toggle
-          pressed={editorState.isSuperscript}
-          onPressedChange={() =>
-            editor.chain().focus().toggleSuperscript().run()
-          }
-          aria-label="Superscript"
-        >
-          <SuperscriptIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isSubscript}
-          onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
-          aria-label="Subscript"
-        >
-          <SubscriptIcon className="w-4 h-4" />
-        </Toggle>
-      </div>
+      <Toggle
+        pressed={editorState.isSuperscript}
+        onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
+        aria-label="Superscript"
+      >
+        <SuperscriptIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isSubscript}
+        onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
+        aria-label="Subscript"
+      >
+        <SubscriptIcon className="w-4 h-4" />
+      </Toggle>
 
       <Separator orientation="vertical" />
 
-      <div>
-        <Toggle
-          pressed={editorState.isAlignLeft}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign("left").run()
-          }
-          aria-label="Align Left"
-        >
-          <AlignLeftIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isAlignCenter}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign("center").run()
-          }
-          aria-label="Align Center"
-        >
-          <AlignCenterIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isAlignRight}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign("right").run()
-          }
-          aria-label="Align Right"
-        >
-          <AlignRightIcon className="w-4 h-4" />
-        </Toggle>
-        <Toggle
-          pressed={editorState.isAlignJustify}
-          onPressedChange={() =>
-            editor.chain().focus().setTextAlign("justify").run()
-          }
-          aria-label="Align Justify"
-        >
-          <AlignJustifyIcon className="w-4 h-4" />
-        </Toggle>
-      </div>
+      <Toggle
+        pressed={editorState.isAlignLeft}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign("left").run()
+        }
+        aria-label="Align Left"
+      >
+        <AlignLeftIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isAlignCenter}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign("center").run()
+        }
+        aria-label="Align Center"
+      >
+        <AlignCenterIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isAlignRight}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign("right").run()
+        }
+        aria-label="Align Right"
+      >
+        <AlignRightIcon className="w-4 h-4" />
+      </Toggle>
+      <Toggle
+        pressed={editorState.isAlignJustify}
+        onPressedChange={() =>
+          editor.chain().focus().setTextAlign("justify").run()
+        }
+        aria-label="Align Justify"
+      >
+        <AlignJustifyIcon className="w-4 h-4" />
+      </Toggle>
     </section>
   );
 };
