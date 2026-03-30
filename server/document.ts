@@ -17,8 +17,6 @@ export async function saveDocument({
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user);
-
   if (!user) throw new Error("Unauthorized");
 
   // 👉 UPDATE if id exists

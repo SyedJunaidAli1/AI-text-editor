@@ -5,9 +5,14 @@
 - [x] logout using supabase
 - [x] using tiptap for text editor (lexical alternative)
 - [x] need to figure out why starter kit not working (it was working but i have to create my own component)
-- [ ] forgot password
-- [ ] reset password
-- [ ] creating tiptap states(list, highlight, and link remaind)
-- [ ] about page completed them for ai editor (for now placeholder)
-- [ ] privacy page completed them for ai editor (for now placeholder)
-- [ ] terms page completed them for ai editor (for now placeholder)
+- [x] forgot password
+- [x] reset password
+- [x] creating tiptap states(list, highlight, and link remaind)
+- [x] about page completed them for ai editor (for now placeholder)
+- [x] privacy page completed them for ai editor (for now placeholder)
+- [x] terms page completed them for ai editor (for now placeholder)
+- [ ] okay so tiptap link componet is remaind (almost everything working)
+- [x] create document api is working with update
+- [ ] now api for get all document api to get all docu 
+- [ ] api to get specific document
+- [ ] AI/LLM intigration and save that in db
