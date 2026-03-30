@@ -49,8 +49,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useEffect, useRef, useState } from "react";
+import { saveDocument } from "@/server/document";
 
-const Tiptap = () => {
+const Tiptap = ({ docId }: { docId?: string }) => {
+  const [currentDocId, setCurrentDocId] = useState(docId || null);
+  const [saving, setSaving] = useState(false);
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -136,6 +141,40 @@ const Tiptap = () => {
     immediatelyRender: false,
   });
 
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (!editor) return;
+
+    const handler = () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+      timeoutRef.current = setTimeout(async () => {
+        setSaving(true);
+
+        const json = editor.getJSON();
+
+        const res = await saveDocument({
+          id: currentDocId,
+          content: json,
+          title: "Untitled",
+        });
+
+        if (!currentDocId) {
+          setCurrentDocId(res.id);
+          window.history.replaceState(null, "", `/app?docId=${res.id}`);
+        }
+
+        setSaving(false);
+      }, 800);
+    };
+
+    editor.on("update", handler);
+
+    return () => {
+      editor.off("update", handler); // ✅ cleanup
+    };
+  }, [editor, currentDocId]);
   return (
     <>
       {editor && <Toolbar editor={editor} />}

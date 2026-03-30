@@ -1,11 +1,13 @@
+"use client";
 import Tiptap from "@/app/components/Tiptap";
+import { use } from "react";
 
 export default function Page({
   searchParams,
 }: {
-  searchParams: { docId?: string };
+  searchParams: Promise<{ docId?: string }>;
 }) {
-  const docId = searchParams.docId;
+  const { docId } = use(searchParams);
 
   return (
     <div className="flex min-h-screen w-full py-4 px-2">
