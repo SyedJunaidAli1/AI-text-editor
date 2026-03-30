@@ -63,7 +63,7 @@ export function AppSidebar({ user }: userProps) {
               {/* Editor */}
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <Link href="/editor">
+                  <Link href="/app">
                     <Pencil className="size-4" />
                     <span>Editor</span>
                   </Link>
