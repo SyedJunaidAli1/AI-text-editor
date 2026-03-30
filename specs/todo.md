@@ -16,3 +16,4 @@
 - [ ] now api for get all document api to get all docu 
 - [ ] api to get specific document
 - [ ] AI/LLM intigration and save that in db
+- [ ] UI/UX improvement after that+ responsive ness
