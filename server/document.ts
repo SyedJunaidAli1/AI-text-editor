@@ -8,7 +8,7 @@ export async function saveDocument({
   title,
 }: {
   id?: string;
-  content: any;
+  content: string;
   title?: string;
 }) {
   const supabase = await createClient();
@@ -50,4 +50,24 @@ export async function saveDocument({
   if (error) throw new Error(error.message);
 
   return { id: data.id };
+}
+
+export async function getAllDocuments() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Unauthorized");
+
+  const { data, error } = await supabase
+    .from("documents")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("updated_at", { ascending: false });
+
+  if (error) throw new Error(error.message);
+
+  return { data };
 }
