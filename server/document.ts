@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createClientReadOnly } from "@/lib/supabase/server-read";
 
 export async function saveDocument({
   id,
@@ -53,7 +54,7 @@ export async function saveDocument({
 }
 
 export async function getAllDocuments() {
-  const supabase = await createClient();
+  const supabase = await createClientReadOnly();
 
   const {
     data: { user },
@@ -69,5 +70,5 @@ export async function getAllDocuments() {
 
   if (error) throw new Error(error.message);
 
-  return { data };
+  return data;
 }
