@@ -3,15 +3,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { documentsQuery } from "@/lib/tanstack-queries/document";
 import { useRouter } from "next/navigation";
+import { Loader } from "@/app/components/Loader";
 
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
   const router = useRouter();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center items-center">
+        <Loader />
+      </div>
+    );
 
   return (
-    <div className="px-2 py-6 space-y-2">
+    <div className="flex gap-2 px-2 py-6 w-200 h-48 overflow-y-auto">
       {docs?.map((doc) => (
         <div
           key={doc.id}

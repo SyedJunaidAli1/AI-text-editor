@@ -1,12 +1,10 @@
-
 import { Github } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About ",
-  description:
-    "",
+  description: "",
 };
 const Page = () => {
   return (
@@ -14,9 +12,7 @@ const Page = () => {
       <section className="min-h-[75vh] w-full mx-auto max-w-175 mt-12 px-4 sm:px-6 py-16">
         <main className="flex flex-col items-start justify-center gap-8">
           <header className="w-full">
-            <h1 className="text-3xl sm:text-4xl font-bold">
-              About Testimonia
-            </h1>
+            <h1 className="text-3xl sm:text-4xl font-bold">About Testimonia</h1>
             <p className="mt-2 text-sm">
               An open-source testimonial engine that helps creators, startups,
               and teams collect, manage, and showcase authentic social proof —
@@ -27,11 +23,11 @@ const Page = () => {
           <div>
             <h2 className="text-lg font-medium">What this app does</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Testimonia makes it effortless to gather feedback and turn it
-              into polished testimonial sections, shareable pages, and
-              embeddable widgets. Whether you're building a landing page, SaaS,
-              portfolio, or shop — you can collect testimonials, approve them,
-              and display them beautifully.
+              Testimonia makes it effortless to gather feedback and turn it into
+              polished testimonial sections, shareable pages, and embeddable
+              widgets. Whether you're building a landing page, SaaS, portfolio,
+              or shop — you can collect testimonials, approve them, and display
+              them beautifully.
             </p>
           </div>
 
