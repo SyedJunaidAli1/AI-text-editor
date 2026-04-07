@@ -17,7 +17,8 @@ const HistoryComponent = () => {
     );
 
   return (
-    <div className="flex gap-2 px-2 py-6 w-200 h-48 overflow-y-auto">
+    <div className="px-2 py-6 w-full h-screen">
+      <h1 className="text-2xl font-bold">My Documents</h1>
       {docs?.map((doc) => (
         <div
           key={doc.id}
