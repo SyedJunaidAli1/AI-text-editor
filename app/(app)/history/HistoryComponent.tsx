@@ -4,6 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { documentsQuery } from "@/lib/tanstack-queries/document";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/app/components/Loader";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
@@ -17,40 +25,40 @@ const HistoryComponent = () => {
     );
 
   return (
-    <div className="px-2 py-6 w-full h-screen">
-      <h1 className="text-2xl font-bold">My Documents</h1>
-      <p className="text-sm text-muted-foreground">
-        Review and manage your documents history.
-      </p>
-      <div className="flex gap-2 mt-8 ">
-        {docs?.map((doc) => (
-          <div
-            key={doc.id}
-            onClick={() => router.push(`/app?docId=${doc.id}`)}
-            className="px-4 py-6 h-56 w-2xs rounded-lg bg-sidebar border cursor-pointer hover:bg-muted transition"
-          >
-            <div>
-              <p className="text-xs text-muted-foreground mb-3">
-                {new Date(doc.updated_at).toLocaleString()}
-              </p>
-            </div>
-            <p className="font-semibold mb-2">{doc.title || "Untitled"}</p>
-            <p className="text-sm text-muted-foreground max-w-full w-full">
-              {doc.description}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 ">
+      {docs?.map((doc) => (
+        <Card
+          key={doc.id}
+          onClick={() => router.push(`/app?docId=${doc.id}`)}
+          className="cursor-pointer hover:bg-muted/50 transition w-2xs h-64"
+        >
+          <CardHeader className="pb-2">
+            <p className="text-xs text-muted-foreground">
+              {new Date(doc.updated_at).toLocaleString()}
             </p>
-            <p className="text-sm text-muted-foreground">
-              Created at :-
-              {new Date(doc.created_at).toLocaleString()}
-            </p>
+            <CardTitle className="text-base truncate">
+              {doc.title || "Untitled"}
+            </CardTitle>
+          </CardHeader>
 
-            <div>
-              <p className="text-xs text-muted-foreground">
-                {/*{doc.content.split(" ").length} words*/} 200 words
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+          <CardContent className="text-sm text-muted-foreground">
+            <p className="line-clamp-3">
+              {doc.description || "No description available"}
+            </p>
+          </CardContent>
+
+          <CardFooter className="flex justify-between text-xs text-muted-foreground">
+            <span>200 words</span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => router.push(`/app?docId=${doc.id}`)}
+            >
+              Open Editor
+            </Button>
+          </CardFooter>
+        </Card>
+      ))}
     </div>
   );
 };
