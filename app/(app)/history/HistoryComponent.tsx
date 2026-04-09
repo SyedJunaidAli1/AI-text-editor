@@ -25,12 +25,12 @@ const HistoryComponent = () => {
     );
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-8 px-6 py-2 content-start">
       {docs?.map((doc) => (
         <Card
           key={doc.id}
           onClick={() => router.push(`/app?docId=${doc.id}`)}
-          className="cursor-pointer hover:bg-muted/50 transition w-2xs h-64"
+          className="cursor-pointer hover:bg-muted/50 transition h-64 flex flex-col"
         >
           <CardHeader className="pb-2">
             <p className="text-xs text-muted-foreground">
@@ -41,8 +41,8 @@ const HistoryComponent = () => {
             </CardTitle>
           </CardHeader>
 
-          <CardContent className="text-sm text-muted-foreground">
-            <p className="line-clamp-3">
+          <CardContent className="text-sm text-muted-foreground flex-1 overflow-hidden">
+            <p className="line-clamp-4">
               {doc.description || "No description available"}
             </p>
           </CardContent>
@@ -52,7 +52,10 @@ const HistoryComponent = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => router.push(`/app?docId=${doc.id}`)}
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(`/app?docId=${doc.id}`);
+              }}
             >
               Open Editor
             </Button>
