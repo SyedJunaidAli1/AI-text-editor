@@ -12,6 +12,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { formatDistanceToNow } from "date-fns";
+import { DotsThreeOutlineVerticalIcon } from "@phosphor-icons/react";
 
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
@@ -36,13 +38,19 @@ const HistoryComponent = () => {
         {docs?.map((doc) => (
           <Card
             key={doc.id}
-            className="cursor-pointer hover:bg-muted/50 transition rounded-md h-64 flex flex-col"
+            className="hover:bg-muted/50 transition rounded-md h-64 flex flex-col"
           >
             <CardHeader className="pb-2">
-              <p className="text-xs text-muted-foreground">
-                {new Date(doc.updated_at).toLocaleString()}
-              </p>
-              <CardTitle className="text-base truncate">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-xs text-muted-foreground">
+                  {formatDistanceToNow(new Date(doc.updated_at), {
+                    addSuffix: true,
+                  })}
+                </p>
+                <DotsThreeOutlineVerticalIcon size={16} />
+              </div>
+
+              <CardTitle className="text-xl">
                 {doc.title || "Untitled"}
               </CardTitle>
             </CardHeader>
@@ -58,6 +66,7 @@ const HistoryComponent = () => {
               <Button
                 variant="ghost"
                 size="sm"
+                className="cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   router.push(`/app?docId=${doc.id}`);
