@@ -11,9 +11,13 @@
 - [x] about page completed them for ai editor (for now placeholder)
 - [x] privacy page completed them for ai editor (for now placeholder)
 - [x] terms page completed them for ai editor (for now placeholder)
+- [ ] Add input for title in Editor (tiptap)
 - [ ] okay so tiptap link componet is remaind (almost everything working)
 - [x] create document api is working with update
 - [x] now api for get all document api to get all docu 
 - [ ] api to get specific document
 - [ ] AI/LLM intigration and save that in db
 - [ ] UI/UX improvement after that+ responsive ness
+- [x] hitory page is done
+- [ ] history page show words
+- [ ] history page dropdown for options
