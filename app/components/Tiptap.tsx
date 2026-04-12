@@ -41,6 +41,8 @@ import {
   Heading4,
   Highlighter,
   Ban,
+  Link,
+  Unlink,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -210,6 +212,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isOrderedList: ctx.editor.isActive("orderedList") ?? false, // ✅ Fixed typo
         isTaskList: ctx.editor.isActive("taskList") ?? false,
         isHighlight: ctx.editor.isActive("highlight") ?? false,
+        isLink: ctx.editor.isActive("link") ?? false,
       };
     },
   });
@@ -404,6 +407,19 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {editorState.isLink ? (
+        <Toggle
+          pressed
+          onPressedChange={() => editor.chain().focus().unsetLink().run()}
+        >
+          <Unlink className="w-4 h-4" />
+        </Toggle>
+      ) : (
+        <Toggle>
+          <Link className="w-4 h-4" />
+        </Toggle>
+      )}
 
       <Separator orientation="vertical" />
 
