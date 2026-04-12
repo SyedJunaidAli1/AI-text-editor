@@ -3,11 +3,14 @@
 import { useEffect, useState } from "react";
 import { Editor } from "@tiptap/react";
 import { Link as LinkIcon } from "lucide-react";
-
 import { Toggle } from "@/components/ui/toggle";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 type Props = {
   editor: Editor;
@@ -38,7 +41,7 @@ const LinkComponent = ({ editor }: Props) => {
 
       <PopoverContent className="w-64 space-y-2">
         <Input
-          placeholder="Enter URL..."
+          placeholder="Paste a link..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />

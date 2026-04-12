@@ -53,6 +53,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useRef, useState } from "react";
 import { saveDocument } from "@/server/document";
+import LinkComponent from "./LinkComponent";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
@@ -417,9 +418,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <Unlink className="w-4 h-4" />
         </Toggle>
       ) : (
-        <Toggle>
-          <Link className="w-4 h-4" />
-        </Toggle>
+        <LinkComponent editor={editor} />
       )}
 
       <Separator orientation="vertical" />
