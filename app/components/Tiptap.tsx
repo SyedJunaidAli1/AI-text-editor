@@ -57,6 +57,7 @@ import { saveDocument } from "@/server/document";
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
   const [saving, setSaving] = useState(false);
+  const [url, setUrl] = useState("");
 
   const editor = useEditor({
     extensions: [
