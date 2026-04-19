@@ -53,11 +53,17 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { saveDocument } from "@/server/document";
 import LinkComponent from "@/app/components/LinkComponent";
+import { useQuery } from "@tanstack/react-query";
+import { documentsQuery } from "@/lib/tanstack-queries/document";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
   const [saving, setSaving] = useState(false);
-  const [url, setUrl] = useState("");
+
+  const { data: doc } = useQuery({
+    ...documentsQuery.byId(docId!),
+    enabled: !!docId, // 🔥 only run if exists
+  });
 
   const editor = useEditor({
     extensions: [
@@ -178,6 +184,13 @@ const Tiptap = ({ docId }: { docId?: string }) => {
       editor.off("update", handler); // ✅ cleanup
     };
   }, [editor, currentDocId]);
+
+  useEffect(() => {
+    if (!editor || !doc) return;
+
+    editor.commands.setContent(doc.content);
+  }, [editor, doc]);
+
   return (
     <>
       {editor && <Toolbar editor={editor} />}
