@@ -72,3 +72,24 @@ export async function getAllDocuments() {
 
   return data;
 }
+
+export async function getDocumentsById(id: string) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("Unauthorized");
+
+  const { data, error } = await supabase
+    .from("documents")
+    .select("*")
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .single();
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
