@@ -23,3 +23,8 @@
 - [ ] editor (tiptap) add option for title input
 - [ ] history page show words
 - [ ] history page dropdown for options
+
+
+#bug
+
+-[ ] only yellow color is saving for highlighter, other color shows on frontend but only yellow is saving

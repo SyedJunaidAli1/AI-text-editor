@@ -15,11 +15,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import {
-  BoldIcon,
-  Code,
-  ItalicIcon,
   Redo2Icon,
-  StrikethroughIcon,
   SuperscriptIcon,
   SubscriptIcon,
   Underline,
@@ -29,7 +25,6 @@ import {
   AlignRightIcon,
   AlignCenterIcon,
   TextQuoteIcon,
-  SquareCodeIcon,
   ListOrdered,
   ListTodo,
   List,
@@ -55,6 +50,15 @@ import { saveDocument } from "@/server/document";
 import LinkComponent from "@/app/components/LinkComponent";
 import { useQuery } from "@tanstack/react-query";
 import { documentsQuery } from "@/lib/tanstack-queries/document";
+import {
+  CodeBlockIcon,
+  CodeIcon,
+  HighlighterIcon,
+  TextBIcon,
+  TextItalicIcon,
+  TextStrikethroughIcon,
+  TextUnderlineIcon,
+} from "@phosphor-icons/react";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
@@ -353,7 +357,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
         aria-label="Code Block"
       >
-        <SquareCodeIcon className="w-4 h-4" />
+        <CodeBlockIcon size={32} />
       </Toggle>
 
       <Separator orientation="vertical" />
@@ -363,41 +367,41 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
         aria-label="Bold"
       >
-        <BoldIcon className="w-4 h-4" />
+        <TextBIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isItalic}
         onPressedChange={() => editor.chain().focus().toggleItalic().run()}
         aria-label="Italic"
       >
-        <ItalicIcon className="w-4 h-4" />
+        <TextItalicIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isStrike}
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
         aria-label="Strike"
       >
-        <StrikethroughIcon className="w-4 h-4" />
+        <TextStrikethroughIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isCode}
         onPressedChange={() => editor.chain().focus().toggleCode().run()}
         aria-label="Code"
       >
-        <Code className="w-4 h-4" />
+        <CodeIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isUnderline}
         onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
         aria-label="Underline"
       >
-        <Underline className="w-4 h-4" />
+        <TextUnderlineIcon size={32} />
       </Toggle>
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <Highlighter className="w-4 h-4" />
+            <HighlighterIcon size={32} />
           </Button>
         </DropdownMenuTrigger>
 
