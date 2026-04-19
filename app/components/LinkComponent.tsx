@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Editor } from "@tiptap/react";
-import { Link as LinkIcon } from "lucide-react";
 import { Toggle } from "@/components/ui/toggle";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,6 +10,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { LinkSimpleIcon } from "@phosphor-icons/react";
 
 type Props = {
   editor: Editor;
@@ -35,7 +35,7 @@ const LinkComponent = ({ editor }: Props) => {
     <Popover>
       <PopoverTrigger asChild>
         <Toggle pressed={isLink}>
-          <LinkIcon className="w-4 h-4" />
+          <LinkSimpleIcon size={32} />
         </Toggle>
       </PopoverTrigger>
 

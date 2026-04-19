@@ -16,14 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import {
   Redo2Icon,
-  SuperscriptIcon,
-  SubscriptIcon,
-  Underline,
   Undo2Icon,
-  AlignLeftIcon,
-  AlignJustifyIcon,
-  AlignRightIcon,
-  AlignCenterIcon,
   TextQuoteIcon,
   ListOrdered,
   ListTodo,
@@ -34,9 +27,7 @@ import {
   Heading2,
   Heading3,
   Heading4,
-  Highlighter,
   Ban,
-  Unlink,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -51,12 +42,23 @@ import LinkComponent from "@/app/components/LinkComponent";
 import { useQuery } from "@tanstack/react-query";
 import { documentsQuery } from "@/lib/tanstack-queries/document";
 import {
+  CaretDownIcon,
   CodeBlockIcon,
   CodeIcon,
   HighlighterIcon,
+  LinkBreakIcon,
+  ListChecksIcon,
+  ListIcon,
+  ListNumbersIcon,
+  TextAlignCenterIcon,
+  TextAlignJustifyIcon,
+  TextAlignLeftIcon,
+  TextAlignRightIcon,
   TextBIcon,
   TextItalicIcon,
   TextStrikethroughIcon,
+  TextSubscriptIcon,
+  TextSuperscriptIcon,
   TextUnderlineIcon,
 } from "@phosphor-icons/react";
 
@@ -317,8 +319,8 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
               !editorState.isOrderedList &&
               !editorState.isTaskList && (
                 <div className="flex gap-0 p-0">
-                  <List />
-                  <ChevronDown />
+                  <ListIcon size={32} />
+                  <CaretDownIcon size={32} />
                 </div>
               )}
           </Button>
@@ -327,19 +329,19 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           <DropdownMenuItem
             onClick={() => editor.chain().focus().toggleBulletList().run()}
           >
-            <List className="w-4 h-4 mr-2" />
+            <ListIcon size={32} />
             Bulleted List
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
           >
-            <ListOrdered className="w-4 h-4 mr-2" />
+            <ListNumbersIcon size={32} />
             Ordered List
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => editor.chain().focus().toggleTaskList().run()}
           >
-            <ListTodo className="w-4 h-4 mr-2" />
+            <ListChecksIcon size={32} />
             Task List
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -431,7 +433,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
           pressed
           onPressedChange={() => editor.chain().focus().unsetLink().run()}
         >
-          <Unlink className="w-4 h-4" />
+          <LinkBreakIcon size={32} />
         </Toggle>
       ) : (
         <LinkComponent editor={editor} />
@@ -444,14 +446,14 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
         aria-label="Superscript"
       >
-        <SuperscriptIcon className="w-4 h-4" />
+        <TextSuperscriptIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isSubscript}
         onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
         aria-label="Subscript"
       >
-        <SubscriptIcon className="w-4 h-4" />
+        <TextSubscriptIcon size={32} />
       </Toggle>
 
       <Separator orientation="vertical" />
@@ -463,7 +465,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         }
         aria-label="Align Left"
       >
-        <AlignLeftIcon className="w-4 h-4" />
+        <TextAlignLeftIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isAlignCenter}
@@ -472,7 +474,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         }
         aria-label="Align Center"
       >
-        <AlignCenterIcon className="w-4 h-4" />
+        <TextAlignCenterIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isAlignRight}
@@ -481,7 +483,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         }
         aria-label="Align Right"
       >
-        <AlignRightIcon className="w-4 h-4" />
+        <TextAlignRightIcon size={32} />
       </Toggle>
       <Toggle
         pressed={editorState.isAlignJustify}
@@ -490,7 +492,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         }
         aria-label="Align Justify"
       >
-        <AlignJustifyIcon className="w-4 h-4" />
+        <TextAlignJustifyIcon size={32} />
       </Toggle>
     </section>
   );
