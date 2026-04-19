@@ -10,13 +10,13 @@ export default function Page({
   const { docId } = use(searchParams);
 
   return (
-    <div className="flex min-h-screen w-full py-4 px-2">
+    <div className="flex min-h-screen w-full px-2">
       {/* EDITOR */}
       <main className="flex-1">
-        <h1 className="text-4xl font-bold mb-10">
+        <h1 className="mt-6">
           AI Text Editor welcome to app
         </h1>
-
+        <p className="mb-6 text-sm text-muted-foreground">This is your Editor.</p>
         {/* 👇 pass docId */}
         <Tiptap docId={docId} />
       </main>
