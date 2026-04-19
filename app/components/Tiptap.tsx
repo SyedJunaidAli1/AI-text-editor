@@ -41,7 +41,6 @@ import {
   Heading4,
   Highlighter,
   Ban,
-  Link,
   Unlink,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
@@ -53,7 +52,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useEffect, useRef, useState } from "react";
 import { saveDocument } from "@/server/document";
-import LinkComponent from "./LinkComponent";
+import LinkComponent from "@/app/components/LinkComponent";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
