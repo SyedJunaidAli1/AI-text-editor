@@ -20,5 +20,6 @@
 - [ ] AI/LLM intigration and save that in db
 - [ ] UI/UX improvement after that+ responsive ness
 - [x] hitory page is done
+- [ ] editor (tiptap) add option for title input
 - [ ] history page show words
 - [ ] history page dropdown for options
