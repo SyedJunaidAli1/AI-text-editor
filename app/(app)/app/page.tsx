@@ -10,7 +10,7 @@ export default function Page({
   const { docId } = use(searchParams);
 
   return (
-    <div className="flex min-h-screen w-full px-2">
+    <div className="flex min-h-screen w-full px-4">
       {/* EDITOR */}
       <main className="flex-1">
         <h1 className="mt-6">
