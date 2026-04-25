@@ -15,19 +15,15 @@ import TextAlign from "@tiptap/extension-text-align";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import {
-  Redo2Icon,
-  Undo2Icon,
   TextQuoteIcon,
   ListOrdered,
   ListTodo,
   List,
-  ChevronDown,
   Heading,
   Heading1,
   Heading2,
   Heading3,
   Heading4,
-  Ban,
 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -42,6 +38,8 @@ import LinkComponent from "@/app/components/LinkComponent";
 import { useQuery } from "@tanstack/react-query";
 import { documentsQuery } from "@/lib/tanstack-queries/document";
 import {
+  ArrowUUpLeftIcon,
+  ArrowUUpRightIcon,
   CaretDownIcon,
   CodeBlockIcon,
   CodeIcon,
@@ -50,6 +48,7 @@ import {
   ListChecksIcon,
   ListIcon,
   ListNumbersIcon,
+  ProhibitIcon,
   TextAlignCenterIcon,
   TextAlignJustifyIcon,
   TextAlignLeftIcon,
@@ -258,13 +257,13 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         onClick={() => editor.chain().focus().undo().run()}
         variant="ghost"
       >
-        <Undo2Icon />
+        <ArrowUUpLeftIcon size={32} />
       </Button>
       <Button
         onClick={() => editor.chain().focus().redo().run()}
         variant="ghost"
       >
-        <Redo2Icon />
+        <ArrowUUpRightIcon size={32} />
       </Button>
 
       <Separator orientation="vertical" />
@@ -276,7 +275,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
               {headings.find((h) =>
                 editor.isActive("heading", { level: h.level }),
               )?.icon || <Heading />}
-              <ChevronDown />
+              <CaretDownIcon size={32} />
             </div>
           </Button>
         </DropdownMenuTrigger>
@@ -423,7 +422,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             className="p-0"
             onClick={() => editor.chain().focus().unsetHighlight().run()}
           >
-            <Ban />
+            <ProhibitIcon size={32} />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
