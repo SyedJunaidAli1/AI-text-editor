@@ -14,7 +14,7 @@ import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import { TextQuoteIcon, ListOrdered, ListTodo, List } from "lucide-react";
+import { TextQuoteIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
@@ -306,9 +306,9 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm" className="px-2 gap-0">
-            {editorState.isBulletList && <List className="w-4 h-4" />}
-            {editorState.isOrderedList && <ListOrdered className="w-4 h-4" />}
-            {editorState.isTaskList && <ListTodo className="w-4 h-4" />}
+            {editorState.isBulletList && <ListIcon size={32} />}
+            {editorState.isOrderedList && <ListNumbersIcon size={32} />}
+            {editorState.isTaskList && <ListChecksIcon size={32} />}
             {!editorState.isBulletList &&
               !editorState.isOrderedList &&
               !editorState.isTaskList && (
