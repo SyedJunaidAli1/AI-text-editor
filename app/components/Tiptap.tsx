@@ -14,17 +14,7 @@ import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import {
-  TextQuoteIcon,
-  ListOrdered,
-  ListTodo,
-  List,
-  Heading,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-} from "lucide-react";
+import { TextQuoteIcon, ListOrdered, ListTodo, List } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
@@ -54,6 +44,11 @@ import {
   TextAlignLeftIcon,
   TextAlignRightIcon,
   TextBIcon,
+  TextHFourIcon,
+  TextHIcon,
+  TextHOneIcon,
+  TextHThreeIcon,
+  TextHTwoIcon,
   TextItalicIcon,
   TextStrikethroughIcon,
   TextSubscriptIcon,
@@ -237,10 +232,10 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   });
 
   const headings = [
-    { level: 1, label: "Heading 1", icon: <Heading1 /> },
-    { level: 2, label: "Heading 2", icon: <Heading2 /> },
-    { level: 3, label: "Heading 3", icon: <Heading3 /> },
-    { level: 4, label: "Heading 4", icon: <Heading4 /> },
+    { level: 1, label: "Heading 1", icon: <TextHOneIcon size={32} /> },
+    { level: 2, label: "Heading 2", icon: <TextHTwoIcon size={32} /> },
+    { level: 3, label: "Heading 3", icon: <TextHThreeIcon size={32} /> },
+    { level: 4, label: "Heading 4", icon: <TextHFourIcon size={32} /> },
   ];
 
   const colors = [
@@ -274,7 +269,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
             <div className="flex items-center gap-1">
               {headings.find((h) =>
                 editor.isActive("heading", { level: h.level }),
-              )?.icon || <Heading />}
+              )?.icon || <TextHIcon size={32} />}
               <CaretDownIcon size={32} />
             </div>
           </Button>
