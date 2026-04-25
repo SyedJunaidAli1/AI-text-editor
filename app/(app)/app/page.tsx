@@ -19,18 +19,18 @@ export default function Page({
       <main className="flex-1">
         <Input
           type="text"
-          placeholder="title"
+          placeholder="Enter Title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="text-3xl font-bold outline-none w-full max-w-xl bg-transparent"
+          className="text-3xl font-bold outline-none border-none w-full max-w-xl bg-transparent mb-2 h-20"
         />
 
-        <input
+        <Input
           type="text"
-          placeholder="description"
+          placeholder="Enter Description..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="text-sm text-muted-foreground outline-none w-full bg-transparent"
+          className="text-sm text-muted-foreground outline-none border-none w-full max-w-xl bg-transparent"
         />
         {/* 👇 pass docId */}
         <Tiptap docId={docId} />
