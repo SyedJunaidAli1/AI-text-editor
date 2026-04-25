@@ -1,6 +1,7 @@
 "use client";
 import Tiptap from "@/app/components/Tiptap";
-import { use } from "react";
+import { Input } from "@/components/ui/input";
+import { use, useState } from "react";
 
 export default function Page({
   searchParams,
@@ -9,14 +10,28 @@ export default function Page({
 }) {
   const { docId } = use(searchParams);
 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   return (
-    <div className="flex min-h-screen w-full px-4">
+    <div className="flex min-h-screen w-full px-4 py-4">
       {/* EDITOR */}
       <main className="flex-1">
-        <h1 className="mt-6">
-          AI Text Editor welcome to app
-        </h1>
-        <p className="mb-6 text-sm text-muted-foreground">This is your Editor.</p>
+        <Input
+          type="text"
+          placeholder="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="text-3xl font-bold outline-none w-full max-w-xl bg-transparent"
+        />
+
+        <input
+          type="text"
+          placeholder="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="text-sm text-muted-foreground outline-none w-full bg-transparent"
+        />
         {/* 👇 pass docId */}
         <Tiptap docId={docId} />
       </main>
