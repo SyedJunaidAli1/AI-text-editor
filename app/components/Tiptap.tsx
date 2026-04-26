@@ -197,7 +197,7 @@ const Tiptap = ({ docId }: { docId?: string }) => {
   }, [editor, save]);
 
   useEffect(() => {
-    if (!currentDocId || isInitialLoad.current) return;
+    if (isInitialLoad.current) return;
 
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
@@ -209,22 +209,29 @@ const Tiptap = ({ docId }: { docId?: string }) => {
   }, [title, description, save]);
 
   useEffect(() => {
-    if (!editor || !doc) return;
+    if (!editor) return;
 
+    // ✅ NEW DOCUMENT CASE
+    if (!docId) {
+      isInitialLoad.current = false;
+      return;
+    }
+
+    // ✅ WAIT until doc is fetched
+    if (!doc) return;
+
+    // ✅ EXISTING DOCUMENT CASE
     isInitialLoad.current = true;
 
-    // set content
     editor.commands.setContent(doc.content);
 
-    // set metadata
     setTitle(doc.title || "");
     setDescription(doc.description || "");
 
-    // allow saving AFTER everything is set
     setTimeout(() => {
       isInitialLoad.current = false;
     }, 0);
-  }, [editor, doc]);
+  }, [editor, doc, docId]);
 
   return (
     <>
