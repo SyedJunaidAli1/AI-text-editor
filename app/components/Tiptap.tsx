@@ -316,7 +316,7 @@ const Toolbar = ({
           placeholder="Enter Title..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="text-3xl font-bold outline-none border-none w-full max-w-xl bg-transparent mb-2 h-20"
+          className="!text-3xl font-bold border-none bg-transparent focus-visible:ring-0"
         />
 
         <Input
@@ -324,7 +324,7 @@ const Toolbar = ({
           placeholder="Enter Description..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="text-sm text-muted-foreground outline-none border-none w-full max-w-xl bg-transparent"
+          className="text-muted-foreground focus-visible:ring-0 border-none w-full max-w-xl bg-transparent"
         />
       </div>
 
