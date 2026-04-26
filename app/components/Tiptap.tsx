@@ -55,6 +55,7 @@ import {
   TextSuperscriptIcon,
   TextUnderlineIcon,
 } from "@phosphor-icons/react";
+import { Input } from "@/components/ui/input";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
@@ -200,6 +201,9 @@ const Tiptap = ({ docId }: { docId?: string }) => {
 };
 
 const Toolbar = ({ editor }: { editor: Editor }) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
@@ -223,7 +227,7 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
         isHeading4: ctx.editor.isActive("heading", { level: 4 }) ?? false,
         isParagraph: ctx.editor.isActive("paragraph") ?? false,
         isBulletList: ctx.editor.isActive("bulletList") ?? false,
-        isOrderedList: ctx.editor.isActive("orderedList") ?? false, // ✅ Fixed typo
+        isOrderedList: ctx.editor.isActive("orderedList") ?? false,
         isTaskList: ctx.editor.isActive("taskList") ?? false,
         isHighlight: ctx.editor.isActive("highlight") ?? false,
         isLink: ctx.editor.isActive("link") ?? false,
@@ -247,247 +251,271 @@ const Toolbar = ({ editor }: { editor: Editor }) => {
   ];
 
   return (
-    <section className="flex mb-1 items-center justify-start">
-      <Button
-        onClick={() => editor.chain().focus().undo().run()}
-        variant="ghost"
-      >
-        <ArrowUUpLeftIcon size={32} />
-      </Button>
-      <Button
-        onClick={() => editor.chain().focus().redo().run()}
-        variant="ghost"
-      >
-        <ArrowUUpRightIcon size={32} />
-      </Button>
+    <section className="flex flex-col w-full mb-1">
+      <div className="w-full">
+        <Input
+          type="text"
+          placeholder="Enter Title..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="text-3xl font-bold outline-none border-none w-full max-w-xl bg-transparent mb-2 h-20"
+        />
 
-      <Separator orientation="vertical" />
+        <Input
+          type="text"
+          placeholder="Enter Description..."
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="text-sm text-muted-foreground outline-none border-none w-full max-w-xl bg-transparent"
+        />
+      </div>
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="px-2">
-            <div className="flex items-center gap-1">
-              {headings.find((h) =>
-                editor.isActive("heading", { level: h.level }),
-              )?.icon || <TextHIcon size={32} />}
-              <CaretDownIcon size={32} />
-            </div>
-          </Button>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent>
-          {headings.map((h) => {
-            const isActive = editor.isActive("heading", { level: h.level });
-
-            return (
-              <DropdownMenuItem
-                key={h.level}
-                onClick={() => {
-                  if (isActive) {
-                    editor.chain().focus().setParagraph().run();
-                  } else {
-                    editor
-                      .chain()
-                      .focus()
-                      .toggleHeading({ level: h.level })
-                      .run();
-                  }
-                }}
-                className={isActive ? "bg-accent" : ""}
-              >
-                {h.label}
-              </DropdownMenuItem>
-            );
-          })}
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {/* ✅ Fixed: value now reflects orderedList correctly */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm" className="px-2 gap-0">
-            {editorState.isBulletList && <ListIcon size={32} />}
-            {editorState.isOrderedList && <ListNumbersIcon size={32} />}
-            {editorState.isTaskList && <ListChecksIcon size={32} />}
-            {!editorState.isBulletList &&
-              !editorState.isOrderedList &&
-              !editorState.isTaskList && (
-                <div className="flex gap-0 p-0">
-                  <ListIcon size={32} />
-                  <CaretDownIcon size={32} />
-                </div>
-              )}
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-          >
-            <ListIcon size={32} />
-            Bulleted List
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          >
-            <ListNumbersIcon size={32} />
-            Ordered List
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => editor.chain().focus().toggleTaskList().run()}
-          >
-            <ListChecksIcon size={32} />
-            Task List
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <Toggle
-        pressed={editorState.isBlockquote}
-        onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
-        aria-label="Blockquote"
-      >
-        <TextQuoteIcon className="w-4 h-4" />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isCodeBlock}
-        onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
-        aria-label="Code Block"
-      >
-        <CodeBlockIcon size={32} />
-      </Toggle>
-
-      <Separator orientation="vertical" />
-
-      <Toggle
-        pressed={editorState.isBold}
-        onPressedChange={() => editor.chain().focus().toggleBold().run()}
-        aria-label="Bold"
-      >
-        <TextBIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isItalic}
-        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-        aria-label="Italic"
-      >
-        <TextItalicIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isStrike}
-        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-        aria-label="Strike"
-      >
-        <TextStrikethroughIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isCode}
-        onPressedChange={() => editor.chain().focus().toggleCode().run()}
-        aria-label="Code"
-      >
-        <CodeIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isUnderline}
-        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-        aria-label="Underline"
-      >
-        <TextUnderlineIcon size={32} />
-      </Toggle>
-
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm">
-            <HighlighterIcon size={32} />
-          </Button>
-        </DropdownMenuTrigger>
-
-        <DropdownMenuContent className="flex items-center gap-2 px-2 py-2">
-          {colors.map((color) => (
-            <DropdownMenuItem
-              key={color}
-              className="w-5 h-5 p-0 rounded-full border"
-              style={{ backgroundColor: color }}
-              onClick={() => {
-                editor.chain().focus().setHighlight({ color }).run();
-              }}
-            />
-          ))}
-          <Separator orientation="vertical" />
-          <DropdownMenuItem
-            className="p-0"
-            onClick={() => editor.chain().focus().unsetHighlight().run()}
-          >
-            <ProhibitIcon size={32} />
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {editorState.isLink ? (
-        <Toggle
-          pressed
-          onPressedChange={() => editor.chain().focus().unsetLink().run()}
+      <div className="w-full flex flex-wrap items-center border-b gap-2">
+        <Button
+          onClick={() => editor.chain().focus().undo().run()}
+          variant="ghost"
         >
-          <LinkBreakIcon size={32} />
+          <ArrowUUpLeftIcon size={32} />
+        </Button>
+        <Button
+          onClick={() => editor.chain().focus().redo().run()}
+          variant="ghost"
+        >
+          <ArrowUUpRightIcon size={32} />
+        </Button>
+
+        <Separator orientation="vertical" />
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="px-2">
+              <div className="flex items-center gap-1">
+                {headings.find((h) =>
+                  editor.isActive("heading", { level: h.level }),
+                )?.icon || <TextHIcon size={32} />}
+                <CaretDownIcon size={32} />
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+
+          <DropdownMenuContent>
+            {headings.map((h) => {
+              const isActive = editor.isActive("heading", { level: h.level });
+
+              return (
+                <DropdownMenuItem
+                  key={h.level}
+                  onClick={() => {
+                    if (isActive) {
+                      editor.chain().focus().setParagraph().run();
+                    } else {
+                      editor
+                        .chain()
+                        .focus()
+                        .toggleHeading({ level: h.level })
+                        .run();
+                    }
+                  }}
+                  className={isActive ? "bg-accent" : ""}
+                >
+                  {h.label}
+                </DropdownMenuItem>
+              );
+            })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {/* ✅ Fixed: value now reflects orderedList correctly */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="px-2 gap-0">
+              {editorState.isBulletList && <ListIcon size={32} />}
+              {editorState.isOrderedList && <ListNumbersIcon size={32} />}
+              {editorState.isTaskList && <ListChecksIcon size={32} />}
+              {!editorState.isBulletList &&
+                !editorState.isOrderedList &&
+                !editorState.isTaskList && (
+                  <div className="flex gap-0 p-0">
+                    <ListIcon size={32} />
+                    <CaretDownIcon size={32} />
+                  </div>
+                )}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem
+              onClick={() => editor.chain().focus().toggleBulletList().run()}
+            >
+              <ListIcon size={32} />
+              Bulleted List
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            >
+              <ListNumbersIcon size={32} />
+              Ordered List
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => editor.chain().focus().toggleTaskList().run()}
+            >
+              <ListChecksIcon size={32} />
+              Task List
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        <Toggle
+          pressed={editorState.isBlockquote}
+          onPressedChange={() =>
+            editor.chain().focus().toggleBlockquote().run()
+          }
+          aria-label="Blockquote"
+        >
+          <TextQuoteIcon className="w-4 h-4" />
         </Toggle>
-      ) : (
-        <LinkComponent editor={editor} />
-      )}
+        <Toggle
+          pressed={editorState.isCodeBlock}
+          onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
+          aria-label="Code Block"
+        >
+          <CodeBlockIcon size={32} />
+        </Toggle>
 
-      <Separator orientation="vertical" />
+        <Separator orientation="vertical" />
 
-      <Toggle
-        pressed={editorState.isSuperscript}
-        onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
-        aria-label="Superscript"
-      >
-        <TextSuperscriptIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isSubscript}
-        onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
-        aria-label="Subscript"
-      >
-        <TextSubscriptIcon size={32} />
-      </Toggle>
+        <Toggle
+          pressed={editorState.isBold}
+          onPressedChange={() => editor.chain().focus().toggleBold().run()}
+          aria-label="Bold"
+        >
+          <TextBIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isItalic}
+          onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+          aria-label="Italic"
+        >
+          <TextItalicIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isStrike}
+          onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+          aria-label="Strike"
+        >
+          <TextStrikethroughIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isCode}
+          onPressedChange={() => editor.chain().focus().toggleCode().run()}
+          aria-label="Code"
+        >
+          <CodeIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isUnderline}
+          onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+          aria-label="Underline"
+        >
+          <TextUnderlineIcon size={32} />
+        </Toggle>
 
-      <Separator orientation="vertical" />
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm">
+              <HighlighterIcon size={32} />
+            </Button>
+          </DropdownMenuTrigger>
 
-      <Toggle
-        pressed={editorState.isAlignLeft}
-        onPressedChange={() =>
-          editor.chain().focus().setTextAlign("left").run()
-        }
-        aria-label="Align Left"
-      >
-        <TextAlignLeftIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isAlignCenter}
-        onPressedChange={() =>
-          editor.chain().focus().setTextAlign("center").run()
-        }
-        aria-label="Align Center"
-      >
-        <TextAlignCenterIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isAlignRight}
-        onPressedChange={() =>
-          editor.chain().focus().setTextAlign("right").run()
-        }
-        aria-label="Align Right"
-      >
-        <TextAlignRightIcon size={32} />
-      </Toggle>
-      <Toggle
-        pressed={editorState.isAlignJustify}
-        onPressedChange={() =>
-          editor.chain().focus().setTextAlign("justify").run()
-        }
-        aria-label="Align Justify"
-      >
-        <TextAlignJustifyIcon size={32} />
-      </Toggle>
+          <DropdownMenuContent className="flex items-center gap-2 px-2 py-2">
+            {colors.map((color) => (
+              <DropdownMenuItem
+                key={color}
+                className="w-5 h-5 p-0 rounded-full border"
+                style={{ backgroundColor: color }}
+                onClick={() => {
+                  editor.chain().focus().setHighlight({ color }).run();
+                }}
+              />
+            ))}
+            <Separator orientation="vertical" />
+            <DropdownMenuItem
+              className="p-0"
+              onClick={() => editor.chain().focus().unsetHighlight().run()}
+            >
+              <ProhibitIcon size={32} />
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
+        {editorState.isLink ? (
+          <Toggle
+            pressed
+            onPressedChange={() => editor.chain().focus().unsetLink().run()}
+          >
+            <LinkBreakIcon size={32} />
+          </Toggle>
+        ) : (
+          <LinkComponent editor={editor} />
+        )}
+
+        <Separator orientation="vertical" />
+
+        <Toggle
+          pressed={editorState.isSuperscript}
+          onPressedChange={() =>
+            editor.chain().focus().toggleSuperscript().run()
+          }
+          aria-label="Superscript"
+        >
+          <TextSuperscriptIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isSubscript}
+          onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
+          aria-label="Subscript"
+        >
+          <TextSubscriptIcon size={32} />
+        </Toggle>
+
+        <Separator orientation="vertical" />
+
+        <Toggle
+          pressed={editorState.isAlignLeft}
+          onPressedChange={() =>
+            editor.chain().focus().setTextAlign("left").run()
+          }
+          aria-label="Align Left"
+        >
+          <TextAlignLeftIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isAlignCenter}
+          onPressedChange={() =>
+            editor.chain().focus().setTextAlign("center").run()
+          }
+          aria-label="Align Center"
+        >
+          <TextAlignCenterIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isAlignRight}
+          onPressedChange={() =>
+            editor.chain().focus().setTextAlign("right").run()
+          }
+          aria-label="Align Right"
+        >
+          <TextAlignRightIcon size={32} />
+        </Toggle>
+        <Toggle
+          pressed={editorState.isAlignJustify}
+          onPressedChange={() =>
+            editor.chain().focus().setTextAlign("justify").run()
+          }
+          aria-label="Align Justify"
+        >
+          <TextAlignJustifyIcon size={32} />
+        </Toggle>
+      </div>
     </section>
   );
 };
