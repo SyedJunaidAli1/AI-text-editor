@@ -12,7 +12,7 @@
 - [x] privacy page completed them for ai editor (for now placeholder)
 - [x] terms page completed them for ai editor (for now placeholder)
 - [ ] Add input for title in Editor (tiptap)
-- [ ] change lucid icon with phosphor (few more needed to change)
+- [x] change lucid icon with phosphor (blockuote icon is lucid)
 - [x] okay so tiptap link component is remaind (almost everything working)
 - [x] create document api is working with update
 - [x] now api for get all document api to get all docu 
