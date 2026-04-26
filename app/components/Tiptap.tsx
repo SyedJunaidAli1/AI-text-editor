@@ -22,7 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { saveDocument } from "@/server/document";
 import LinkComponent from "@/app/components/LinkComponent";
 import { useQuery } from "@tanstack/react-query";
@@ -156,32 +156,37 @@ const Tiptap = ({ docId }: { docId?: string }) => {
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const save = useCallback(async () => {
+    if (!editor || isInitialLoad.current) return;
+
+    setSaving(true);
+
+    const json = editor.getJSON();
+
+    const res = await saveDocument({
+      id: currentDocId,
+      content: json,
+      title,
+      description,
+    });
+
+    if (!currentDocId) {
+      setCurrentDocId(res.id);
+      window.history.replaceState(null, "", `/app?docId=${res.id}`);
+    }
+
+    setSaving(false);
+  }, [editor, currentDocId, title, description]);
+
   useEffect(() => {
     if (!editor) return;
 
     const handler = () => {
       if (isInitialLoad.current) return;
+
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
-      timeoutRef.current = setTimeout(async () => {
-        setSaving(true);
-
-        const json = editor.getJSON();
-
-        const res = await saveDocument({
-          id: currentDocId,
-          content: json,
-          title,
-          description,
-        });
-
-        if (!currentDocId) {
-          setCurrentDocId(res.id);
-          window.history.replaceState(null, "", `/app?docId=${res.id}`);
-        }
-
-        setSaving(false);
-      }, 800);
+      timeoutRef.current = setTimeout(save, 800);
     };
 
     editor.on("update", handler);
@@ -189,7 +194,19 @@ const Tiptap = ({ docId }: { docId?: string }) => {
     return () => {
       editor.off("update", handler);
     };
-  }, [editor, currentDocId, title, description]); // 👈 ADD THESE
+  }, [editor, save]);
+
+  useEffect(() => {
+    if (!currentDocId || isInitialLoad.current) return;
+
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    timeoutRef.current = setTimeout(save, 800);
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [title, description, save]);
 
   useEffect(() => {
     if (!editor || !doc) return;
