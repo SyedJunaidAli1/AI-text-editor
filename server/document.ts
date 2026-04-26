@@ -7,10 +7,12 @@ export async function saveDocument({
   id,
   content,
   title,
+  description,
 }: {
   id?: string;
   content: string;
-  title?: string;
+  title: string;
+  description: string;
 }) {
   const supabase = await createClient();
 
@@ -28,6 +30,7 @@ export async function saveDocument({
         user_id: user.id,
         content,
         title,
+        description,
         updated_at: new Date().toISOString(),
       })
       .eq("id", id);

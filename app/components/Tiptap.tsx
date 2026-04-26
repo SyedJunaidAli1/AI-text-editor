@@ -56,10 +56,13 @@ import {
   TextUnderlineIcon,
 } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
+import { Cossette_Texte } from "next/font/google";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
   const [saving, setSaving] = useState(false);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const { data: doc } = useQuery({
     ...documentsQuery.byId(docId!),
@@ -153,39 +156,73 @@ const Tiptap = ({ docId }: { docId?: string }) => {
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // useEffect(() => {
+  //   if (!editor) return;
+
+  //   const handler = () => {
+  //     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+  //     timeoutRef.current = setTimeout(async () => {
+  //       setSaving(true);
+
+  //       const json = editor.getJSON();
+
+  //       const res = await saveDocument({
+  //         id: currentDocId,
+  //         content: json,
+  //       });
+
+  //       if (!currentDocId) {
+  //         setCurrentDocId(res.id);
+  //         window.history.replaceState(null, "", `/app?docId=${res.id}`);
+  //       }
+
+  //       setSaving(false);
+  //     }, 800);
+  //   };
+
+  //   editor.on("update", handler);
+
+  //   return () => {
+  //     editor.off("update", handler); // ✅ cleanup
+  //   };
+  // }, [editor, currentDocId]);
+  
   useEffect(() => {
     if (!editor) return;
-
+  
     const handler = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
+  
       timeoutRef.current = setTimeout(async () => {
         setSaving(true);
-
+  
         const json = editor.getJSON();
-
+  
         const res = await saveDocument({
           id: currentDocId,
           content: json,
-          title: "Untitled",
+          title,
+          description,
         });
-
+  
         if (!currentDocId) {
           setCurrentDocId(res.id);
           window.history.replaceState(null, "", `/app?docId=${res.id}`);
         }
-
+  
         setSaving(false);
       }, 800);
     };
-
+  
     editor.on("update", handler);
-
+  
     return () => {
-      editor.off("update", handler); // ✅ cleanup
+      editor.off("update", handler);
     };
-  }, [editor, currentDocId]);
+  }, [editor, currentDocId, title, description]); // 👈 ADD THESE
 
+  
   useEffect(() => {
     if (!editor || !doc) return;
 
@@ -194,16 +231,33 @@ const Tiptap = ({ docId }: { docId?: string }) => {
 
   return (
     <>
-      {editor && <Toolbar editor={editor} />}
+      {editor && (
+        <Toolbar
+          editor={editor}
+          title={title}
+          description={description}
+          setTitle={setTitle}
+          setDescription={setDescription}
+        />
+      )}
       <EditorContent editor={editor} />
     </>
   );
 };
 
-const Toolbar = ({ editor }: { editor: Editor }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
+const Toolbar = ({
+  editor,
+  title,
+  description,
+  setTitle,
+  setDescription,
+}: {
+  editor: Editor;
+  title: string;
+  description: string;
+  setTitle: (value: string) => void;
+  setDescription: (value: string) => void;
+}) => {
   const editorState = useEditorState({
     editor,
     selector: (ctx) => {
