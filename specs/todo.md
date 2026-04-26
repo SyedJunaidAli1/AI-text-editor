@@ -11,7 +11,7 @@
 - [x] about page completed them for ai editor (for now placeholder)
 - [x] privacy page completed them for ai editor (for now placeholder)
 - [x] terms page completed them for ai editor (for now placeholder)
-- [ ] Add input for title in Editor (tiptap)
+- [x] Add input for title in Editor (tiptap)
 - [x] change lucid icon with phosphor (blockuote icon is lucid)
 - [x] okay so tiptap link component is remaind (almost everything working)
 - [x] create document api is working with update
