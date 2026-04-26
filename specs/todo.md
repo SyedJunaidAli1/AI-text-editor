@@ -16,11 +16,10 @@
 - [x] okay so tiptap link component is remaind (almost everything working)
 - [x] create document api is working with update
 - [x] now api for get all document api to get all docu 
-- [ ] api to get specific document
+- [x] api to get specific document
 - [ ] AI/LLM intigration and save that in db
 - [ ] UI/UX improvement after that+ responsive ness
 - [x] hitory page is done
-- [ ] editor (tiptap) add option for title input
 - [ ] history page show words
 - [ ] history page dropdown for options
 
