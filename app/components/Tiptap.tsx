@@ -56,13 +56,13 @@ import {
   TextUnderlineIcon,
 } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
-import { Cossette_Texte } from "next/font/google";
 
 const Tiptap = ({ docId }: { docId?: string }) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
   const [saving, setSaving] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const isInitialLoad = useRef(true);
 
   const { data: doc } = useQuery({
     ...documentsQuery.byId(docId!),
@@ -156,77 +156,57 @@ const Tiptap = ({ docId }: { docId?: string }) => {
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // useEffect(() => {
-  //   if (!editor) return;
-
-  //   const handler = () => {
-  //     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-  //     timeoutRef.current = setTimeout(async () => {
-  //       setSaving(true);
-
-  //       const json = editor.getJSON();
-
-  //       const res = await saveDocument({
-  //         id: currentDocId,
-  //         content: json,
-  //       });
-
-  //       if (!currentDocId) {
-  //         setCurrentDocId(res.id);
-  //         window.history.replaceState(null, "", `/app?docId=${res.id}`);
-  //       }
-
-  //       setSaving(false);
-  //     }, 800);
-  //   };
-
-  //   editor.on("update", handler);
-
-  //   return () => {
-  //     editor.off("update", handler); // ✅ cleanup
-  //   };
-  // }, [editor, currentDocId]);
-  
   useEffect(() => {
     if (!editor) return;
-  
+
     const handler = () => {
+      if (isInitialLoad.current) return;
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  
+
       timeoutRef.current = setTimeout(async () => {
         setSaving(true);
-  
+
         const json = editor.getJSON();
-  
+
         const res = await saveDocument({
           id: currentDocId,
           content: json,
           title,
           description,
         });
-  
+
         if (!currentDocId) {
           setCurrentDocId(res.id);
           window.history.replaceState(null, "", `/app?docId=${res.id}`);
         }
-  
+
         setSaving(false);
       }, 800);
     };
-  
+
     editor.on("update", handler);
-  
+
     return () => {
       editor.off("update", handler);
     };
   }, [editor, currentDocId, title, description]); // 👈 ADD THESE
 
-  
   useEffect(() => {
     if (!editor || !doc) return;
 
+    isInitialLoad.current = true;
+
+    // set content
     editor.commands.setContent(doc.content);
+
+    // set metadata
+    setTitle(doc.title || "");
+    setDescription(doc.description || "");
+
+    // allow saving AFTER everything is set
+    setTimeout(() => {
+      isInitialLoad.current = false;
+    }, 0);
   }, [editor, doc]);
 
   return (
