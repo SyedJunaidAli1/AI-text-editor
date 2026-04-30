@@ -22,8 +22,6 @@
 - [x] hitory page is done
 - [ ] history page show words
 - [ ] history page dropdown for options
-- [ ] dasdasdas
-
 
 #bug
 
