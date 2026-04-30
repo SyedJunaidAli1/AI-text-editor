@@ -31,11 +31,14 @@ import { toast } from "sonner";
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
   const queryClient = useQueryClient();
-  const { mutate: deleteDoc, isPending } = useMutation({
+  const { mutate: deleteDoc } = useMutation({
     ...documentsMutation().delete(),
     onSuccess: () => {
       toast.success("Document deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["documents"] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
   const router = useRouter();
