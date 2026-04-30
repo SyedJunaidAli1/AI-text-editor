@@ -64,7 +64,7 @@ const HistoryComponent = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     <DropdownMenuGroup>
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuLabel>Document</DropdownMenuLabel>
                       <DropdownMenuItem>Profile</DropdownMenuItem>
                       <DropdownMenuItem>Billing</DropdownMenuItem>
                     </DropdownMenuGroup>
