@@ -1,4 +1,8 @@
-import { getAllDocuments, getDocumentsById } from "@/server/document";
+import {
+  deleteDocument,
+  getAllDocuments,
+  getDocumentsById,
+} from "@/server/document";
 
 export const documentsQuery = {
   all: () => ({
@@ -11,3 +15,9 @@ export const documentsQuery = {
     queryFn: () => getDocumentsById(id),
   }),
 };
+
+export const documentsMutation = () => ({
+  delete: () => ({
+    mutationFn: (id: string) => deleteDocument(id),
+  }),
+});

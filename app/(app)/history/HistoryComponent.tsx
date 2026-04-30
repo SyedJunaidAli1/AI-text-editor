@@ -1,7 +1,10 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { documentsQuery } from "@/lib/tanstack-queries/document";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  documentsMutation,
+  documentsQuery,
+} from "@/lib/tanstack-queries/document";
 import { useRouter } from "next/navigation";
 import { Loader } from "@/app/components/Loader";
 import {
@@ -23,9 +26,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
+  const queryClient = useQueryClient();
+  const { mutate: deleteDoc, isPending } = useMutation({
+    ...documentsMutation().delete(),
+    onSuccess: () => {
+      toast.success("Document deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["documents"] });
+    },
+  });
   const router = useRouter();
 
   if (isLoading)
@@ -70,7 +82,12 @@ const HistoryComponent = () => {
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
-                      <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+                      <DropdownMenuItem
+                        variant="destructive"
+                        onClick={() => deleteDoc(doc.id)}
+                      >
+                        Delete
+                      </DropdownMenuItem>
                     </DropdownMenuGroup>
                   </DropdownMenuContent>
                 </DropdownMenu>

@@ -106,13 +106,13 @@ export async function deleteDocument(id: string) {
 
   if (!user) throw new Error("Unauthorized");
 
-  const { error: deleteError } = await supabase
+  const { error } = await supabase
     .from("documents")
     .delete()
     .eq("id", id)
     .eq("user_id", user.id);
 
-  if (deleteError) throw new Error(deleteError.message);
+  if (error) throw new Error(error.message);
 
   return { success: true };
 }
