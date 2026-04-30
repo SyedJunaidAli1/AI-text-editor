@@ -17,6 +17,7 @@
 - [x] create document api is working with update
 - [x] now api for get all document api to get all docu 
 - [x] api to get specific document
+- [x] api to delete document (all crud operation done for document)
 - [ ] AI/LLM intigration and save that in db
 - [ ] UI/UX improvement after that+ responsive ness
 - [x] hitory page is done
