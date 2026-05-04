@@ -166,7 +166,7 @@ const Tiptap = ({ docId }: { docId?: string }) => {
     setSaving(true);
 
     const json = editor.getJSON();
-    console.log(editor.getJSON());
+    console.log("Saving JSON:", JSON.stringify(editor.getJSON(), null, 2));
 
     const res = await saveDocument({
       id: currentDocId,
