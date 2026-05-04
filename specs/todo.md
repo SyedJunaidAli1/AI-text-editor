@@ -27,8 +27,8 @@
 #bug
 
 - [ ] only yellow color is saving for highlighter, other color shows on frontend but only yellow is saving
-- [ ] only h1 is showing from backend even we save it as h2,3,4 (frontend is sending correct json)
+- [x] only h1 is showing from backend even we save it as h2,3,4 (fixed by clean json)
 - [ ] tick is not saving working task list
 - [ ] link behaviour issue
-- [ ] align has also some issues
+- [x] align has also some issues (fixed by clean json)
 - [x] creating new doc is broken by implemention new inputs
