@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { createClientReadOnly } from "@/lib/supabase/server-read";
+import { JSONContent } from "@tiptap/react";
 
 export async function saveDocument({
   id,
@@ -10,7 +11,7 @@ export async function saveDocument({
   description,
 }: {
   id?: string;
-  content: string;
+  content: JSONContent;
   title: string;
   description: string;
 }) {
@@ -47,6 +48,7 @@ export async function saveDocument({
       user_id: user.id,
       content,
       title,
+      description,
     })
     .select("id")
     .single();

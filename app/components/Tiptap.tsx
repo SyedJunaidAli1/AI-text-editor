@@ -71,7 +71,11 @@ const Tiptap = ({ docId }: { docId?: string }) => {
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3, 4, 5, 6],
+        },
+      }),
       Superscript,
       Subscript,
       TaskList,
@@ -162,6 +166,7 @@ const Tiptap = ({ docId }: { docId?: string }) => {
     setSaving(true);
 
     const json = editor.getJSON();
+    console.log(editor.getJSON());
 
     const res = await saveDocument({
       id: currentDocId,
@@ -223,7 +228,7 @@ const Tiptap = ({ docId }: { docId?: string }) => {
     // ✅ EXISTING DOCUMENT CASE
     isInitialLoad.current = true;
 
-    editor.commands.setContent(doc.content);
+    editor.commands.setContent(doc.content, false);
 
     setTitle(doc.title || "");
     setDescription(doc.description || "");

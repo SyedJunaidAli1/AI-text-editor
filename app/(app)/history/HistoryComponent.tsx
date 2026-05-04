@@ -58,6 +58,7 @@ const HistoryComponent = () => {
           Review and manage your documents history.
         </p>
       </div>
+      {docs?.length === 0 && <p>No documents found.</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 content-start">
         {docs?.map((doc) => (
           <Card
