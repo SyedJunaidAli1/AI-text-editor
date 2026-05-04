@@ -21,7 +21,7 @@
 - [ ] AI/LLM intigration and save that in db
 - [ ] UI/UX improvement after that+ responsive ness
 - [x] hitory page is done
-- [ ] history page show words
+- [x] history page show words
 - [ ] history page dropdown for options
 
 #bug
