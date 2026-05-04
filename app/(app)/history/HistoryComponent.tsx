@@ -26,6 +26,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { JSONContent } from "@tiptap/react";
 import { toast } from "sonner";
 
 const HistoryComponent = () => {
@@ -42,6 +43,24 @@ const HistoryComponent = () => {
     },
   });
   const router = useRouter();
+
+  const getWordCount = (content: JSONContent): number => {
+    let text = "";
+
+    const extractText = (node: JSONContent) => {
+      if (node.type === "text") {
+        text += node.text + " ";
+      }
+
+      if (node.content) {
+        node.content.forEach(extractText);
+      }
+    };
+
+    extractText(content);
+
+    return text.trim().split(/\s+/).filter(Boolean).length;
+  };
 
   if (isLoading)
     return (
@@ -109,7 +128,9 @@ const HistoryComponent = () => {
             </CardContent>
 
             <CardFooter className="flex justify-between text-xs text-muted-foreground">
-              <span>200 words</span>
+              <span className="font-semibold">
+                {getWordCount(doc.content)} words
+              </span>
               <Button
                 variant="ghost"
                 size="sm"
