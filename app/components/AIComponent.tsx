@@ -1,5 +1,4 @@
 "use client";
-
 import {
   InputGroup,
   InputGroupAddon,
@@ -44,7 +43,7 @@ const AIComponent = () => {
       </div>
 
       {/* INPUT */}
-      <div className="border-t p-4 border-amber-600">
+      <div className="border-t p-4 border-blue-600">
         <InputGroup className="rounded-2xl border bg-background shadow-sm">
           <InputGroupTextarea placeholder="Ask AI anything..." />
 
