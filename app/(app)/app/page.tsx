@@ -1,4 +1,5 @@
 "use client";
+import AIComponent from "@/app/components/AIComponent";
 import Tiptap from "@/app/components/Tiptap";
 import { use } from "react";
 
@@ -18,7 +19,7 @@ export default function Page({
 
       {/* AI PANEL */}
       <div className="w-[30%] border border-red-600 h-screen px-2">
-        <h2 className="text-2xl font-bold mb-4">AI Assistant</h2>
+        <AIComponent />
       </div>
     </div>
   );
