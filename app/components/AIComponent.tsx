@@ -6,9 +6,13 @@ import {
   InputGroupTextarea,
 } from "@/components/ui/input-group";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
+import { aiMutation } from "@/lib/tanstack-queries/ai";
+import { useMutation } from "@tanstack/react-query";
 import { ArrowUpIcon, Sparkles } from "lucide-react";
 
 const AIComponent = () => {
+  const { mutateAsync: askMutation, isPending } = useMutation(aiMutation.ask());
+
   return (
     <div className="flex flex-col h-screen border-l bg-background">
       {/* HEADER */}
