@@ -24,11 +24,18 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { signoutUser } from "@/server/user";
-import { ChevronsUpDown, History, LogOut, Pencil, Sparkle } from "lucide-react";
+import {
+  CaretDownIcon,
+  ClockCounterClockwiseIcon,
+  PencilIcon,
+  SignOutIcon,
+  SparkleIcon,
+} from "@phosphor-icons/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface userProps {
+  user: string;
   email: string;
   user_metadata: {
     full_name: string;
@@ -47,7 +54,7 @@ export function AppSidebar({ user }: userProps) {
           <SidebarMenuItem>
             <SidebarMenuButton>
               <div className="flex items-center justify-center gap-2 ">
-                <Sparkle />
+                <SparkleIcon size={32} />
                 {state !== "collapsed" && "AI text editor"}
               </div>
             </SidebarMenuButton>
@@ -64,7 +71,7 @@ export function AppSidebar({ user }: userProps) {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link href="/app">
-                    <Pencil className="size-4" />
+                    <PencilIcon size={32} />
                     <span>Editor</span>
                   </Link>
                 </SidebarMenuButton>
@@ -74,7 +81,7 @@ export function AppSidebar({ user }: userProps) {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
                   <Link href="/history">
-                    <History className="size-4" />
+                    <ClockCounterClockwiseIcon size={32} />
                     <span>History</span>
                   </Link>
                 </SidebarMenuButton>
@@ -112,9 +119,7 @@ export function AppSidebar({ user }: userProps) {
                       </p>
                     </div>
                   )}
-                  {state !== "collapsed" && (
-                    <ChevronsUpDown className="ml-auto size-4" />
-                  )}
+                  {state !== "collapsed" && <CaretDownIcon size={32} />}
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -139,7 +144,8 @@ export function AppSidebar({ user }: userProps) {
                       router.push("/signin");
                     }}
                   >
-                    <LogOut /> Log out
+                    <SignOutIcon size={32} />
+                    Log out
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               </DropdownMenuContent>
