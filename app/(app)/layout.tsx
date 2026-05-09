@@ -1,4 +1,3 @@
-import "../globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/app/components/AppSidebar";
 import { getUser } from "@/server/data";
