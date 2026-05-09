@@ -23,6 +23,7 @@
 - [x] hitory page is done
 - [x] history page show words
 - [ ] history page dropdown for options
+- [ ] for not we sending content and query to AI/LLM (i think sending content will be a waste of tokens ask chat gpt about it)
 
 #bug
 
