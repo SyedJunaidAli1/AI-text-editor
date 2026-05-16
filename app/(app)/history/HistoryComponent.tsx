@@ -100,8 +100,6 @@ const HistoryComponent = () => {
                   <DropdownMenuContent>
                     <DropdownMenuGroup>
                       <DropdownMenuLabel>Document</DropdownMenuLabel>
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Billing</DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
