@@ -19,7 +19,7 @@ export default function Page({
 
       {/* AI PANEL */}
       <div className="w-[30%] border border-red-600 h-screen px-2">
-        <AIComponent />
+        <AIComponent documentId={docId} editor={editor} />
       </div>
     </div>
   );
