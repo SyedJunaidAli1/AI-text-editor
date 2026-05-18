@@ -1,7 +1,6 @@
 "use server";
 
 import Groq from "groq-sdk";
-import { JSONContent } from "@tiptap/react";
 import { createClient } from "@/lib/supabase/server";
 
 const groq = new Groq({
@@ -11,11 +10,11 @@ const groq = new Groq({
 export async function askAi({
   documentId,
   query,
-  editorcontent,
+  editorContent,
 }: {
   documentId: string;
   query: string;
-  editorcontent: JSONContent;
+  editorContent: string;
 }) {
   const supabase = await createClient();
 
@@ -28,7 +27,7 @@ export async function askAi({
       },
       {
         role: "user",
-        content: `Document: ${editorcontent} User Request: ${query}`,
+        content: `Document: ${editorContent} User Request: ${query}`,
       },
     ],
   });

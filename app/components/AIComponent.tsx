@@ -17,8 +17,8 @@ const AIComponent = ({
   documentId,
   editor,
 }: {
-  documentId: string | undefined;
-  editor: Editor | Null;
+  documentId: string;
+  editor: Editor | null;
 }) => {
   const { mutateAsync: askMutation, isPending } = useMutation(aiMutation.ask());
   const [query, setQuery] = useState("");
@@ -30,6 +30,7 @@ const AIComponent = ({
   >([]);
 
   const handleAsk = async () => {
+    if (!editor) return;
     if (!query.trim()) return;
 
     setMessages((prev) => [
@@ -39,6 +40,9 @@ const AIComponent = ({
         content: query,
       },
     ]);
+
+    const text = editor.getText();
+    console.log(text);
 
     try {
       const response = await askMutation({
