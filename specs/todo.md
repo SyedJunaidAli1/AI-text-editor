@@ -18,7 +18,9 @@
 - [x] now api for get all document api to get all docu 
 - [x] api to get specific document
 - [x] api to delete document (all crud operation done for document)
-- [ ] AI/LLM intigration and save that in db
+- [x] AI/LLM intigration (done but document is empty)
+- [ ] ai mutation document is empty investigate the issue and fix it
+- [ ] AI/LLM intigration save that in db for history
 - [ ] UI/UX improvement after that+ responsive ness
 - [x] hitory page is done
 - [x] history page show words

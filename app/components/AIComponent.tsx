@@ -118,7 +118,6 @@ const AIComponent = ({
               ) : (
                 <>
                   <ArrowUpIcon className="w-4 h-4" />
-                  <span className="sr-only">Send</span>
                 </>
               )}
             </InputGroupButton>
