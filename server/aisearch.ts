@@ -47,7 +47,7 @@ export async function askAi({
 
   const response = completion.choices[0]?.message?.content || "";
 
-  await supabase.from("ai_search").insert({
+  await supabase.from("ai_searches").insert({
     document_id: documentId,
     query,
     response,
