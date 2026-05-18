@@ -19,7 +19,9 @@
 - [x] api to get specific document
 - [x] api to delete document (all crud operation done for document)
 - [x] AI/LLM intigration (done but document is empty)
-- [ ] ai mutation document is empty investigate the issue and fix it
+- [x] ai mutation document is empty investigate the issue and fix it
+- [ ] ai improve system prompt
+- [ ] ai search is not saving in the db (row policy created for crd)
 - [ ] AI/LLM intigration save that in db for history
 - [ ] UI/UX improvement after that+ responsive ness
 - [x] hitory page is done
