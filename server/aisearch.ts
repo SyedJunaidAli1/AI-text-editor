@@ -1,7 +1,9 @@
 "use server";
 
 import Groq from "groq-sdk";
+import { createClientReadOnly } from "@/lib/supabase/server-read";
 import { createClient } from "@/lib/supabase/server";
+import { userAgent } from "next/server";
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
@@ -54,4 +56,19 @@ export async function askAi({
   });
 
   return response;
+}
+
+export async function getAISearchHistory(documentId: string) {
+  const supabase = await createClientReadOnly();
+
+  const { data, error } = await supabase
+    .from("ai_searches")
+    .select("*")
+    .eq("document_id", documentId)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
 }
