@@ -15,7 +15,7 @@
 - [x] change lucid icon with phosphor (blockuote icon is lucid)
 - [x] okay so tiptap link component is remaind (almost everything working)
 - [x] create document api is working with update
-- [x] now api for get all document api to get all docu 
+- [x] now api for get all document api to get all docu
 - [x] api to get specific document
 - [x] api to delete document (all crud operation done for document)
 - [x] AI/LLM intigration (done but document is empty)
@@ -29,7 +29,7 @@
 - [ ] UI/UX improvement after that+ responsiveness
 - [x] hitory page is done
 - [x] history page show words
-- [ ] history page dropdown for options
+- [ ] history page dropdown for options (export to csv, text)
 - [ ] for not we sending content and query to AI/LLM (i think sending content will be a waste of tokens ask chat gpt about it)
 
 #bug
