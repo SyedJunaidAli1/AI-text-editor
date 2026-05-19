@@ -102,7 +102,7 @@ const AIComponent = ({
       </div>
 
       {/* INPUT */}
-      <div className="border-t p-4 border-blue-600">
+      <div className="border-t p-4">
         <InputGroup className="rounded-2xl border bg-background shadow-sm">
           <InputGroupTextarea
             value={query}
