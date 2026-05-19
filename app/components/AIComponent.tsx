@@ -7,8 +7,8 @@ import {
 } from "@/components/ui/input-group";
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Spinner } from "@/components/ui/spinner";
-import { aiMutation } from "@/lib/tanstack-queries/ai";
-import { useMutation } from "@tanstack/react-query";
+import { aiMutation, aiQuery } from "@/lib/tanstack-queries/ai";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ArrowUpIcon, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Editor } from "@tiptap/react";
@@ -21,13 +21,16 @@ const AIComponent = ({
   editor: Editor | null;
 }) => {
   const { mutateAsync: askMutation, isPending } = useMutation(aiMutation.ask());
+  const { data: history, isLoading: isLoadingHistory } = useQuery(aiQuery.history(documentId));
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<
     {
       role: "user" | "assistant";
       content: string;
     }[]
-  >([]);
+    >([]);
+
+  console.log(history)
 
   const handleAsk = async () => {
     if (!editor) return;
@@ -40,9 +43,6 @@ const AIComponent = ({
         content: query,
       },
     ]);
-
-    const text = editor.getText();
-    console.log(text);
 
     try {
       const response = await askMutation({
