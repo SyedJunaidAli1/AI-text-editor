@@ -106,15 +106,15 @@ export default function Page({
     immediatelyRender: false,
   });
   return (
-    <div className="flex min-h-screen w-full px-4 py-4">
+    <div className="flex min-h-screen w-full">
       {/* EDITOR */}
-      <main className="flex-1">
+      <main className="flex-1 p-4">
         {/* 👇 pass docId */}
         <Tiptap docId={docId} editor={editor} />
       </main>
 
       {/* AI PANEL */}
-      <div className="w-[30%] border border-red-600 h-screen px-2">
+      <div className="w-[30%] h-screen py-0">
         <AIComponent documentId={docId} editor={editor} />
       </div>
     </div>
