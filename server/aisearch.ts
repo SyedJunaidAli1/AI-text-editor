@@ -40,7 +40,7 @@ export async function askAi({
       },
       {
         role: "user",
-        content: `Document: ${editorContent} User Request: ${query}`,
+        content: `Here is the document:${editorContent} User request: ${query} Respond briefly and helpfully.`,
       },
     ],
   });
