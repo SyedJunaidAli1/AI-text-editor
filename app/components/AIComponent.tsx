@@ -21,16 +21,30 @@ const AIComponent = ({
   editor: Editor | null;
 }) => {
   const { mutateAsync: askMutation, isPending } = useMutation(aiMutation.ask());
-  const { data: history, isLoading: isLoadingHistory } = useQuery(aiQuery.history(documentId));
+  const { data: history, isLoading: isLoadingHistory } = useQuery(
+    aiQuery.history(documentId),
+  );
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<
     {
       role: "user" | "assistant";
       content: string;
     }[]
-    >([]);
+  >([]);
 
-  console.log(history)
+  const historyMassages =
+    history?.flatMap((item) => [
+      {
+        role: "user" as const,
+        content: item.query,
+      },
+      {
+        role: "assistant" as const,
+        content: item.response,
+      },
+    ]) || [];
+
+  const allMessages = [...historyMassages, ...messages];
 
   const handleAsk = async () => {
     if (!editor) return;
@@ -87,7 +101,9 @@ const AIComponent = ({
       {/* CHAT AREA */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
         {/* AI message */}
-        {messages.map((message, index) => (
+        {allMessages.length === 0 && <p>No messages yet.</p>}
+        {isLoadingHistory && <p>Loading history...</p>}
+        {allMessages.map((message, index) => (
           <div
             key={index}
             className={`rounded-xl py-2 px-3 text-sm max-w-[80%] ${
@@ -115,7 +131,7 @@ const AIComponent = ({
               variant="default"
               className="ml-auto rounded-xl"
               onClick={handleAsk}
-              // disabled={isPending}
+              disabled={isPending}
             >
               {isPending ? (
                 <Spinner />
