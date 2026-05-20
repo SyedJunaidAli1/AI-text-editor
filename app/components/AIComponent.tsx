@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowUpIcon, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Editor } from "@tiptap/react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const AIComponent = ({
   documentId,
@@ -111,8 +112,23 @@ const AIComponent = ({
       {/* CHAT AREA */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
         {/* AI message */}
-        {allMessages.length === 0 && <p>No messages yet.</p>}
-        {isLoadingHistory && <p>Loading history...</p>}
+
+        {isLoadingHistory && (
+          <div className="space-y-3">
+            <div className="rounded-xl bg-muted/50 p-3 max-w-[80%]">
+              <Skeleton className="h-4 w-full mb-2" />
+              <Skeleton className="h-4 w-full" />
+            </div>
+        
+            <div className="rounded-xl bg-primary/80 px-2 py-4 max-w-[80%] ml-auto">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-[80%] mt-2" />
+            </div>
+          </div>
+        )}
+        {allMessages.length === 0 && (
+          <p className="text-center">No messages yet.</p>
+        )}
         {allMessages.map((message, index) => (
           <div
             key={index}
