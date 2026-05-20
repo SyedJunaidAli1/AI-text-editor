@@ -3,7 +3,6 @@
 import { EditorContent, useEditorState, Editor } from "@tiptap/react";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
-import { TextQuoteIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
@@ -43,10 +42,17 @@ import {
   TextSubscriptIcon,
   TextSuperscriptIcon,
   TextUnderlineIcon,
+  TextIndentIcon,
 } from "@phosphor-icons/react";
 import { Input } from "@/components/ui/input";
 
-const Tiptap = ({ docId, editor }: { docId?: string; editor: Editor | null }) => {
+const Tiptap = ({
+  docId,
+  editor,
+}: {
+  docId?: string;
+  editor: Editor | null;
+}) => {
   const [currentDocId, setCurrentDocId] = useState(docId || null);
   const [saving, setSaving] = useState(false);
   const [title, setTitle] = useState("");
@@ -334,7 +340,7 @@ const Toolbar = ({
           }
           aria-label="Blockquote"
         >
-          <TextQuoteIcon className="w-4 h-4" />
+          <TextIndentIcon size={32} className="w-4 h-4" />
         </Toggle>
         <Toggle
           pressed={editorState.isCodeBlock}
