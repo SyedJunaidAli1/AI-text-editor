@@ -9,7 +9,7 @@ import { documentsQuery } from "@/lib/tanstack-queries/document";
 
 export const metadata: Metadata = {
   title: "AI-Text Editor | History",
-  description: "",
+  description: "AI-Text Editor History Page",
 };
 
 const Page = async () => {
