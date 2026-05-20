@@ -8,7 +8,7 @@ import {
 import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Spinner } from "@/components/ui/spinner";
 import { aiMutation, aiQuery } from "@/lib/tanstack-queries/ai";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowUpIcon, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Editor } from "@tiptap/react";
@@ -20,10 +20,20 @@ const AIComponent = ({
   documentId: string;
   editor: Editor | null;
 }) => {
-  const { mutateAsync: askMutation, isPending } = useMutation(aiMutation.ask());
+  const queryClient = useQueryClient();
+  const { mutateAsync: askMutation, isPending } = useMutation({
+    ...aiMutation.ask(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["ai-history", documentId],
+      });
+    },
+  });
+
   const { data: history, isLoading: isLoadingHistory } = useQuery(
     aiQuery.history(documentId),
   );
+
   const [query, setQuery] = useState("");
   const [messages, setMessages] = useState<
     {
