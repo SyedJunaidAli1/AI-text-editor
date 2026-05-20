@@ -26,6 +26,8 @@
 - [ ] feature: when we press enter in ai editor, it sent the prompt instead it goes to new line
 - [ ] feature: make ai component collapsible
 - [x] AI/LLM response data in db for history make a get request and show it in ai component convo history
+- [x] ai component convo history loading state
+- [ ] ai component only work with doc id (means only for created doc)
 - [ ] ai component convo history delete? (should i add this?)
 - [ ] UI/UX improvement after that+ responsiveness
 - [x] hitory page is done

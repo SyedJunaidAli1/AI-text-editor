@@ -9,10 +9,10 @@ import { Kbd, KbdGroup } from "@/components/ui/kbd";
 import { Spinner } from "@/components/ui/spinner";
 import { aiMutation, aiQuery } from "@/lib/tanstack-queries/ai";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowUpIcon, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { Editor } from "@tiptap/react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ArrowUpIcon, SparkleIcon } from "@phosphor-icons/react";
 
 const AIComponent = ({
   documentId,
@@ -94,7 +94,7 @@ const AIComponent = ({
       {/* HEADER */}
       <div className="border-b px-4 py-4">
         <div className="flex items-center gap-2 mb-1">
-          <Sparkles className="w-5 h-5 text-primary" />
+          <SparkleIcon size={32} className="text-primary" />
           <h2 className="text-lg font-semibold">AI Assistant</h2>
         </div>
 
@@ -119,15 +119,26 @@ const AIComponent = ({
               <Skeleton className="h-4 w-full mb-2" />
               <Skeleton className="h-4 w-full" />
             </div>
-        
+
             <div className="rounded-xl bg-primary/80 px-2 py-4 max-w-[80%] ml-auto">
               <Skeleton className="h-4 w-full" />
               <Skeleton className="h-4 w-[80%] mt-2" />
             </div>
           </div>
         )}
-        {allMessages.length === 0 && (
-          <p className="text-center">No messages yet.</p>
+        {allMessages.length === 0 && !isLoadingHistory && (
+          <div className="flex flex-col items-center justify-center h-full text-center px-6">
+            <SparkleIcon
+              size={32}
+              className="w-10 h-10 text-muted-foreground mb-4"
+            />
+
+            <h3 className="font-semibold text-lg mb-1">Start a conversation</h3>
+
+            <p className="text-sm text-muted-foreground max-w-xs">
+              Ask AI to summarize, rewrite, explain, or improve your document.
+            </p>
+          </div>
         )}
         {allMessages.map((message, index) => (
           <div
@@ -163,7 +174,7 @@ const AIComponent = ({
                 <Spinner />
               ) : (
                 <>
-                  <ArrowUpIcon className="w-4 h-4" />
+                  <ArrowUpIcon size={32} className="w-4 h-4" />
                 </>
               )}
             </InputGroupButton>
