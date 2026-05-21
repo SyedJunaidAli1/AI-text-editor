@@ -89,8 +89,22 @@ const AIComponent = ({
     setQuery("");
   };
 
+  if (!documentId) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen border-l border-b px-6 text-center">
+        <SparkleIcon className="w-10 h-10 mb-4 text-muted-foreground" />
+
+        <h3 className="text-lg font-semibold mb-2">AI Assistant Unavailable</h3>
+
+        <p className="text-sm text-muted-foreground max-w-xs">
+          Create and save a document first to start using AI features.
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col h-screen border-l bg-background">
+    <div className="flex flex-col h-screen border-l border-b bg-background">
       {/* HEADER */}
       <div className="border-b px-4 py-4">
         <div className="flex items-center gap-2 mb-1">
@@ -112,7 +126,6 @@ const AIComponent = ({
       {/* CHAT AREA */}
       <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
         {/* AI message */}
-
         {isLoadingHistory && (
           <div className="space-y-3">
             <div className="rounded-xl bg-muted/50 p-3 max-w-[80%]">
