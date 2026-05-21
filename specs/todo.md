@@ -1,7 +1,7 @@
 - [x] signup using supabase done
 - [x] signin using email and password with supabase done
 - [x] oauth using supabse google
-- [] dashboard UI/UX is in the works (for now i am doing as props for ssr)
+- [ ] dashboard UI/UX is in the works (for now i am doing as props for ssr)
 - [x] logout using supabase
 - [x] using tiptap for text editor (lexical alternative)
 - [x] need to figure out why starter kit not working (it was working but i have to create my own component)
@@ -27,7 +27,7 @@
 - [ ] feature: make ai component collapsible
 - [x] AI/LLM response data in db for history make a get request and show it in ai component convo history
 - [x] ai component convo history loading state
-- [ ] ai component only work with doc id (means only for created doc)
+- [x] ai component only work with doc id (means only for created doc)
 - [ ] ai component convo history delete? (should i add this?)
 - [ ] UI/UX improvement after that+ responsiveness
 - [x] hitory page is done
