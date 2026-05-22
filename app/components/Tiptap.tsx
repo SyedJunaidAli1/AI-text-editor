@@ -124,7 +124,19 @@ const Tiptap = ({
 
     // ✅ NEW DOCUMENT CASE
     if (!docId) {
-      isInitialLoad.current = false;
+      isInitialLoad.current = true;
+
+      setCurrentDocId(null);
+
+      editor.commands.setContent("", false);
+
+      setTitle("");
+      setDescription("");
+
+      setTimeout(() => {
+        isInitialLoad.current = false;
+      }, 0);
+
       return;
     }
 
