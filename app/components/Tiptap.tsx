@@ -69,6 +69,11 @@ const Tiptap = ({
   const save = useCallback(async () => {
     if (!editor || isInitialLoad.current) return;
 
+    const text = editor.getText().trim();
+    const isEmpty = !title.trim() && !description.trim() && !text.trim();
+
+    if (isEmpty) return;
+
     setSaving(true);
 
     const json = editor.getJSON();
