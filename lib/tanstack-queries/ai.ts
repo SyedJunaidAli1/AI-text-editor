@@ -18,5 +18,6 @@ export const aiQuery = {
   history: (documentId: string) => ({
     queryKey: ["ai-history", documentId],
     queryFn: () => getAISearchHistory(documentId),
+    enabled: !!documentId,
   }),
 };
