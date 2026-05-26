@@ -1,7 +1,7 @@
 - [x] signup using supabase done
 - [x] signin using email and password with supabase done
 - [x] oauth using supabse google
-- [ ] dashboard UI/UX is in the works (for now i am doing as props for ssr)
+- [x] dashboard UI/UX is in the works (for now i am doing as props for ssr)
 - [x] logout using supabase
 - [x] using tiptap for text editor (lexical alternative)
 - [x] need to figure out why starter kit not working (it was working but i have to create my own component)
@@ -35,7 +35,6 @@
 - [x] hitory page is done
 - [x] history page show words
 - [ ] history page dropdown for options (export to csv, text)
-- [ ] for not we sending content and query to AI/LLM (i think sending content will be a waste of tokens ask chat gpt about it)
 
 #bug
 
