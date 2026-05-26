@@ -24,7 +24,7 @@
 - [x] ai response is not saving in the db as ai_searches (row policy created for crd)
 - [ ] feature: ctrl + k to open ai editor (decide what to implement dropdown or just open editor)
 - [ ] feature: when we press enter in ai editor, it sent the prompt instead it goes to new line
-- [ ] feature: make ai component collapsible
+- [x] feature: make ai component collapsible
 - [x] AI/LLM response data in db for history make a get request and show it in ai component convo history
 - [x] ai component convo history loading state
 - [x] ai component only work with doc id (means only for created doc)

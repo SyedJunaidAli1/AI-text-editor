@@ -56,7 +56,7 @@ export default function AppComponent({ docId }: { docId?: string }) {
 
       {/* AI PANEL */}
       <div
-        className={`transition-all duration-300 overflow-hidden h-screen ${isAIOpen ? "sm:w-[33]% lg:w-[30%] opacity-100 " : "w-0 opacity-0"}`}
+        className={`transition-all duration-300 overflow-hidden h-screen ${isAIOpen ? "sm:w-3/6 lg:w-98 opacity-100" : "w-0 opacity-0"}`}
       >
         {isAIOpen && <AIComponent documentId={docId} editor={editor} />}
       </div>
