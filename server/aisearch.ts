@@ -3,7 +3,6 @@
 import Groq from "groq-sdk";
 import { createClientReadOnly } from "@/lib/supabase/server-read";
 import { createClient } from "@/lib/supabase/server";
-import { userAgent } from "next/server";
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,

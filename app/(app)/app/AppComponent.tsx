@@ -8,8 +8,12 @@ import Subscript from "@tiptap/extension-subscript";
 import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import { useEditor } from "@tiptap/react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { RobotIcon } from "@phosphor-icons/react";
 
 export default function AppComponent({ docId }: { docId?: string }) {
+  const [isAIOpen, setIsAIOpen] = useState(false);
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -41,13 +45,20 @@ export default function AppComponent({ docId }: { docId?: string }) {
     <div className="flex min-h-screen w-full">
       {/* EDITOR */}
       <main className="flex-1 p-4">
+        <div className="flex justify-end mb-2">
+          <Button onClick={() => setIsAIOpen((prev) => !prev)}>
+            <RobotIcon size={32} /> AI
+          </Button>
+        </div>
         {/* 👇 pass docId */}
         <Tiptap docId={docId} editor={editor} />
       </main>
 
       {/* AI PANEL */}
-      <div className="w-[30%] h-screen py-0">
-        <AIComponent documentId={docId} editor={editor} />
+      <div
+        className={`transition-all duration-300 overflow-hidden h-screen ${isAIOpen ? "sm:w-[33]% lg:w-[30%] opacity-100 " : "w-0 opacity-0"}`}
+      >
+        {isAIOpen && <AIComponent documentId={docId} editor={editor} />}
       </div>
     </div>
   );
