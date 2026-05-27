@@ -55,6 +55,9 @@ export default function AppComponent({ docId }: { docId?: string }) {
           textareaRef.current?.focus();
         }, 100);
       }
+      if (e.key === "Escape") {
+        setIsAIOpen(false);
+      }
     };
     window.addEventListener("keydown", down);
     return () => window.removeEventListener("keydown", down);

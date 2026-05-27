@@ -21,7 +21,7 @@ const AIComponent = ({
 }: {
   documentId: string;
   editor: Editor | null;
-  textarearef: React.RefObject<HTMLTextAreaElement | null>;
+  textarearef: React.RefObject<HTMLTextAreaElement>;
 }) => {
   const queryClient = useQueryClient();
   const { mutateAsync: askMutation, isPending } = useMutation({

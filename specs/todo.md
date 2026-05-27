@@ -23,6 +23,7 @@
 - [x] ai improve system prompt
 - [x] ai response is not saving in the db as ai_searches (row policy created for crd)
 - [x] feature: ctrl + k to open ai editor (decide what to implement dropdown or just open editor)
+- [x] feature: escape to close ai editor
 - [x] feature: when we press enter in ai editor, it sent the prompt instead it goes to new line
 - [x] feature: make ai component collapsible
 - [x] AI/LLM response data in db for history make a get request and show it in ai component convo history
@@ -30,6 +31,7 @@
 - [x] ai component only work with doc id (means only for created doc)
 - [x] tiptap when we press on app route editor hold the text of old history doc how can we reset to default without any doc id
 - [x] tiptap when we press on app route is not creating a new doc instant
+- [ ] make a page for keyboard shorcuts
 - [ ] ai component convo history delete? (should i add this?)
 - [ ] UI/UX improvement after that+ responsiveness
 - [x] hitory page is done
