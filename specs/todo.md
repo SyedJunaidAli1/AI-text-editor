@@ -22,7 +22,7 @@
 - [x] ai mutation document is empty investigate the issue and fix it
 - [x] ai improve system prompt
 - [x] ai response is not saving in the db as ai_searches (row policy created for crd)
-- [ ] feature: ctrl + k to open ai editor (decide what to implement dropdown or just open editor)
+- [x] feature: ctrl + k to open ai editor (decide what to implement dropdown or just open editor)
 - [x] feature: when we press enter in ai editor, it sent the prompt instead it goes to new line
 - [x] feature: make ai component collapsible
 - [x] AI/LLM response data in db for history make a get request and show it in ai component convo history

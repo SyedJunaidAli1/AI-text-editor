@@ -8,12 +8,14 @@ import Subscript from "@tiptap/extension-subscript";
 import Highlight from "@tiptap/extension-highlight";
 import TextAlign from "@tiptap/extension-text-align";
 import { useEditor } from "@tiptap/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { RobotIcon } from "@phosphor-icons/react";
 
 export default function AppComponent({ docId }: { docId?: string }) {
   const [isAIOpen, setIsAIOpen] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -41,6 +43,23 @@ export default function AppComponent({ docId }: { docId?: string }) {
     },
     immediatelyRender: false,
   });
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+
+        setIsAIOpen(true);
+
+        setTimeout(() => {
+          textareaRef.current?.focus();
+        }, 100);
+      }
+    };
+    window.addEventListener("keydown", down);
+    return () => window.removeEventListener("keydown", down);
+  }, []);
+
   return (
     <div className="flex min-h-screen w-full">
       {/* EDITOR */}
@@ -58,7 +77,13 @@ export default function AppComponent({ docId }: { docId?: string }) {
       <div
         className={`transition-all duration-300 overflow-hidden h-screen ${isAIOpen ? "sm:w-3/6 lg:w-98 opacity-100" : "w-0 opacity-0"}`}
       >
-        {isAIOpen && <AIComponent documentId={docId} editor={editor} />}
+        {isAIOpen && (
+          <AIComponent
+            documentId={docId}
+            editor={editor}
+            textarearef={textareaRef}
+          />
+        )}
       </div>
     </div>
   );

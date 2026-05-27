@@ -17,9 +17,11 @@ import { ArrowUpIcon, SparkleIcon } from "@phosphor-icons/react";
 const AIComponent = ({
   documentId,
   editor,
+  textarearef,
 }: {
   documentId: string;
   editor: Editor | null;
+  textarearef: React.RefObject<HTMLTextAreaElement | null>;
 }) => {
   const queryClient = useQueryClient();
   const { mutateAsync: askMutation, isPending } = useMutation({
@@ -180,6 +182,7 @@ const AIComponent = ({
                 handleAsk();
               }
             }}
+            ref={textarearef}
           />
 
           <InputGroupAddon align="block-end">
