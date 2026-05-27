@@ -174,6 +174,12 @@ const AIComponent = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Ask AI anything..."
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleAsk();
+              }
+            }}
           />
 
           <InputGroupAddon align="block-end">
