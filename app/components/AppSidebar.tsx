@@ -126,15 +126,15 @@ export function AppSidebar({ user }: userProps) {
                 <DropdownMenuGroup>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <Link href="/terms">Terms</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/privacy">Privacy & Policy</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href="/about">About</Link>
-                  </DropdownMenuItem>
+                  <Link href="/terms">
+                    <DropdownMenuItem>Terms</DropdownMenuItem>
+                  </Link>
+                  <Link href="/privacy">
+                    <DropdownMenuItem>Privacy & Policy</DropdownMenuItem>
+                  </Link>
+                  <Link href="/about">
+                    <DropdownMenuItem>About</DropdownMenuItem>
+                  </Link>
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
