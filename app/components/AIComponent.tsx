@@ -13,6 +13,7 @@ import { useState } from "react";
 import { Editor } from "@tiptap/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowUpIcon, SparkleIcon } from "@phosphor-icons/react";
+import KeyboardShortcutsDialog from "./KeyboardShortcutsDialog";
 
 const AIComponent = ({
   documentId,
