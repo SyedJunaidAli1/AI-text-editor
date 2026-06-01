@@ -31,7 +31,7 @@
 - [x] ai component only work with doc id (means only for created doc)
 - [x] tiptap when we press on app route editor hold the text of old history doc how can we reset to default without any doc id
 - [x] tiptap when we press on app route is not creating a new doc instant
-- [ ] ask to add ctrl alt for mac ?
+- [x] ask to add ctrl alt for mac ?(conditional rendering for mac)
 - [ ] ai component convo history delete? (should i add this?)
 - [ ] UI/UX improvement after that+ responsiveness
 - [x] hitory page is done

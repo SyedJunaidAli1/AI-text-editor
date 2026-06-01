@@ -13,7 +13,6 @@ import { useState } from "react";
 import { Editor } from "@tiptap/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowUpIcon, SparkleIcon } from "@phosphor-icons/react";
-import KeyboardShortcutsDialog from "./KeyboardShortcutsDialog";
 
 const AIComponent = ({
   documentId,
@@ -92,6 +91,10 @@ const AIComponent = ({
     setQuery("");
   };
 
+  const isMac =
+    typeof navigator !== "undefined" &&
+    navigator.platform.toLowerCase().includes("mac");
+
   if (!documentId) {
     return (
       <div className="flex flex-col items-center justify-center h-screen border-l border-b px-6 text-center">
@@ -119,7 +122,7 @@ const AIComponent = ({
           <p>Ask AI to write, summarize, or improve text</p>
 
           <KbdGroup>
-            <Kbd>Ctrl</Kbd>
+            <Kbd>{isMac ? "⌘" : "Ctrl"}</Kbd>
             <span>+</span>
             <Kbd>K</Kbd>
           </KbdGroup>
