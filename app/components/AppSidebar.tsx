@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Kbd } from "@/components/ui/kbd";
 import {
   Sidebar,
   SidebarContent,
@@ -135,6 +136,13 @@ export function AppSidebar({ user }: userProps) {
                   <Link href="/about">
                     <DropdownMenuItem>About</DropdownMenuItem>
                   </Link>
+                  <DropdownMenuSeparator />
+                  <Link href="/kbd">
+                    <DropdownMenuItem>
+                      Keyboard Shortcuts <Kbd>⌘</Kbd>
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuSeparator />
                 </DropdownMenuGroup>
                 <DropdownMenuGroup>
                   <DropdownMenuSeparator />
