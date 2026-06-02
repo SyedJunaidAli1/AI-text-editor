@@ -2,9 +2,10 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "",
-  description: "",
+  title: "AI Text Editor | Terms of Use",
+  description: "ai text editor terms of use page",
 };
+
 const page = () => {
   return (
     <>
@@ -14,7 +15,7 @@ const page = () => {
             <h1 className="text-3xl sm:text-4xl font-bold">Terms of Use</h1>
             <p className="mt-2 text-sm">
               By using this app, you agree to the terms below. These terms exist
-              to keep Testimonia fair, safe, and enjoyable for everyone.
+              to keep Text-Editor fair, safe, and enjoyable for everyone.
             </p>
           </header>
 
@@ -22,8 +23,8 @@ const page = () => {
           <div>
             <h2 className="text-lg font-medium">1. Using the Service</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Testimonia allows you to collect, manage, and display testimonials
-              and social proof. You agree to use the app only for legal,
+              Text-Editor allows you to create documents of text and AI
+              generated responses. You agree to use the app only for legal,
               ethical, and respectful purposes. Do not upload harmful, abusive,
               illegal, or malicious content.
             </p>
@@ -34,34 +35,20 @@ const page = () => {
             <h2 className="text-lg font-medium">2. Your Data & Privacy</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
               Your data belongs to you. We do not sell, rent, or share your
-              information with third parties — ever. The testimonials, spaces,
-              and content you create are stored securely, and used only to
-              provide the features you request (such as displaying embeds,
-              generating widgets, or showing your Wall of Love page).
+              information with third parties — ever. The documents you create
+              are stored securely, and used only to provide the features you
+              request. They are deleted from the database when you delete your
+              document with all the conversations related to it.
             </p>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
               You may delete your data at any time. Once removed, we do not keep
-              backups of your content unless required for security or abuse
-              prevention.
+              backups of your content.
             </p>
           </div>
 
           {/* Section 3 */}
           <div>
-            <h2 className="text-lg font-medium">
-              3. Testimonials Submitted by Users
-            </h2>
-            <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              If you allow users to submit testimonials, you are responsible for
-              how those testimonials are used or displayed. We do not review or
-              verify user-submitted content and are not responsible for what
-              your users write.
-            </p>
-          </div>
-
-          {/* Section 4 */}
-          <div>
-            <h2 className="text-lg font-medium">4. Availability & Updates</h2>
+            <h2 className="text-lg font-medium">3. Availability & Updates</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
               This app is actively maintained, but downtime or updates may
               occur. Features may change or be removed over time as the project
@@ -70,13 +57,25 @@ const page = () => {
             </p>
           </div>
 
-          {/* Section 5 */}
+          {/* Section 4 */}
           <div>
-            <h2 className="text-lg font-medium">5. Open Source Contribution</h2>
+            <h2 className="text-lg font-medium">4. Open Source Contribution</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Testimonia is open source. By contributing code, ideas, or fixes,
+              Text-Editor is open source. By contributing code, ideas, or fixes,
               you agree that your contributions may be used in the project under
               the repository’s license.
+            </p>
+          </div>
+
+          {/* Section 5 */}
+          <div>
+            <h2 className="text-lg font-medium">5. AI Generated Content</h2>
+
+            <p className="mt-2 text-[15px] font-medium leading-relaxed">
+              AI-generated responses may contain inaccuracies, omissions, or
+              outdated information. Users are responsible for reviewing and
+              verifying any content produced by the AI assistant before relying
+              on it.
             </p>
           </div>
 
@@ -107,15 +106,15 @@ const page = () => {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-[1px] bg-neutral-50/15" />
+          <div className="w-full h-px bg-neutral-50/15" />
 
           {/* Footer */}
           <footer className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-3">
             <p className="text-sm font-medium italic text-muted-foreground">
-              Updated: 2025
+              Updated: 2026
             </p>
             <div className="text-sm text-muted-foreground">
-              <span>Built for creators • Powered by trust</span>
+              <span>Write smarter • Think clearer</span>
             </div>
           </footer>
         </main>
