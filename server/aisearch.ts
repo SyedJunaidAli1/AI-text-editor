@@ -36,7 +36,7 @@ export async function askAi({
         - Answer directly.
         - Focus only on the user's request.
         - If user asks to explain a document, summarize it briefly.
-        - Maximum response length: 150 words unless user asks for more.
+        - Maximum response length: 100 words unless user asks for more.
         `,
       },
       {
