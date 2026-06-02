@@ -111,7 +111,7 @@ const page = () => {
           {/* Footer */}
           <footer className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-3">
             <p className="text-sm font-medium italic text-muted-foreground">
-              Updated: 2026
+              Updated: june 2026
             </p>
             <div className="text-sm text-muted-foreground">
               <span>Write smarter • Think clearer</span>

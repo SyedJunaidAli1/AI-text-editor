@@ -26,13 +26,10 @@ const page = () => {
               includes:
             </p>
             <ul className="mt-2 list-disc ml-6 text-[15px] font-medium leading-relaxed">
-              <li>Your account details (email, name if provided)</li>
-              <li>Spaces you create and their settings</li>
-              <li>Testimonials submitted by you or your users</li>
-              <li>
-                Basic analytics (app usage, error logs — no personal
-                identifiers)
-              </li>
+              <li>Account information (email address and profile details)</li>
+              <li>Documents and content you create</li>
+              <li>AI chat history associated with your documents</li>
+              <li>Basic usage information and error logs</li>
             </ul>
           </div>
 
@@ -44,9 +41,10 @@ const page = () => {
               request — nothing else. This includes:
             </p>
             <ul className="mt-2 list-disc ml-6 text-[15px] font-medium leading-relaxed">
-              <li>Displaying your testimonials and spaces</li>
-              <li>Generating embed widgets and shareable pages</li>
-              <li>Improving performance and reliability of the app</li>
+              <li>Saving and syncing your documents</li>
+              <li>Providing AI-powered writing assistance</li>
+              <li>Storing AI conversation history</li>
+              <li>Improving reliability, performance, and security</li>
             </ul>
           </div>
 
@@ -55,7 +53,7 @@ const page = () => {
             <h2 className="text-lg font-medium">3. What We Do NOT Do</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
               We do <strong>not</strong> sell, rent, share, or trade your data
-              with any third party. We do not use your testimonials or private
+              with any third party. We do not use your documents or private
               information for advertising or profiling.
             </p>
           </div>
@@ -64,10 +62,10 @@ const page = () => {
           <div>
             <h2 className="text-lg font-medium">4. Data Ownership</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Everything you create — your account, spaces, testimonial content
-              — is yours. You may edit or delete your data at any time. When you
-              delete something, it is permanently removed from our database
-              unless needed for security or abuse prevention.
+              Everything you create — your account, documents, and AI chat
+              history — is yours. You may edit or delete your data at any time.
+              When you delete a document, it is permanently removed from our
+              database.
             </p>
           </div>
 
@@ -86,19 +84,21 @@ const page = () => {
           <div>
             <h2 className="text-lg font-medium">6. Third-Party Services</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              We may use trusted third-party tools (e.g., email delivery,
-              analytics). These tools never receive your personal data unless
-              required for a feature you explicitly use.
+              We use trusted third-party providers such as:
             </p>
+            <ul className="mt-2 list-disc ml-6 text-[15px] font-medium leading-relaxed">
+              <li>Supabase (authentication and database)</li>
+              <li>Groq (AI response generation)</li>
+            </ul>
           </div>
 
           {/* Section 7 */}
           <div>
-            <h2 className="text-lg font-medium">7. User-Generated Content</h2>
+            <h2 className="text-lg font-medium">7. AI-Generated Content</h2>
             <p className="mt-2 text-[15px] font-medium leading-relaxed">
-              Testimonials submitted by your users may contain names, messages,
-              or images. You are responsible for how this content is used or
-              displayed. You may delete any testimonial at any time.
+              AI-generated content may include text. You are responsible for how
+              this content is used or displayed. You may delete any AI-generated
+              content at any time.
             </p>
           </div>
 
@@ -137,14 +137,14 @@ const page = () => {
             </p>
           </div>
 
-          <div className="w-full h-[1px] bg-neutral-50/15" />
+          <div className="w-full h-px  bg-neutral-50/15" />
 
           <footer className="flex flex-col sm:flex-row justify-between items-start sm:items-center w-full gap-3">
             <p className="text-sm font-medium italic text-muted-foreground">
-              Updated: december 2025
+              Updated: june 2026
             </p>
             <div className="text-sm text-muted-foreground">
-              <span>Your trust • Your data • Your control</span>
+              <span>Write smarter • Think clearer</span>
             </div>
           </footer>
         </main>
