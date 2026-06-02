@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import AboutComponent from "@/app/(otherroutes)/about/aboutcomponent";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "AI Text Editor | About",
   description: "About Page of AI Text Editor",
 };
 const Page = () => {
