@@ -34,11 +34,11 @@
 - [x] ask to add ctrl alt for mac ?(conditional rendering for mac)
 - [ ] ai component convo history delete? (should i add this?)
 - [ ] UI/UX improvement after that+ responsiveness
-- [x] complete other route pages 
+- [x] complete other route pages
 - [ ] make landing page properly
 - [x] hitory page is done
 - [x] history page show words
-- [ ] history page dropdown for options (export to csv, text)
+- [ ] history page dropdown for options (export to markdown, text)
 
 #bug
 
