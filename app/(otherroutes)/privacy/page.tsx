@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "",
+  title: "AI Text Editor | Privacy Policy",
+  description: "privacy policy page of AI Text Editor",
 };
 const page = () => {
   return (

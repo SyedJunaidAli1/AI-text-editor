@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "AI Text Editor | Terms of Use",
-  description: "ai text editor terms of use page",
+  description: "terms of use page of AI Text Editor",
 };
 
 const page = () => {
