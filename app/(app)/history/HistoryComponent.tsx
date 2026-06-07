@@ -27,6 +27,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { JSONContent } from "@tiptap/react";
+import { generateText } from "@tiptap/react";
 import { toast } from "sonner";
 
 const HistoryComponent = () => {
@@ -60,6 +61,12 @@ const HistoryComponent = () => {
     extractText(content);
 
     return text.trim().split(/\s+/).filter(Boolean).length;
+  };
+
+  const handleExport = (doc: any) => {
+    const text = generateText(doc.content, editorExtensions);
+
+    console.log(text);
   };
 
   if (isLoading)
@@ -100,6 +107,13 @@ const HistoryComponent = () => {
                   <DropdownMenuContent>
                     <DropdownMenuGroup>
                       <DropdownMenuLabel>Document</DropdownMenuLabel>
+                      <DropdownMenuItem onClick={() => handleExport(doc)}>
+                        Export as TXT
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem onClick={() => exportAsMarkdown(doc)}>
+                        Export as Markdown
+                      </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
