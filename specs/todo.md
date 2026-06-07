@@ -39,7 +39,6 @@
 - [x] hitory page is done
 - [x] history page show words
 - [x] history page dropdown for options (text)
-- [ ] history page dropdown for options (export to markdown)
 
 #bug
 

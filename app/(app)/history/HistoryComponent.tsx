@@ -127,9 +127,6 @@ const HistoryComponent = () => {
                       <DropdownMenuItem onClick={() => handleExport(doc)}>
                         Export as TXT
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => exportAsMarkdown(doc)}>
-                        Export as Markdown
-                      </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />
                     <DropdownMenuGroup>
