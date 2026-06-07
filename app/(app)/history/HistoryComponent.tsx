@@ -29,6 +29,7 @@ import {
 import { JSONContent } from "@tiptap/react";
 import { generateText } from "@tiptap/react";
 import { toast } from "sonner";
+import { editorExtensions } from "@/lib/tiptap-extensions";
 
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
@@ -65,8 +66,24 @@ const HistoryComponent = () => {
 
   const handleExport = (doc: any) => {
     const text = generateText(doc.content, editorExtensions);
+    const blob = new Blob([text], {
+      type: "text/plain;charset=utf-8",
+    });
 
-    console.log(text);
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = `${doc.title || "untitled"}.txt`;
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
   };
 
   if (isLoading)
