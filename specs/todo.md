@@ -38,7 +38,8 @@
 - [ ] make landing page properly
 - [x] hitory page is done
 - [x] history page show words
-- [ ] history page dropdown for options (export to markdown, text)
+- [x] history page dropdown for options (text)
+- [ ] history page dropdown for options (export to markdown)
 
 #bug
 
