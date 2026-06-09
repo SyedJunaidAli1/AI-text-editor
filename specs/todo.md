@@ -32,7 +32,7 @@
 - [x] tiptap when we press on app route editor hold the text of old history doc how can we reset to default without any doc id
 - [x] tiptap when we press on app route is not creating a new doc instant
 - [x] ask to add ctrl alt for mac ?(conditional rendering for mac)
-- [ ] ai component convo history delete? (should i add this?)
+- [x] ai component convo history delete? (delete all convo)
 - [ ] UI/UX improvement after that+ responsiveness
 - [x] complete other route pages
 - [ ] make landing page properly
@@ -48,3 +48,4 @@
 - [x] link behaviour issue
 - [x] align has also some issues (fixed by clean json)
 - [x] creating new doc is broken by implemention new inputs
+- [ ] found a bug that doubles que/response in ai chatbot
