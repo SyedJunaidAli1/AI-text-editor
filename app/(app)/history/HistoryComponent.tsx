@@ -30,6 +30,7 @@ import { JSONContent } from "@tiptap/react";
 import { generateText } from "@tiptap/react";
 import { toast } from "sonner";
 import { editorExtensions } from "@/lib/tiptap-extensions";
+import { aiMutation } from "@/lib/tanstack-queries/ai";
 
 const HistoryComponent = () => {
   const { data: docs, isLoading } = useQuery(documentsQuery.all());
@@ -39,6 +40,19 @@ const HistoryComponent = () => {
     onSuccess: () => {
       toast.success("Document deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["documents"] });
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+  const { mutate: clearHistory } = useMutation({
+    ...aiMutation.clearHistory(),
+    onSuccess: () => {
+      toast.success("History cleared");
+
+      queryClient.invalidateQueries({
+        queryKey: ["documents"],
+      });
     },
     onError: (error) => {
       toast.error(error.message);
@@ -126,6 +140,9 @@ const HistoryComponent = () => {
                       <DropdownMenuLabel>Document</DropdownMenuLabel>
                       <DropdownMenuItem onClick={() => handleExport(doc)}>
                         Export as TXT
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() =>{ console.log(doc.id); clearHistory(doc.id)}}>
+                        Clear AI Conversation
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
                     <DropdownMenuSeparator />

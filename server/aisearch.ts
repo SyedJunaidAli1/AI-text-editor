@@ -82,7 +82,7 @@ export async function clearAIHistory(documentId: string) {
   if (!user) throw new Error("unauthorized");
 
   const { error } = await supabase
-    .from("ai_seaches")
+    .from("ai_searches")
     .delete()
     .eq("document_id", documentId)
     .eq("user_id", user.id);

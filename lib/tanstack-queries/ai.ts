@@ -13,7 +13,7 @@ export const aiMutation = {
     }) => askAi({ documentId, query, editorContent }),
   }),
   clearHistory: () => ({
-    mutationFn: ({ documentId }: { documentId: string }) =>
+    mutationFn: (documentId: string) =>
       clearAIHistory(documentId),
   }),
 };
