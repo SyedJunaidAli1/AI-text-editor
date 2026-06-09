@@ -141,7 +141,7 @@ const HistoryComponent = () => {
                       <DropdownMenuItem onClick={() => handleExport(doc)}>
                         Export as TXT
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() =>{ console.log(doc.id); clearHistory(doc.id)}}>
+                      <DropdownMenuItem onClick={() => clearHistory(doc.id)}>
                         Clear AI Conversation
                       </DropdownMenuItem>
                     </DropdownMenuGroup>
