@@ -48,4 +48,4 @@
 - [x] link behaviour issue
 - [x] align has also some issues (fixed by clean json)
 - [x] creating new doc is broken by implemention new inputs
-- [ ] found a bug that doubles que/response in ai chatbot
+- [x] found a bug that doubles que/response in ai chatbot

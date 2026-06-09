@@ -38,12 +38,6 @@ const AIComponent = ({
   );
 
   const [query, setQuery] = useState("");
-  const [messages, setMessages] = useState<
-    {
-      role: "user" | "assistant";
-      content: string;
-    }[]
-  >([]);
 
   const historyMassages =
     history?.flatMap((item) => [
@@ -57,33 +51,18 @@ const AIComponent = ({
       },
     ]) || [];
 
-  const allMessages = [...historyMassages, ...messages];
+  const Messages = historyMassages;
 
   const handleAsk = async () => {
     if (!editor) return;
     if (!query.trim()) return;
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "user",
-        content: query,
-      },
-    ]);
-
     try {
-      const response = await askMutation({
+      await askMutation({
         documentId,
         query,
         editorContent: editor.getText(),
       });
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: response,
-        },
-      ]);
     } catch (error) {
       console.error(error);
     }
@@ -145,7 +124,7 @@ const AIComponent = ({
             </div>
           </div>
         )}
-        {allMessages.length === 0 && !isLoadingHistory && (
+        {Messages.length === 0 && !isLoadingHistory && (
           <div className="flex flex-col items-center justify-center h-full text-center px-6">
             <SparkleIcon
               size={32}
@@ -159,7 +138,7 @@ const AIComponent = ({
             </p>
           </div>
         )}
-        {allMessages.map((message, index) => (
+        {Messages.map((message, index) => (
           <div
             key={index}
             className={`rounded-xl py-2 px-3 text-sm max-w-[80%] ${
