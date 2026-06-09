@@ -71,3 +71,22 @@ export async function getAISearchHistory(documentId: string) {
   }
   return data;
 }
+
+export async function clearAIHistory(documentId: string) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) throw new Error("unauthorized");
+
+  const { error } = await supabase
+    .from("ai_seaches")
+    .delete()
+    .eq("document_id", documentId)
+    .eq("user_id", user.id);
+
+  if (error) throw new Error(error.message);
+  return true;
+}
