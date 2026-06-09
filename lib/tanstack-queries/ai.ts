@@ -1,4 +1,4 @@
-import { askAi, getAISearchHistory } from "@/server/aisearch";
+import { askAi, clearAIHistory, getAISearchHistory } from "@/server/aisearch";
 
 export const aiMutation = {
   ask: () => ({
@@ -11,6 +11,10 @@ export const aiMutation = {
       query: string;
       editorContent: string;
     }) => askAi({ documentId, query, editorContent }),
+  }),
+  clearHistory: () => ({
+    mutationFn: ({ documentId }: { documentId: string }) =>
+      clearAIHistory(documentId),
   }),
 };
 
