@@ -131,7 +131,11 @@ const HistoryComponent = () => {
                 </p>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon">
+                    <Button
+                      className="cursor-pointer"
+                      variant="outline"
+                      size="icon"
+                    >
                       <DotsThreeOutlineVerticalIcon />
                     </Button>
                   </DropdownMenuTrigger>

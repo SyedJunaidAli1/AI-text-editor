@@ -53,10 +53,12 @@ export function AppSidebar({ user }: userProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton>
-              <div className="flex items-center justify-center gap-2 ">
-                <SparkleIcon size={32} />
-                {state !== "collapsed" && "AI text editor"}
-              </div>
+              <Link href="/app">
+                <div className="flex items-center justify-center gap-2">
+                  <SparkleIcon size={32} className="cursor-pointer" />
+                  {state !== "collapsed" && "AI text editor"}
+                </div>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
