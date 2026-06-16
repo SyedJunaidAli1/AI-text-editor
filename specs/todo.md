@@ -33,7 +33,7 @@
 - [x] tiptap when we press on app route is not creating a new doc instant
 - [x] ask to add ctrl alt for mac ?(conditional rendering for mac)
 - [x] ai component convo history delete? (delete all convo)
-- [ ] UI/UX improvement after that+ responsiveness
+- [x] UI/UX improvement after that+ responsiveness
 - [x] complete other route pages
 - [ ] make landing page properly
 - [x] hitory page is done
