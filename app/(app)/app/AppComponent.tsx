@@ -43,7 +43,7 @@ export default function AppComponent({ docId }: { docId?: string }) {
   return (
     <div className="flex min-h-screen w-full">
       {/* EDITOR */}
-      <main className="flex-1 p-4">
+      <main className="flex-1 pt-4 pr-4">
         <div className="flex justify-end mb-2">
           <Button onClick={() => setIsAIOpen((prev) => !prev)}>
             <RobotIcon size={32} /> AI
