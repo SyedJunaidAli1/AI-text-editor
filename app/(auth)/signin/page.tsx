@@ -150,7 +150,7 @@ export default function Page() {
               </Button>
             </div>
             <div className="flex items-center justify-center">
-              <p className="">Don't have an account?</p>
+              <p>Don't have an account?</p>
               <Button variant="link">
                 <Link href="/signup">Sign up </Link>
               </Button>
