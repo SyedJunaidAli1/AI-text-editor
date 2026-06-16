@@ -108,7 +108,7 @@ const HistoryComponent = () => {
     );
 
   return (
-    <div className="mt-6 px-4 w-full h-screen overflow-y-auto">
+    <div className="my-6 pr-6 w-full h-screen overflow-y-auto">
       <div className="mb-6">
         <h2>My Documents</h2>
         <p className="text-sm text-muted-foreground">
@@ -120,7 +120,7 @@ const HistoryComponent = () => {
         {docs?.map((doc) => (
           <Card
             key={doc.id}
-            className="hover:bg-muted/50 transition rounded-md h-64 flex flex-col"
+            className="hover:bg-muted/50 transition rounded-md lg:h-64 h-58 flex flex-col"
           >
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between mb-2">
