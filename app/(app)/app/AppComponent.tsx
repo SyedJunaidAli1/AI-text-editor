@@ -54,16 +54,39 @@ export default function AppComponent({ docId }: { docId?: string }) {
       </main>
 
       {/* AI PANEL */}
+      {/* Desktop */}
       <div
-        className={`transition-all duration-300 overflow-hidden h-screen ${isAIOpen ? "sm:w-3/6 lg:w-98 opacity-100" : "w-0 opacity-0"}`}
+        className={`
+          hidden md:block
+          overflow-hidden transition-all duration-300
+          ${isAIOpen ? "w-98" : "w-0"}
+        `}
       >
         {isAIOpen && (
           <AIComponent
             documentId={docId}
             editor={editor}
             textarearef={textareaRef}
+            onClose={() => setIsAIOpen(false)}
           />
         )}
+      </div>
+
+      {/* Mobile */}
+      <div
+        className={`
+          fixed inset-0 z-50 bg-background md:hidden
+          transition-transform duration-300 ease-in-out
+
+          ${isAIOpen ? "translate-x-0" : "translate-x-full pointer-events-none"}
+        `}
+      >
+        <AIComponent
+          documentId={docId}
+          editor={editor}
+          textarearef={textareaRef}
+          onClose={() => setIsAIOpen(false)}
+        />
       </div>
     </div>
   );

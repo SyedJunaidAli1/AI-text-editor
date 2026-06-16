@@ -12,16 +12,19 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Editor } from "@tiptap/react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowUpIcon, SparkleIcon } from "@phosphor-icons/react";
+import { ArrowUpIcon, SidebarIcon, SparkleIcon } from "@phosphor-icons/react";
+import { Button } from "@/components/ui/button";
 
 const AIComponent = ({
   documentId,
   editor,
   textarearef,
+  onClose,
 }: {
-  documentId: string;
+  documentId: string | undefined;
   editor: Editor | null;
-  textarearef: React.RefObject<HTMLTextAreaElement>;
+  textarearef: React.RefObject<HTMLTextAreaElement | null>;
+  onClose: () => void;
 }) => {
   const queryClient = useQueryClient();
   const { mutateAsync: askMutation, isPending } = useMutation({
@@ -95,6 +98,14 @@ const AIComponent = ({
         <div className="flex items-center gap-2 mb-1">
           <SparkleIcon size={32} className="text-primary" />
           <h2 className="text-lg font-semibold">AI Assistant</h2>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => onClose()}
+          >
+            <SidebarIcon size={32} />
+          </Button>
         </div>
 
         <div className="flex items-center justify-between text-sm text-muted-foreground">
