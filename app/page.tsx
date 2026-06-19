@@ -1,22 +1,22 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { AnimatedThemeToggler } from "./components/AnimatedThemeToggler";
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-start justify-center font-sans">
-      <main className="flex gap-4  w-full justify-center py-2">
-        <Nav />
-        {/*<h1 className="text-4xl font-bold">Welcome to AI Text Editor</h1>
-        <AnimatedThemeToggler />
-        <div>
+    <main className="flex flex-col gap-4 max-w-7xl w-full p-4 mx-auto">
+      <Nav />
+      <section className="flex flex-col">
+        <h1 className="text-2xl mt-16 leading-wide tracking-wide max-w-md">
+          AI Text Editor is your digital text editor with AI-powered features.
+        </h1>
+        <div className="mt-4">
           <Link href="/app">
             <Button>Get started</Button>
           </Link>
-        </div>*/}
-      </main>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 }

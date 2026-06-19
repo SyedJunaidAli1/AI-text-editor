@@ -3,7 +3,7 @@ import { AnimatedThemeToggler } from "@/app/components/AnimatedThemeToggler";
 
 const Nav = () => {
   return (
-    <nav className="flex justify-between px-4 py-2 max-w-7xl w-full">
+    <nav className="flex justify-between w-full">
       <Link href="/">
         <h2 className="font-bold">AI Text Editor</h2>
       </Link>
