@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
+import InteractiveSection from "./components/InteractiveSection";
 
 export default function Home() {
   return (
@@ -16,8 +17,8 @@ export default function Home() {
             <Button>Get started</Button>
           </Link>
         </div>
+        <InteractiveSection />
       </section>
-      <section className="bg-[url(/hero-image-bg.png)] h-180 w-full rounded mt-12"></section>
     </main>
   );
 }
