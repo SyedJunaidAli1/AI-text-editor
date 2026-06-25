@@ -17,6 +17,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <section className="bg-[url(/hero-image-bg.png)] h-180 w-full rounded mt-12"></section>
     </main>
   );
 }
