@@ -95,21 +95,12 @@ export default function HeroSection() {
       event.preventDefault();
       event.stopPropagation();
 
-      window.removeEventListener(
-        "pointermove",
-        handleDragPointerMove,
-      );
-      
-      window.removeEventListener(
-        "pointerup",
-        handleDragPointerUp,
-      );
-      
-      window.removeEventListener(
-        "pointercancel",
-        handleDragPointerUp,
-      );
-      
+      window.removeEventListener("pointermove", handleDragPointerMove);
+
+      window.removeEventListener("pointerup", handleDragPointerUp);
+
+      window.removeEventListener("pointercancel", handleDragPointerUp);
+
       dragStateRef.current = null;
       isResizingRef.current = true;
       const container = event.currentTarget.closest("[data-window]");
