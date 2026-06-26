@@ -29,9 +29,11 @@ export default function HeroSection() {
     };
   } | null>(null);
 
+  const isResizingRef = useRef(false);
+
   const [size, setSize] = useState({
     width: 1000,
-    height: 700,
+    height: 750,
   });
 
   const minWidth = 700;
@@ -41,6 +43,7 @@ export default function HeroSection() {
 
   const handleDragPointerMove = useCallback(
     (event: PointerEvent) => {
+      if (isResizingRef.current) return;
       const state = dragStateRef.current;
       if (!state) return;
 
@@ -52,7 +55,10 @@ export default function HeroSection() {
   );
 
   const handleDragPointerUp = useCallback(() => {
-    dragStateRef.current = null;
+    if (isResizingRef.current) {
+      dragStateRef.current = null;
+      return;
+    }
 
     window.removeEventListener("pointermove", handleDragPointerMove);
 
@@ -64,6 +70,7 @@ export default function HeroSection() {
   const handleTitleBarPointerDown = (
     event: React.PointerEvent<HTMLDivElement>,
   ) => {
+    if (isResizingRef.current) return;
     event.preventDefault();
 
     dragStateRef.current = {
@@ -88,6 +95,23 @@ export default function HeroSection() {
       event.preventDefault();
       event.stopPropagation();
 
+      window.removeEventListener(
+        "pointermove",
+        handleDragPointerMove,
+      );
+      
+      window.removeEventListener(
+        "pointerup",
+        handleDragPointerUp,
+      );
+      
+      window.removeEventListener(
+        "pointercancel",
+        handleDragPointerUp,
+      );
+      
+      dragStateRef.current = null;
+      isResizingRef.current = true;
       const container = event.currentTarget.closest("[data-window]");
 
       if (!(container instanceof HTMLElement)) return;
@@ -115,7 +139,6 @@ export default function HeroSection() {
     if (!state) return;
 
     const dx = event.clientX - state.startX;
-
     const dy = event.clientY - state.startY;
 
     let width = state.startWidth;
@@ -123,27 +146,34 @@ export default function HeroSection() {
 
     if (state.edges.right) {
       width = Math.max(minWidth, state.startWidth + dx);
-    }
-
-    if (state.edges.left) {
+    } else if (state.edges.left) {
       width = Math.max(minWidth, state.startWidth - dx);
-
-      const appliedDelta = state.startWidth - width;
-
-      dragX.set(state.startDragX + appliedDelta);
     }
 
     if (state.edges.bottom) {
       height = Math.max(minHeight, state.startHeight + dy);
-    }
-
-    if (state.edges.top) {
+    } else if (state.edges.top) {
       height = Math.max(minHeight, state.startHeight - dy);
-
-      const appliedDelta = state.startHeight - height;
-
-      dragY.set(state.startDragY + appliedDelta);
     }
+
+    // Since the window is absolute-positioned at left: 50%, top: 50% with transform translate(-50%, -50%),
+    // any change in width or height will expand/shrink it symmetrically from the center.
+    // To keep the opposite edge fixed, we adjust the drag offset (dragX/dragY) by half of the size change.
+    let newDragX = state.startDragX;
+    if (state.edges.right) {
+      newDragX = state.startDragX + (width - state.startWidth) / 2;
+    } else if (state.edges.left) {
+      newDragX = state.startDragX - (width - state.startWidth) / 2;
+    }
+    dragX.set(newDragX);
+
+    let newDragY = state.startDragY;
+    if (state.edges.bottom) {
+      newDragY = state.startDragY + (height - state.startHeight) / 2;
+    } else if (state.edges.top) {
+      newDragY = state.startDragY - (height - state.startHeight) / 2;
+    }
+    dragY.set(newDragY);
 
     setSize({
       width,
@@ -155,6 +185,7 @@ export default function HeroSection() {
     event: React.PointerEvent<HTMLButtonElement>,
   ) => {
     resizeStateRef.current = null;
+    isResizingRef.current = false;
 
     event.currentTarget.releasePointerCapture(event.pointerId);
   };
@@ -169,7 +200,7 @@ export default function HeroSection() {
           x: dragX,
           y: dragY,
         }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background shadow-2xl overflow-hidden"
+        className="absolute left-1/2 top-110 -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background shadow-2xl overflow-hidden"
       >
         {/* TITLE BAR */}
         <div
@@ -180,6 +211,7 @@ export default function HeroSection() {
             cursor-grab
             active:cursor-grabbing
             bg-background
+            pointer-events-auto
           "
         />
 
