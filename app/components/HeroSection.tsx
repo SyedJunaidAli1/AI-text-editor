@@ -2,6 +2,7 @@
 
 import { motion, useMotionValue } from "motion/react";
 import { useCallback, useRef, useState } from "react";
+import DragSidebar from "@/app/components/dragComponents/DragSidebar";
 
 export default function HeroSection() {
   const dragX = useMotionValue(0);
@@ -213,7 +214,9 @@ export default function HeroSection() {
         </div>
 
         {/* CONTENT */}
-        <div className="h-[calc(100%-48px)]"></div>
+        <div className="h-[calc(100%-48px)]">
+          <DragSidebar />
+        </div>
 
         {/* RIGHT */}
         <button
