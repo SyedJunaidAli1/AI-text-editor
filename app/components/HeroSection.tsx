@@ -204,7 +204,13 @@ export default function HeroSection() {
             bg-background
             pointer-events-auto
           "
-        />
+        >
+          <div className="flex items-center gap-2 px-3 py-2">
+            <div className="h-3 w-3 rounded-full bg-red-500" />
+            <div className="h-3 w-3 rounded-full bg-yellow-500" />
+            <div className="h-3 w-3 rounded-full bg-green-500" />
+          </div>
+        </div>
 
         {/* CONTENT */}
         <div className="h-[calc(100%-48px)]"></div>
