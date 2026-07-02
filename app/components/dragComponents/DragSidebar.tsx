@@ -10,7 +10,7 @@ const DragSidebar = () => {
   return (
     <div className="w-12 h-full bg-sidebar border-r">
       <div className="flex flex-col py-2 gap-2 items-center justify-between h-full">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-5">
           <SparkleIcon size={22} className="cursor-pointer mb-2" />
           <PencilIcon size={22} className="cursor-pointer" />
           <ClockCounterClockwiseIcon size={22} className="cursor-pointer" />
