@@ -1,6 +1,6 @@
 const DragAIComponent = () => {
   return (
-    <div className="bg-red-500 w-80 h-screen">
+    <div className="bg-background w-80 h-screen border-background border-l-2">
       
     </div>
   );
