@@ -9,7 +9,7 @@ export default function Home() {
     <main className="flex flex-col gap-4 max-w-7xl w-full p-4 mx-auto">
       <Nav />
       <section className="flex flex-col">
-        <h1 className="text-2xl mt-16 leading-wide tracking-wide max-w-md">
+        <h1 className="text-3xl mt-16 leading-wide tracking-wide max-w-md">
           AI Text Editor is your digital text editor with AI-powered features.
         </h1>
         <div className="mt-4">
