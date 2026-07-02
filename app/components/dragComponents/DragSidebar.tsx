@@ -8,7 +8,7 @@ import {
 
 const DragSidebar = () => {
   return (
-    <div className="w-12 h-full bg-sidebar border-r">
+    <div className="min-w-12 h-full bg-sidebar border-r">
       <div className="flex flex-col py-2 gap-2 items-center justify-between h-full">
         <div className="flex flex-col gap-5">
           <SparkleIcon size={22} className="cursor-pointer mb-2" />
@@ -16,7 +16,7 @@ const DragSidebar = () => {
           <ClockCounterClockwiseIcon size={22} className="cursor-pointer" />
         </div>
 
-        <UserIcon size={22} />
+        <UserIcon size={22} className="cursor-pointer" />
       </div>
     </div>
   );

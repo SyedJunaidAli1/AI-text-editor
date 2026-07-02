@@ -3,6 +3,8 @@
 import { motion, useMotionValue } from "motion/react";
 import { useCallback, useRef, useState } from "react";
 import DragSidebar from "@/app/components/dragComponents/DragSidebar";
+import DragCenter from "@/app/components/dragComponents/DragCenter";
+import DragAIComponent from "./dragComponents/DragAIComponent";
 
 export default function HeroSection() {
   const dragX = useMotionValue(0);
@@ -214,8 +216,10 @@ export default function HeroSection() {
         </div>
 
         {/* CONTENT */}
-        <div className="h-[calc(100%-48px)]">
+        <div className="flex h-[calc(100%-48px)]">
           <DragSidebar />
+          <DragCenter />
+          <DragAIComponent />
         </div>
 
         {/* RIGHT */}
