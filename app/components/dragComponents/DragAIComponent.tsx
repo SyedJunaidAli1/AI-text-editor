@@ -1,4 +1,5 @@
 "use client";
+
 import {
   InputGroup,
   InputGroupAddon,
@@ -9,7 +10,7 @@ import { SparkleIcon, ArrowUpIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useState } from "react";
 
-const DragAIComponent = ({ onclose }: { onclose: () => void }) => {
+const DragAIComponent = () => {
   const [messages, setMessages] = useState<
     {
       role: "user" | "assistant";
@@ -48,10 +49,7 @@ const DragAIComponent = ({ onclose }: { onclose: () => void }) => {
   };
 
   return (
-    <div
-      className={`bg-background h-screen border-l-2  transition-all duration-500 ease-in-out
-        ${onclose ? "w-0" : "w-85"}`}
-    >
+    <div className="bg-background h-screen border-l transition-all duration-500 ease-in-out">
       <section className="flex flex-col px-2 py-4 gap-2 border-b">
         <div className="flex items-center gap-2">
           <SparkleIcon size={32} className="text-primary" />
