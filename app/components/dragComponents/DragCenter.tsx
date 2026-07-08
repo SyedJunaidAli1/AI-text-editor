@@ -30,7 +30,7 @@ const DragCenter = () => {
         <div className="flex w-full justify-end">
           <Input
             type="text"
-            value={"Project Kickoff"}
+            defaultValue={"Project Kickoff"}
             className="!text-3xl font-bold px-0 border-none bg-transparent focus-visible:ring-0"
             placeholder="Enter Title..."
           />
@@ -42,7 +42,7 @@ const DragCenter = () => {
         <Input
           type="text"
           placeholder="Enter Description..."
-          value={"Project Related stuff"}
+          defaultValue={"Project Related stuff"}
           className="text-muted-foreground px-0 focus-visible:ring-0 border-none w-full max-w-xl bg-transparent"
         />
         <div className="w-full flex flex-wrap items-center border-b gap-1">
@@ -99,7 +99,7 @@ const DragCenter = () => {
         <h2 className="text-2xl font-bold mb-2">Project Kickoff Notes</h2>
 
         <p className="text-muted-foreground mb-6">
-          Weekly planning meeting for the AI Text Editor project.
+          Weekly planning meeting for the upcoming product release.
         </p>
 
         <p className="mb-4">
