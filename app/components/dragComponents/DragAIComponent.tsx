@@ -67,7 +67,7 @@ const DragAIComponent = () => {
           hey can you check the document
         </p>
 
-        <p className="rounded-xl py-2 px-3 text-sm max-w-[80%] bg-muted text-primary-foreground mr-auto">
+        <p className="rounded-xl py-2 px-3 text-sm max-w-[80%] bg-muted mr-auto">
           i checked he document there are few incoming meetings
         </p>
         {messages.map((message, index) => (
