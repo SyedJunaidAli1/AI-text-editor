@@ -30,6 +30,7 @@ const DragCenter = () => {
         <div className="flex w-full justify-end">
           <Input
             type="text"
+            value={"Project Kickoff"}
             className="!text-3xl font-bold px-0 border-none bg-transparent focus-visible:ring-0"
             placeholder="Enter Title..."
           />
@@ -41,6 +42,7 @@ const DragCenter = () => {
         <Input
           type="text"
           placeholder="Enter Description..."
+          value={"Project Related stuff"}
           className="text-muted-foreground px-0 focus-visible:ring-0 border-none w-full max-w-xl bg-transparent"
         />
         <div className="w-full flex flex-wrap items-center border-b gap-1">
@@ -94,6 +96,43 @@ const DragCenter = () => {
             <TextAlignJustifyIcon size={24} />
           </Toggle>
         </div>
+        <h2 className="text-2xl font-bold mb-2">Project Kickoff Notes</h2>
+
+        <p className="text-muted-foreground mb-6">
+          Weekly planning meeting for the AI Text Editor project.
+        </p>
+
+        <p className="mb-4">
+          This week we'll focus on improving the editor experience, polishing
+          the AI assistant, and preparing the first public release.
+        </p>
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Upcoming Tasks</h3>
+
+        <ul className="list-disc pl-5 space-y-2 mb-6">
+          <li>Finish the landing page interactions.</li>
+          <li>Improve AI response animations.</li>
+          <li>Add document export functionality.</li>
+          <li>Optimize mobile responsiveness.</li>
+        </ul>
+
+        <h3 className="text-lg font-semibold mb-2">Meeting Schedule</h3>
+
+        <ul className="list-disc pl-5 space-y-2 mb-6">
+          <li>Product Review — 9:00 AM • 11 July 2026</li>
+          <li>Design Sync — 2:00 PM • 15 July 2026</li>
+          <li>Launch Planning — 10:00 AM • 22 July 2026</li>
+        </ul>
+
+        <blockquote className="border-l-4 border-primary pl-4 italic text-muted-foreground my-6">
+          "Build tools that help people write faster without getting in their
+          way."
+        </blockquote>
+
+        <p>
+          Highlight any paragraph and ask AI to summarize, rewrite, or improve
+          it instantly.
+        </p>
       </section>
       <div
         className={`transition-all ease-in-out duration-300
