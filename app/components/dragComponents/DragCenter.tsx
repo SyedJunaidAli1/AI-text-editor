@@ -20,7 +20,6 @@ import {
   TextSuperscriptIcon,
   TextUnderlineIcon,
 } from "@phosphor-icons/react";
-import { Separator } from "@/components/ui/separator";
 import { Toggle } from "@/components/ui/toggle";
 
 const DragCenter = () => {
