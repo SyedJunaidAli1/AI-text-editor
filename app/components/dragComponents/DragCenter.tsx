@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { animate, motion } from "motion/react";
 import {
+  ArrowCounterClockwiseIcon,
   ArrowUUpLeftIcon,
   ArrowUUpRightIcon,
   CodeBlockIcon,
@@ -24,33 +25,107 @@ import {
   TextUnderlineIcon,
 } from "@phosphor-icons/react";
 import { Toggle } from "@/components/ui/toggle";
+import { DotmHex1 } from "@/components/ui/dotm-hex-1";
 
 const DOCUMENT_BLOCKS = [
-  { id: "h2-1", type: "h2", text: "Project Kickoff Notes", className: "text-2xl font-bold mb-2" },
-  { id: "p-1", type: "p", text: "Weekly planning meeting for the upcoming product release.", className: "text-muted-foreground mb-6" },
-  { id: "p-2", type: "p", text: "This week we'll focus on improving the editor experience, polishing the AI assistant, and preparing the first public release.", className: "mb-4" },
-  { id: "h3-1", type: "h3", text: "Upcoming Tasks", className: "text-lg font-semibold mt-6 mb-2" },
-  { id: "li-1", type: "li", text: "Finish the landing page interactions.", className: "" },
-  { id: "li-2", type: "li", text: "Improve AI response animations.", className: "" },
-  { id: "li-3", type: "li", text: "Add document export functionality.", className: "" },
-  { id: "li-4", type: "li", text: "Optimize mobile responsiveness.", className: "" },
-  { id: "h3-2", type: "h3", text: "Meeting Schedule", className: "text-lg font-semibold mb-2" },
-  { id: "li-5", type: "li", text: "Product Review — 9:00 AM • 11 July 2026", className: "" },
-  { id: "li-6", type: "li", text: "Design Sync — 2:00 PM • 15 July 2026", className: "" },
-  { id: "li-7", type: "li", text: "Launch Planning — 10:00 AM • 22 July 2026", className: "" },
-  { id: "blockquote-1", type: "blockquote", text: `"Build tools that help people write faster without getting in their way."`, className: "border-l-4 border-primary pl-4 italic text-muted-foreground my-6" },
-  { id: "p-3", type: "p", text: "Highlight any paragraph and ask AI to summarize, rewrite, or improve it instantly.", className: "" }
+  {
+    id: "h2-1",
+    type: "h2",
+    text: "Project Kickoff Notes",
+    className: "text-2xl font-bold mb-2",
+  },
+  {
+    id: "p-1",
+    type: "p",
+    text: "Weekly planning meeting for the upcoming product release.",
+    className: "text-muted-foreground mb-6",
+  },
+  {
+    id: "p-2",
+    type: "p",
+    text: "This week we'll focus on improving the editor experience, polishing the AI assistant, and preparing the first public release.",
+    className: "mb-4",
+  },
+  {
+    id: "h3-1",
+    type: "h3",
+    text: "Upcoming Tasks",
+    className: "text-lg font-semibold mt-6 mb-2",
+  },
+  {
+    id: "li-1",
+    type: "li",
+    text: "Finish the landing page interactions.",
+    className: "",
+  },
+  {
+    id: "li-2",
+    type: "li",
+    text: "Improve AI response animations.",
+    className: "",
+  },
+  {
+    id: "li-3",
+    type: "li",
+    text: "Add document export functionality.",
+    className: "",
+  },
+  {
+    id: "li-4",
+    type: "li",
+    text: "Optimize mobile responsiveness.",
+    className: "",
+  },
+  {
+    id: "h3-2",
+    type: "h3",
+    text: "Meeting Schedule",
+    className: "text-lg font-semibold mb-2",
+  },
+  {
+    id: "li-5",
+    type: "li",
+    text: "Product Review — 9:00 AM • 11 July 2026",
+    className: "",
+  },
+  {
+    id: "li-6",
+    type: "li",
+    text: "Design Sync — 2:00 PM • 15 July 2026",
+    className: "",
+  },
+  {
+    id: "li-7",
+    type: "li",
+    text: "Launch Planning — 10:00 AM • 22 July 2026",
+    className: "",
+  },
+  {
+    id: "blockquote-1",
+    type: "blockquote",
+    text: `"Build tools that help people write faster without getting in their way."`,
+    className:
+      "border-l-4 border-primary pl-4 italic text-muted-foreground my-6",
+  },
+  {
+    id: "p-3",
+    type: "p",
+    text: "Highlight any paragraph and ask AI to summarize, rewrite, or improve it instantly.",
+    className: "",
+  },
 ];
 
 const DragCenter = () => {
   const [show, setShow] = useState(true);
-  
+
   // Motion-driven animation states
   const [titleText, setTitleText] = useState("");
   const [descText, setDescText] = useState("");
   const [currentBlockIndex, setCurrentBlockIndex] = useState(-1);
   const [typedText, setTypedText] = useState("");
-  const [currentCursorTarget, setCurrentCursorTarget] = useState<"title" | "description" | "block" | "done">("title");
+  const [currentCursorTarget, setCurrentCursorTarget] = useState<
+    "title" | "description" | "block" | "done"
+  >("title");
   const [replayTrigger, setReplayTrigger] = useState(0);
 
   const titleInputRef = useRef<HTMLInputElement>(null);
@@ -83,7 +158,7 @@ const DragCenter = () => {
         ease: "linear",
         onUpdate: (latest) => {
           if (active) setTitleText(fullTitle.slice(0, Math.round(latest)));
-        }
+        },
       });
       await controls;
       if (!active) return;
@@ -102,7 +177,7 @@ const DragCenter = () => {
         ease: "linear",
         onUpdate: (latest) => {
           if (active) setDescText(fullDesc.slice(0, Math.round(latest)));
-        }
+        },
       });
       await controls;
       if (!active) return;
@@ -132,7 +207,7 @@ const DragCenter = () => {
           ease: "linear",
           onUpdate: (latest) => {
             if (active) setTypedText(block.text.slice(0, Math.round(latest)));
-          }
+          },
         });
         await controls;
         if (!active) return;
@@ -170,8 +245,14 @@ const DragCenter = () => {
       descInputRef.current.focus();
       const len = descText.length;
       descInputRef.current.setSelectionRange(len, len);
-    } else if (currentCursorTarget === "block" && document.activeElement instanceof HTMLElement) {
-      if (document.activeElement === titleInputRef.current || document.activeElement === descInputRef.current) {
+    } else if (
+      currentCursorTarget === "block" &&
+      document.activeElement instanceof HTMLElement
+    ) {
+      if (
+        document.activeElement === titleInputRef.current ||
+        document.activeElement === descInputRef.current
+      ) {
         document.activeElement.blur();
       }
     }
@@ -189,28 +270,29 @@ const DragCenter = () => {
     const flushList = () => {
       if (currentListItems.length > 0) {
         rendered.push(
-          <motion.ul 
-            key={`ul-${listKey}`} 
+          <motion.ul
+            key={`ul-${listKey}`}
             className="list-disc pl-5 space-y-2 mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.2 }}
           >
             {currentListItems}
-          </motion.ul>
+          </motion.ul>,
         );
         currentListItems = [];
       }
     };
 
-    const blocksToRender = currentBlockIndex >= 0 
-      ? DOCUMENT_BLOCKS.slice(0, currentBlockIndex + 1)
-      : [];
+    const blocksToRender =
+      currentBlockIndex >= 0
+        ? DOCUMENT_BLOCKS.slice(0, currentBlockIndex + 1)
+        : [];
 
     blocksToRender.forEach((block, index) => {
       const isCurrent = index === currentBlockIndex;
       const text = isCurrent ? typedText : block.text;
-      
+
       const showCursor = isCurrent && currentCursorTarget === "block";
       const cursorSpan = showCursor ? (
         <span className="inline-block w-[2px] h-[1.1em] ml-0.5 bg-primary typing-cursor align-middle" />
@@ -221,8 +303,8 @@ const DragCenter = () => {
           listKey = block.id;
         }
         currentListItems.push(
-          <motion.li 
-            key={block.id} 
+          <motion.li
+            key={block.id}
             className={block.className}
             initial={{ opacity: 0, x: -8 }}
             animate={{ opacity: 1, x: 0 }}
@@ -230,15 +312,15 @@ const DragCenter = () => {
           >
             {text}
             {cursorSpan}
-          </motion.li>
+          </motion.li>,
         );
       } else {
         flushList();
 
         if (block.type === "h2") {
           rendered.push(
-            <motion.h2 
-              key={block.id} 
+            <motion.h2
+              key={block.id}
               className={block.className}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -246,12 +328,12 @@ const DragCenter = () => {
             >
               {text}
               {cursorSpan}
-            </motion.h2>
+            </motion.h2>,
           );
         } else if (block.type === "h3") {
           rendered.push(
-            <motion.h3 
-              key={block.id} 
+            <motion.h3
+              key={block.id}
               className={block.className}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -259,12 +341,12 @@ const DragCenter = () => {
             >
               {text}
               {cursorSpan}
-            </motion.h3>
+            </motion.h3>,
           );
         } else if (block.type === "p") {
           rendered.push(
-            <motion.p 
-              key={block.id} 
+            <motion.p
+              key={block.id}
               className={block.className}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -272,12 +354,12 @@ const DragCenter = () => {
             >
               {text}
               {cursorSpan}
-            </motion.p>
+            </motion.p>,
           );
         } else if (block.type === "blockquote") {
           rendered.push(
-            <motion.blockquote 
-              key={block.id} 
+            <motion.blockquote
+              key={block.id}
               className={block.className}
               initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
@@ -285,7 +367,7 @@ const DragCenter = () => {
             >
               {text}
               {cursorSpan}
-            </motion.blockquote>
+            </motion.blockquote>,
           );
         }
       }
@@ -329,16 +411,11 @@ const DragCenter = () => {
               className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
               title="Restart writing simulation"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                viewBox="0 0 256 256"
-                className={currentCursorTarget !== "done" ? "animate-spin" : ""}
-              >
-                <path d="M224,128a96,96,0,0,1-144,83.13l-4-2.3a8,8,0,1,1,8-13.85l4,2.3A80,80,0,1,0,108.6,67.63l-18,18H120a8,8,0,0,1,0,16H72a8,8,0,0,1-8-8V40a8,8,0,0,1,16,0V68.69l19.53-19.52A96,96,0,0,1,224,128Z"></path>
-              </svg>
+              {currentCursorTarget !== "done" ? (
+                <DotmHex1 size={14} dotSize={3} bloom animated={true} />
+              ) : (
+                <ArrowCounterClockwiseIcon size={32} />
+              )}
               Replay
             </Button>
             <Button onClick={() => setShow(!show)}>
@@ -362,7 +439,7 @@ const DragCenter = () => {
           }}
           className="text-muted-foreground px-0 focus-visible:ring-0 border-none w-full max-w-xl bg-transparent"
         />
-        
+
         <div className="w-full flex flex-wrap items-center border-b gap-1 mb-4">
           <Button variant="ghost" className="px-2">
             <ArrowUUpLeftIcon size={24} />
