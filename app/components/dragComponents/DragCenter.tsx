@@ -412,9 +412,15 @@ const DragCenter = () => {
               title="Restart writing simulation"
             >
               {currentCursorTarget !== "done" ? (
-                <DotmHex1 size={14} dotSize={3} bloom animated={true} />
+                <DotmHex1
+                  size={14}
+                  dotSize={3}
+                  colorPreset="solid-mint"
+                  bloom
+                  animated={true}
+                />
               ) : (
-                <ArrowCounterClockwiseIcon size={32} />
+                <ArrowCounterClockwiseIcon className="text-primary" size={32} />
               )}
               Replay
             </Button>
