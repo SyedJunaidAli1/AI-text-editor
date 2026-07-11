@@ -1,9 +1,15 @@
 import DragTerminal from "@/app/components/dragComponents/DragTerminal";
+import Terminal from "@/app/components/Terminal";
 
 export default function HeroSection() {
   return (
-    <div className="max-lg:hidden">
-      <DragTerminal />
-    </div>
+    <>
+      <section className="max-lg:hidden">
+        <DragTerminal />
+      </section>
+      <section className="lg:hidden">
+        <Terminal />
+      </section>
+    </>
   );
 }
