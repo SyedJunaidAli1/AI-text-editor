@@ -12,7 +12,7 @@ const FeatureSection = () => {
         <section className="mt-12 grid gap-2 lg:grid-cols-2">
           {/* Card 1 */}
           <div className="rounded-2xl border p-2 bg-card">
-            <div className="relative h-100 rounded-xl bg-[url('/card.jpg')] bg-cover bg-center overflow-hidden">
+            <div className="relative lg:h-100 h-80 rounded-xl bg-[url('/card.jpg')]  bg-cover bg-center overflow-hidden">
               <div className="absolute top-16 -right-8 w-[92%]">
                 <Image
                   src="/ui1.png"
@@ -39,7 +39,7 @@ const FeatureSection = () => {
 
           {/* Card 2 */}
           <div className="rounded-2xl border bg-card p-2">
-            <div className="relative h-100 rounded-xl bg-[url('/card2.jpg')] bg-cover bg-center overflow-hidden">
+            <div className="relative lg:h-100 h-80 rounded-xl bg-[url('/card2.jpg')] bg-cover bg-center overflow-hidden">
               <div className="absolute top-16 -left-8 w-[92%]">
                 <Image
                   src="/ui2.png"
