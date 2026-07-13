@@ -1,5 +1,6 @@
 import DragTerminal from "@/app/components/dragComponents/DragTerminal";
 import Terminal from "@/app/components/Terminal";
+import FeatureSection from "@/app/components/FeatureSection";
 
 export default function HeroSection() {
   return (
@@ -10,6 +11,7 @@ export default function HeroSection() {
       <section className="lg:hidden">
         <Terminal />
       </section>
+      <FeatureSection />
     </>
   );
 }
