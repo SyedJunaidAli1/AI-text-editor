@@ -1,6 +1,7 @@
 import DragTerminal from "@/app/components/dragComponents/DragTerminal";
 import Terminal from "@/app/components/Terminal";
 import FeatureSection from "@/app/components/FeatureSection";
+import QNASection from "@/app/components/QNASection";
 
 export default function HeroSection() {
   return (
@@ -12,6 +13,7 @@ export default function HeroSection() {
         <Terminal />
       </section>
       <FeatureSection />
+      <QNASection />
     </>
   );
 }
