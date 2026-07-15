@@ -7,10 +7,7 @@ export default function HeroWindow() {
   return (
     <section className="relative mt-12 overflow-hidden rounded-xl bg-[url('/hero-image-bg.png')]">
       <div className="px-4 pt-4 md:px-8 md:pt-8">
-        <div
-          className="mx-auto overflow-hidden rounded-xl border bg-background shadow-2xl w-full max-w-[1200px] h-[520px] sm:h-[600px] lg:h-[720px]
-          "
-        >
+        <div className="mx-auto overflow-hidden rounded-xl border bg-background shadow-2xl w-full max-w-[1200px] h-[520px] sm:h-[600px] lg:h-[720px]">
           {/* Title bar */}
           <div className="h-8 border-b">
             <div className="flex items-center gap-2 px-3 py-2">
