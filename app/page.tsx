@@ -4,6 +4,7 @@ import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import HeroSection from "./components/HeroSection";
 import TryNowSection from "./components/TryNowSection";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <HeroSection />
       </section>
       <TryNowSection />
+      <Footer />
     </main>
   );
 }
