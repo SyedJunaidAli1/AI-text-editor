@@ -82,7 +82,7 @@ const page = () => {
               Updated: July 2026
             </p>
             <div className="text-sm text-muted-foreground">
-              <span>Write smarter with AI.</span>
+              <span>Write smarter • Think clearer</span>
             </div>
           </footer>
         </main>
