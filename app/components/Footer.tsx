@@ -49,10 +49,10 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border/40 text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} AI Text Editor. All rights reserved.</p>
         <div className="flex gap-4 mt-4 md:mt-0">
-          <Link href="#" className="hover:text-foreground transition-colors">
+          <Link href="https://x.com/Junaid383206" className="hover:text-foreground transition-colors">
             Twitter
           </Link>
-          <Link href="#" className="hover:text-foreground transition-colors">
+          <Link href="https://github.com/SyedJunaidAli1/AI-text-editor" className="hover:text-foreground transition-colors">
             GitHub
           </Link>
         </div>
