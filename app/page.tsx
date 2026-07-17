@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Nav from "@/app/components/Nav";
 import HeroSection from "./components/HeroSection";
+import TryNowSection from "./components/TryNowSection";
 
 export default function Home() {
   return (
@@ -19,6 +20,8 @@ export default function Home() {
         </div>
         <HeroSection />
       </section>
+      <TryNowSection />
     </main>
   );
 }
+
