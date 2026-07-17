@@ -35,10 +35,13 @@
 - [x] ai component convo history delete? (delete all convo)
 - [x] UI/UX improvement after that+ responsiveness
 - [x] complete other route pages
-- [ ] make landing page properly
+- [x] make landing page properly (work in progress)
+- [x] landing page (drag window working in progress)
+- [x] landing page (stack window for mobile)
 - [x] hitory page is done
 - [x] history page show words
 - [x] history page dropdown for options (text)
+- [ ] make ai component collapsible for terminal (for mobile)
 
 #bug
 
