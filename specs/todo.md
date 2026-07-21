@@ -43,6 +43,7 @@
 - [x] history page dropdown for options (text)
 - [ ] make ai component collapsible for terminal (for mobile)
 - [ ] ai component the responsee we get ui (is not good)
+- [ ] readme for the project
 
 #bug
 
