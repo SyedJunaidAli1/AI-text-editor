@@ -157,8 +157,8 @@ const AIComponent = ({
             key={index}
             className={`max-w-[80%] rounded-2xl px-4 py-3 ${
               message.role === "user"
-                ? "ml-auto bg-primary text-primary-foreground"
-                : "border bg-card"
+                ? "ml-auto bg-primary text-primary-foreground border"
+                : "border bg-muted"
             }`}
           >
             <article
