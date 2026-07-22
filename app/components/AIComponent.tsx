@@ -14,6 +14,9 @@ import { Editor } from "@tiptap/react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowUpIcon, SidebarIcon, SparkleIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeHighlight from "rehype-highlight";
 
 const AIComponent = ({
   documentId,
@@ -152,13 +155,26 @@ const AIComponent = ({
         {Messages.map((message, index) => (
           <div
             key={index}
-            className={`rounded-xl py-2 px-3 text-sm max-w-[80%] ${
+            className={`max-w-[80%] rounded-2xl px-4 py-3 ${
               message.role === "user"
-                ? "ml-auto bg-primary text-primary-foreground"
-                : "bg-muted"
+                ? "ml-auto bg-primary text-primary-foreground border"
+                : "border bg-muted"
             }`}
           >
-            {message.content}
+            <article
+              className={`prose prose-sm max-w-none dark:prose-invert ${
+                message.role === "user"
+                  ? "prose-headings:text-primary-foreground prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-code:text-primary-foreground"
+                  : ""
+              }`}
+            >
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight]}
+              >
+                {message.content}
+              </ReactMarkdown>
+            </article>
           </div>
         ))}
       </div>
