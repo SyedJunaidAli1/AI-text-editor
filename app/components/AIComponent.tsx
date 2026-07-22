@@ -152,7 +152,7 @@ const AIComponent = ({
         {Messages.map((message, index) => (
           <div
             key={index}
-            className={`rounded-xl py-2 px-3 text-sm max-w-[80%] ${
+            className={`rounded-xl py-3 px-4 text-sm max-w-[80%] leading-relaxed ${
               message.role === "user"
                 ? "ml-auto bg-primary text-primary-foreground"
                 : "bg-muted"
