@@ -2,7 +2,7 @@
 
 A modern AI-powered text editor built with **Next.js**, **Tiptap**, **Supabase**, and **Groq**. Create rich-text documents, chat with AI alongside your writing, and manage your documents in one clean workspace.
 
-![AI Text Editor Preview](./public/hero-image.png)
+![AI Text Editor Preview](./public/hero-image-bg.png)
 
 ## ✨ Features
 
