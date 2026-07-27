@@ -1,6 +1,7 @@
 "use client";
 
 import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 
 const QNASection = () => {
@@ -47,15 +48,25 @@ const QNASection = () => {
                 <section className="flex justify-between items-center py-4">
                   <h3 className="text-md">{q.question}</h3>
                   {show !== q.id && (
-                    <CaretDownIcon size={12} onClick={() => handleshow(q.id)} />
+                    <CaretDownIcon size={16} onClick={() => handleshow(q.id)} />
                   )}
                   {show === q.id && (
-                    <CaretUpIcon size={12} onClick={() => handleshow(q.id)} />
+                    <CaretUpIcon size={16} onClick={() => handleshow(q.id)} />
                   )}
                 </section>
-                {show === q.id && (
-                  <p className="text-chart-2 pb-4">{q.answer}</p>
-                )}
+                <AnimatePresence initial={false}>
+                  {show === q.id && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, type: "tween" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-4 text-muted-foreground">{q.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <hr />
               </div>
             ))}
