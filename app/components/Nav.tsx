@@ -8,7 +8,7 @@ const Nav = () => {
         <h2 className="font-bold">AI Text Editor</h2>
       </Link>
       <section>
-        <ul className="flex gap-2 items-center justify-center text-center cursor-pointer ">
+        <ul className="flex gap-4 items-center justify-center text-center cursor-pointer ">
           <li className="hover:opacity-80">
             <Link href="/about">About</Link>
           </li>
