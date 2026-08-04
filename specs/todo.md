@@ -42,7 +42,7 @@
 - [x] history page show words
 - [x] history page dropdown for options (text)
 - [x] make ai component collapsible for terminal (for mobile)
-- [ ] fix the landing page terminal ai section for mobile
+- [x] fix the landing page terminal ai section for mobile
 - [ ] add tiptap editor in landing page for both drag terminal and static terminal
 - [x] add animation for qna
 - [x] ai component the responsee we get ui (is not good)
