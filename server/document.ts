@@ -28,7 +28,6 @@ export async function saveDocument({
     const { error } = await supabase
       .from("documents")
       .update({
-        user_id: user.id,
         content,
         title,
         description,
