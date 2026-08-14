@@ -14,7 +14,14 @@ export async function createClient() {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options),
+            cookieStore.set(name, value, {
+              ...options,
+              // Force secure cookies in production.
+              // Vercel (and most hosts) terminate HTTPS at the edge and
+              // forward requests internally over HTTP, so @supabase/ssr
+              // would otherwise set Secure: false even on production.
+              secure: process.env.NODE_ENV === "production",
+            }),
           );
         },
       },

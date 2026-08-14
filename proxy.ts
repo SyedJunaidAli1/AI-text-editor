@@ -17,7 +17,13 @@ export async function proxy(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options),
+            response.cookies.set(name, value, {
+              ...options,
+              // Force secure cookies in production.
+              // Vercel terminates HTTPS at the edge and forwards over HTTP
+              // internally, so without this Secure would be false in prod.
+              secure: process.env.NODE_ENV === "production",
+            }),
           );
         },
       },
