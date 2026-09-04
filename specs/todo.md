@@ -57,3 +57,4 @@
 - [x] align has also some issues (fixed by clean json)
 - [x] creating new doc is broken by implemention new inputs
 - [x] found a bug that doubles que/response in ai chatbot
+- [] ai chat width of markdown is not response for biggers messages fix that
