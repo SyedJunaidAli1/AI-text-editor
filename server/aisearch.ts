@@ -20,7 +20,7 @@ export async function askAi({
   const supabase = await createClient();
 
   const completion = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+    model: "groq/compound",
     messages: [
       {
         role: "system",
