@@ -8,16 +8,16 @@ const DragCenter = () => {
   const [show, setShow] = useState(true);
 
   return (
-    <div className="flex w-full justify-between bg-background h-screen">
-      {/* Editor pane — now uses a real Tiptap editor */}
-      <section className="w-full overflow-hidden">
+    <div className="flex w-full h-full justify-between bg-background overflow-hidden">
+      {/* Editor pane — real Tiptap editor */}
+      <section className="flex-1 h-full overflow-hidden">
         <DemoTiptap onAIClick={() => setShow(!show)} />
       </section>
 
       {/* AI sidebar */}
       <div
-        className={`transition-all ease-in-out duration-300
-        ${show ? "w-[42%]" : "w-0"}
+        className={`h-full transition-all ease-in-out duration-300 shrink-0 overflow-hidden
+        ${show ? "w-[340px]" : "w-0"}
       `}
       >
         <DragAIComponent />

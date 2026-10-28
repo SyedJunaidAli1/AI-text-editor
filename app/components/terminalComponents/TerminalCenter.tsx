@@ -8,12 +8,9 @@ const TerminalCenter = () => {
   const [aiOpen, setAiOpen] = useState(false);
 
   return (
-    <div
-      className="relative flex w-full bg-background overflow-hidden"
-      style={{ height: "calc(100% - 0px)" }}
-    >
+    <div className="relative flex w-full h-full bg-background overflow-hidden">
       {/* Editor pane — real Tiptap editor */}
-      <section className="w-full overflow-hidden">
+      <section className="flex-1 h-full overflow-hidden">
         <DemoTiptap onAIClick={() => setAiOpen(true)} />
       </section>
 

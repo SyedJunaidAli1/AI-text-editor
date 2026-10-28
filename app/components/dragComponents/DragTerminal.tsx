@@ -34,12 +34,12 @@ export default function DragTerminal() {
   const isResizingRef = useRef(false);
 
   const [size, setSize] = useState({
-    width: 1000,
-    height: 750,
+    width: 1020,
+    height: 560,
   });
 
-  const minWidth = 700;
-  const minHeight = 500;
+  const minWidth = 650;
+  const minHeight = 420;
 
   // ---------------- DRAG ----------------
 
@@ -149,9 +149,6 @@ export default function DragTerminal() {
       height = Math.max(minHeight, state.startHeight - dy);
     }
 
-    // Since the window is absolute-positioned at left: 50%, top: 50% with transform translate(-50%, -50%),
-    // any change in width or height will expand/shrink it symmetrically from the center.
-    // To keep the opposite edge fixed, we adjust the drag offset (dragX/dragY) by half of the size change.
     let newDragX = state.startDragX;
     if (state.edges.right) {
       newDragX = state.startDragX + (width - state.startWidth) / 2;
@@ -184,7 +181,7 @@ export default function DragTerminal() {
   };
 
   return (
-    <section className="relative mt-12 h-[800px] overflow-hidden rounded-xl bg-[url('/hero-image-bg.png')]">
+    <section className="relative mt-12 h-[680px] overflow-hidden rounded-xl bg-[url('/hero-image-bg.png')]">
       <motion.div
         data-window
         style={{
@@ -193,7 +190,7 @@ export default function DragTerminal() {
           x: dragX,
           y: dragY,
         }}
-        className="absolute left-1/2 top-110 -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background shadow-2xl overflow-hidden"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-background shadow-2xl overflow-hidden"
       >
         {/* TITLE BAR */}
         <div
@@ -215,7 +212,7 @@ export default function DragTerminal() {
         </div>
 
         {/* CONTENT */}
-        <div className="flex h-[calc(100%-48px)]">
+        <div className="flex h-[calc(100%-32px)]">
           <DragSidebar />
           <DragCenter />
         </div>

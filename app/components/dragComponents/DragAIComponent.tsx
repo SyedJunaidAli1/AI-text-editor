@@ -37,7 +37,7 @@ const DragAIComponent = () => {
               <p>✨ Try the app to use AI on your documents.</p>
               <Link
                 href="/app"
-                className="mt-2 inline-flex text-sm text-primary hover:underline"
+                className="mt-2 inline-flex text-xs text-primary hover:underline"
               >
                 Open editor →
               </Link>
@@ -49,31 +49,32 @@ const DragAIComponent = () => {
   };
 
   return (
-    <div className="bg-background h-screen border-l transition-all duration-500 ease-in-out">
-      <section className="flex flex-col px-2 py-4 gap-2 border-b">
-        <div className="flex items-center gap-2">
-          <SparkleIcon size={32} className="text-primary" />
-          <p>AI Assistant</p>
+    <div className="bg-background h-full flex flex-col border-l transition-all duration-300 ease-in-out">
+      {/* Header */}
+      <section className="flex flex-col px-3 py-2.5 gap-1 border-b shrink-0">
+        <div className="flex items-center gap-1.5">
+          <SparkleIcon size={20} className="text-primary" />
+          <p className="font-semibold text-sm">AI Assistant</p>
         </div>
 
-        <p className="text-xs text-muted-foreground">
+        <p className="text-[11px] text-muted-foreground">
           Ask AI to write, summarize, or improve text
         </p>
       </section>
 
-      {/*chat section*/}
-      <section className="flex flex-col gap-2 h-105 px-2 overflow-y-scroll my-3">
-        <p className="rounded-xl py-2 px-3 text-sm max-w-[80%] bg-primary text-primary-foreground ml-auto">
+      {/* Chat messages */}
+      <section className="flex flex-col gap-2 flex-1 px-3 py-2.5 overflow-y-auto">
+        <p className="rounded-xl py-2 px-3 text-xs max-w-[85%] bg-primary text-primary-foreground ml-auto">
           hey can you check the document
         </p>
 
-        <p className="rounded-xl py-2 px-3 text-sm max-w-[80%] bg-muted mr-auto">
-          i checked he document there are few incoming meetings
+        <p className="rounded-xl py-2 px-3 text-xs max-w-[85%] bg-muted mr-auto">
+          i checked the document there are few incoming meetings
         </p>
         {messages.map((message, index) => (
           <div
             key={index}
-            className={`rounded-xl py-2 px-3 text-sm max-w-[80%]
+            className={`rounded-xl py-2 px-3 text-xs max-w-[85%]
               ${
                 message.role === "user"
                   ? "bg-primary text-primary-foreground ml-auto"
@@ -85,9 +86,9 @@ const DragAIComponent = () => {
         ))}
       </section>
 
-      {/*input section*/}
-      <div className="border-t p-4">
-        <InputGroup className="rounded-2xl border bg-background shadow-sm">
+      {/* Input section */}
+      <div className="border-t p-2.5 shrink-0">
+        <InputGroup className="rounded-xl border bg-background shadow-sm">
           <InputGroupTextarea
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -98,20 +99,21 @@ const DragAIComponent = () => {
               }
             }}
             placeholder="Ask AI anything..."
+            className="min-h-12 text-xs py-2"
           />
 
           <InputGroupAddon align="block-end">
             <InputGroupButton
               variant="default"
-              className="ml-auto rounded-xl"
+              className="ml-auto rounded-lg size-7 p-0"
               onClick={handleSubmit}
             >
-              <ArrowUpIcon size={32} className="w-4 h-4" />
+              <ArrowUpIcon size={14} />
             </InputGroupButton>
           </InputGroupAddon>
         </InputGroup>
 
-        <p className="text-xs text-muted-foreground">
+        <p className="text-[10px] text-muted-foreground mt-1 text-center">
           AI can make mistakes. Verify important information.
         </p>
       </div>

@@ -4,20 +4,40 @@ import { EditorContent, useEditor, useEditorState, Editor } from "@tiptap/react"
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import LinkComponent from "@/app/components/LinkComponent";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { editorExtensions } from "@/lib/tiptap-extensions";
 import {
   ArrowCounterClockwiseIcon,
   ArrowUUpLeftIcon,
   ArrowUUpRightIcon,
+  CaretDownIcon,
   CodeBlockIcon,
   CodeIcon,
+  HighlighterIcon,
+  LinkBreakIcon,
+  ListChecksIcon,
+  ListIcon,
+  ListNumbersIcon,
+  ProhibitIcon,
   RobotIcon,
   TextAlignCenterIcon,
   TextAlignJustifyIcon,
   TextAlignLeftIcon,
   TextAlignRightIcon,
   TextBIcon,
+  TextHFourIcon,
+  TextHIcon,
+  TextHOneIcon,
+  TextHThreeIcon,
+  TextHTwoIcon,
   TextIndentIcon,
   TextItalicIcon,
   TextStrikethroughIcon,
@@ -27,195 +47,146 @@ import {
 } from "@phosphor-icons/react";
 import { DotmHex1 } from "@/components/ui/dotm-hex-1";
 
-// The document content to type out, as Tiptap-compatible JSON blocks
-const DEMO_CONTENT = [
+type DemoBlock =
+  | {
+      type: "heading";
+      level: 1 | 2 | 3 | 4 | 5 | 6;
+      text: string;
+    }
+  | {
+      type: "paragraph";
+      text: string;
+    }
+  | {
+      type: "bulletList";
+      items: string[];
+    }
+  | {
+      type: "blockquote";
+      text: string;
+    };
+
+const DEMO_BLOCKS: DemoBlock[] = [
   {
     type: "heading",
-    attrs: { level: 2 },
-    content: [{ type: "text", text: "Project Kickoff Notes" }],
+    level: 2,
+    text: "Project Kickoff Notes",
   },
   {
     type: "paragraph",
-    content: [
-      {
-        type: "text",
-        text: "Weekly planning meeting for the upcoming product release.",
-      },
-    ],
+    text: "Weekly planning meeting for the upcoming product release.",
   },
   {
     type: "paragraph",
-    content: [
-      {
-        type: "text",
-        text: "This week we'll focus on improving the editor experience, polishing the AI assistant, and preparing the first public release.",
-      },
+    text: "This week we'll focus on improving the editor experience, polishing the AI assistant, and preparing the first public release.",
+  },
+  {
+    type: "heading",
+    level: 3,
+    text: "Upcoming Tasks",
+  },
+  {
+    type: "bulletList",
+    items: [
+      "Finish the landing page interactions.",
+      "Improve AI response animations.",
+      "Add document export functionality.",
+      "Optimize mobile responsiveness.",
     ],
   },
   {
     type: "heading",
-    attrs: { level: 3 },
-    content: [{ type: "text", text: "Upcoming Tasks" }],
+    level: 3,
+    text: "Meeting Schedule",
   },
   {
     type: "bulletList",
-    content: [
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Finish the landing page interactions.",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Improve AI response animations.",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Add document export functionality.",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Optimize mobile responsiveness.",
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-  {
-    type: "heading",
-    attrs: { level: 3 },
-    content: [{ type: "text", text: "Meeting Schedule" }],
-  },
-  {
-    type: "bulletList",
-    content: [
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Product Review — 9:00 AM • 11 July 2026",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Design Sync — 2:00 PM • 15 July 2026",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        type: "listItem",
-        content: [
-          {
-            type: "paragraph",
-            content: [
-              {
-                type: "text",
-                text: "Launch Planning — 10:00 AM • 22 July 2026",
-              },
-            ],
-          },
-        ],
-      },
+    items: [
+      "Product Review — 9:00 AM • 11 July 2026",
+      "Design Sync — 2:00 PM • 15 July 2026",
+      "Launch Planning — 10:00 AM • 22 July 2026",
     ],
   },
   {
     type: "blockquote",
-    content: [
-      {
-        type: "paragraph",
-        content: [
-          {
-            type: "text",
-            text: '"Build tools that help people write faster without getting in their way."',
-          },
-        ],
-      },
-    ],
+    text: `"Build tools that help people write faster without getting in their way."`,
   },
   {
     type: "paragraph",
-    content: [
-      {
-        type: "text",
-        text: "Highlight any paragraph and ask AI to summarize, rewrite, or improve it instantly.",
-      },
-    ],
+    text: "Highlight any paragraph and ask AI to summarize, rewrite, or improve it instantly.",
   },
 ];
 
-// Helper: extract the plain text from a Tiptap JSON node recursively
-function extractText(node: Record<string, unknown>): string {
-  if (node.type === "text") return (node.text as string) || "";
-  if (Array.isArray(node.content)) {
-    return (node.content as Record<string, unknown>[])
-      .map((child) => extractText(child))
-      .join("");
+function blockToNode(
+  block: DemoBlock,
+  partialIndex?: number,
+  partialItemChar?: number,
+) {
+  if (block.type === "heading") {
+    const text =
+      partialIndex !== undefined ? block.text.slice(0, partialIndex) : block.text;
+    return {
+      type: "heading",
+      attrs: { level: block.level },
+      content: text ? [{ type: "text", text }] : [],
+    };
   }
-  return "";
-}
 
-// Helper: build a sequence of { text, node } pairs for typing
-function buildTypingSequence(
-  blocks: Record<string, unknown>[],
-): { text: string; node: Record<string, unknown> }[] {
-  const seq: { text: string; node: Record<string, unknown> }[] = [];
-  for (const block of blocks) {
-    const text = extractText(block);
-    seq.push({ text, node: block });
+  if (block.type === "paragraph") {
+    const text =
+      partialIndex !== undefined ? block.text.slice(0, partialIndex) : block.text;
+    return {
+      type: "paragraph",
+      content: text ? [{ type: "text", text }] : [],
+    };
   }
-  return seq;
+
+  if (block.type === "blockquote") {
+    const text =
+      partialIndex !== undefined ? block.text.slice(0, partialIndex) : block.text;
+    return {
+      type: "blockquote",
+      content: [
+        {
+          type: "paragraph",
+          content: text ? [{ type: "text", text }] : [],
+        },
+      ],
+    };
+  }
+
+  if (block.type === "bulletList") {
+    const itemsNodes = [];
+    const maxItems =
+      partialIndex !== undefined ? partialIndex + 1 : block.items.length;
+
+    for (let i = 0; i < maxItems; i++) {
+      let itemText = block.items[i];
+      if (
+        partialIndex !== undefined &&
+        i === partialIndex &&
+        partialItemChar !== undefined
+      ) {
+        itemText = itemText.slice(0, partialItemChar);
+      }
+      itemsNodes.push({
+        type: "listItem",
+        content: [
+          {
+            type: "paragraph",
+            content: itemText ? [{ type: "text", text: itemText }] : [],
+          },
+        ],
+      });
+    }
+
+    return {
+      type: "bulletList",
+      content: itemsNodes,
+    };
+  }
+
+  return null;
 }
 
 interface DemoTiptapProps {
@@ -237,12 +208,11 @@ const DemoTiptap = ({ onAIClick }: DemoTiptapProps) => {
     editable: true,
     editorProps: {
       attributes: {
-        class: `prose dark:prose-invert prose-sm prose-blockquote:border-l-3 prose-blockquote:border-primary [&_blockquote_p:first-of-type]:before:content-none [&_blockquote_p:last-of-type]:after:content-none prose-code:px-1.5 prose-code:bg-secondary prose-code:text-foreground prose-pre:bg-secondary prose-code:font-normal prose-code:text-sm prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none focus:outline-none max-w-none`,
+        class: `prose dark:prose-invert prose-sm prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-muted-foreground prose-code:px-1.5 prose-code:bg-secondary prose-code:text-foreground prose-pre:bg-secondary prose-code:font-normal prose-code:text-sm prose-code:py-0.5 prose-code:rounded focus:outline-none max-w-none`,
       },
     },
   });
 
-  // Sleep helper
   const sleep = useCallback(
     (ms: number) =>
       new Promise<void>((resolve) => {
@@ -251,140 +221,97 @@ const DemoTiptap = ({ onAIClick }: DemoTiptapProps) => {
     [],
   );
 
-  // Typewriter animation using Tiptap's editor commands
   useEffect(() => {
     if (!editor) return;
 
     const ctrl = { active: true };
     animationRef.current = ctrl;
 
-    // Reset everything
     setTitleText("");
     setDescText("");
     setIsAnimating(true);
-    editor.commands.setContent("", false);
+    editor.commands.setContent({ type: "doc", content: [] }, false);
 
     const runAnimation = async () => {
-      await sleep(400);
+      await sleep(350);
       if (!ctrl.active) return;
 
-      // 1. Type the title character by character
-      const fullTitle = "Project Kickoff";
+      // 1. Type Title
+      const fullTitle = "Project Kickoff Notes";
       for (let i = 0; i <= fullTitle.length; i++) {
         if (!ctrl.active) return;
         setTitleText(fullTitle.slice(0, i));
-        await sleep(35);
+        await sleep(28);
       }
       if (!ctrl.active) return;
 
-      await sleep(200);
+      await sleep(180);
 
-      // 2. Type the description
+      // 2. Type Description
       const fullDesc = "Project Related stuff";
       for (let i = 0; i <= fullDesc.length; i++) {
         if (!ctrl.active) return;
         setDescText(fullDesc.slice(0, i));
-        await sleep(25);
+        await sleep(20);
       }
       if (!ctrl.active) return;
 
-      await sleep(300);
+      await sleep(250);
 
-      // 3. Type document content block by block, character by character
-      const sequence = buildTypingSequence(DEMO_CONTENT);
+      // 3. Type Document Blocks cleanly via structural JSON updates
+      const completedBlocks: DemoBlock[] = [];
 
-      for (let blockIdx = 0; blockIdx < sequence.length; blockIdx++) {
+      for (let blockIdx = 0; blockIdx < DEMO_BLOCKS.length; blockIdx++) {
         if (!ctrl.active) return;
-        const { text, node } = sequence[blockIdx];
+        const currentBlock = DEMO_BLOCKS[blockIdx];
 
-        // For each block, we insert the full structured node but type text progressively
-        // Strategy: insert full node, then we let it appear naturally
-        // For a more authentic feel, we type each character into the editor
-
-        // Move cursor to end
-        editor.commands.focus("end");
-
-        // For list blocks that contain multiple items, insert the whole block at once
-        // but with a slight delay for visual effect
-        if (node.type === "bulletList" || node.type === "orderedList") {
-          const items = (node.content as Record<string, unknown>[]) || [];
-          for (let itemIdx = 0; itemIdx < items.length; itemIdx++) {
+        if (currentBlock.type === "bulletList") {
+          for (let itemIdx = 0; itemIdx < currentBlock.items.length; itemIdx++) {
             if (!ctrl.active) return;
-            const itemText = extractText(items[itemIdx]);
+            const itemText = currentBlock.items[itemIdx];
 
-            // Type the list item character by character
-            if (itemIdx === 0) {
-              // Start a new bullet list
-              editor.commands.focus("end");
-              editor.chain().focus("end").toggleBulletList().run();
-            } else {
-              // Add a new list item by pressing Enter
-              editor.commands.focus("end");
-              editor.chain().focus("end").splitListItem("listItem").run();
-            }
-
-            for (let charIdx = 0; charIdx < itemText.length; charIdx++) {
+            for (let c = 1; c <= itemText.length; c++) {
               if (!ctrl.active) return;
-              editor.commands.focus("end");
-              editor.commands.insertContent(itemText[charIdx]);
-              await sleep(15);
+              const partialNode = blockToNode(currentBlock, itemIdx, c);
+              const nodes = [
+                ...completedBlocks.map((b) => blockToNode(b)),
+                partialNode,
+              ].filter(Boolean);
+
+              editor.commands.setContent(
+                { type: "doc", content: nodes as any },
+                false,
+              );
+              await sleep(12);
             }
 
-            await sleep(100);
+            await sleep(80);
           }
-
-          // Exit list by pressing Enter twice (creates empty item, then lifts it)
-          editor.commands.focus("end");
-          editor.chain().focus("end").splitListItem("listItem").run();
-          editor.chain().focus("end").liftListItem("listItem").run();
-
-          await sleep(150);
         } else {
-          // For headings, paragraphs, blockquotes — set the block type first, then type
-          editor.commands.focus("end");
-
-          if (node.type === "heading") {
-            const level = (node.attrs as { level: number })?.level || 2;
-            editor
-              .chain()
-              .focus("end")
-              .setHeading({ level: level as 1 | 2 | 3 | 4 | 5 | 6 })
-              .run();
-          } else if (node.type === "blockquote") {
-            editor.chain().focus("end").setBlockquote().run();
-          }
-
-          // Type character by character
-          for (let charIdx = 0; charIdx < text.length; charIdx++) {
+          const text = currentBlock.text;
+          for (let c = 1; c <= text.length; c++) {
             if (!ctrl.active) return;
-            editor.commands.focus("end");
-            editor.commands.insertContent(text[charIdx]);
+            const partialNode = blockToNode(currentBlock, c);
+            const nodes = [
+              ...completedBlocks.map((b) => blockToNode(b)),
+              partialNode,
+            ].filter(Boolean);
+
+            editor.commands.setContent(
+              { type: "doc", content: nodes as any },
+              false,
+            );
             await sleep(15);
           }
 
-          // Press Enter to move to next block
-          editor.commands.focus("end");
-
-          if (node.type === "blockquote") {
-            // Exit blockquote
-            editor.chain().focus("end").enter().run();
-            editor.chain().focus("end").liftEmptyBlock().run();
-          } else if (node.type === "heading") {
-            // After heading, go back to paragraph
-            editor.chain().focus("end").enter().run();
-            editor.chain().focus("end").setParagraph().run();
-          } else {
-            editor.chain().focus("end").enter().run();
-          }
-
-          await sleep(100);
-
-          // Extra pause after punctuation
           const lastChar = text[text.length - 1];
           if (lastChar === "." || lastChar === '"') {
-            await sleep(100);
+            await sleep(90);
           }
         }
+
+        completedBlocks.push(currentBlock);
+        await sleep(120);
       }
 
       if (ctrl.active) {
@@ -408,52 +335,42 @@ const DemoTiptap = ({ onAIClick }: DemoTiptapProps) => {
 
   return (
     <div className="flex flex-col w-full h-full bg-background overflow-hidden">
-      <style>{`
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0; }
-        }
-        .typing-cursor .ProseMirror .has-focus {
-          caret-color: hsl(var(--primary));
-        }
-      `}</style>
-
-      {/* Title + Description + Actions */}
-      <section className="px-2 py-2 w-full shrink-0">
-        <div className="flex w-full justify-between items-center mb-2">
+      {/* Top Header: Title, Description, Replay & AI button */}
+      <section className="px-3 pt-2 pb-1 w-full shrink-0">
+        <div className="flex w-full justify-between items-center">
           <Input
             ref={titleInputRef}
             type="text"
             value={titleText}
             onChange={(e) => setTitleText(e.target.value)}
-            className="!text-3xl font-bold px-0 border-none bg-transparent focus-visible:ring-0 w-full"
+            className="!text-2xl font-bold px-0 border-none bg-transparent focus-visible:ring-0 w-full h-8"
             placeholder="Enter Title..."
             readOnly={isAnimating}
           />
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             <Button
               variant="ghost"
               size="sm"
               onClick={handleReplay}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground h-7 px-2"
               title="Restart writing simulation"
             >
               {isAnimating ? (
                 <DotmHex1
-                  size={14}
-                  dotSize={3}
+                  size={12}
+                  dotSize={2.5}
                   colorPreset="solid-mint"
                   bloom
                   animated={true}
                 />
               ) : (
-                <ArrowCounterClockwiseIcon className="text-primary" size={32} />
+                <ArrowCounterClockwiseIcon className="text-primary size-3.5" />
               )}
               Replay
             </Button>
             {onAIClick && (
-              <Button onClick={onAIClick}>
-                <RobotIcon size={24} /> AI
+              <Button size="sm" className="h-7 text-xs gap-1 px-2.5" onClick={onAIClick}>
+                <RobotIcon size={16} /> AI
               </Button>
             )}
           </div>
@@ -465,23 +382,23 @@ const DemoTiptap = ({ onAIClick }: DemoTiptapProps) => {
           placeholder="Enter Description..."
           value={descText}
           onChange={(e) => setDescText(e.target.value)}
-          className="text-muted-foreground px-0 focus-visible:ring-0 border-none w-full max-w-xl bg-transparent"
+          className="text-muted-foreground px-0 focus-visible:ring-0 border-none w-full max-w-xl bg-transparent text-xs h-6 -mt-1"
           readOnly={isAnimating}
         />
       </section>
 
-      {/* Toolbar */}
+      {/* Full Tiptap Toolbar */}
       <DemoToolbar editor={editor} />
 
-      {/* Editor Content */}
-      <div className={`flex-1 overflow-y-auto px-2 py-2 ${isAnimating ? "typing-cursor" : ""}`}>
+      {/* Editor Content Area */}
+      <div className="flex-1 overflow-y-auto px-3 py-2">
         <EditorContent editor={editor} />
       </div>
     </div>
   );
 };
 
-// Toolbar — extracted, same formatting buttons as the real app but no API deps
+// Complete Tiptap Toolbar with all features from Tiptap.tsx
 const DemoToolbar = ({ editor }: { editor: Editor }) => {
   const editorState = useEditorState({
     editor,
@@ -499,125 +416,306 @@ const DemoToolbar = ({ editor }: { editor: Editor }) => {
       isAlignJustify: ctx.editor.isActive({ textAlign: "justify" }) ?? false,
       isBlockquote: ctx.editor.isActive("blockquote") ?? false,
       isCodeBlock: ctx.editor.isActive("codeBlock") ?? false,
+      isBulletList: ctx.editor.isActive("bulletList") ?? false,
+      isOrderedList: ctx.editor.isActive("orderedList") ?? false,
+      isTaskList: ctx.editor.isActive("taskList") ?? false,
+      isHighlight: ctx.editor.isActive("highlight") ?? false,
+      isLink: ctx.editor.isActive("link") ?? false,
     }),
   });
 
+  const headings = [
+    { level: 1, label: "Heading 1", icon: <TextHOneIcon size={16} /> },
+    { level: 2, label: "Heading 2", icon: <TextHTwoIcon size={16} /> },
+    { level: 3, label: "Heading 3", icon: <TextHThreeIcon size={16} /> },
+    { level: 4, label: "Heading 4", icon: <TextHFourIcon size={16} /> },
+  ];
+
+  const colors = [
+    "#facc15",
+    "#4ade80",
+    "#60a5fa",
+    "#c084fc",
+    "#f87171",
+  ];
+
   return (
-    <div className="w-full flex flex-wrap items-center border-b gap-1 px-2 shrink-0">
+    <div className="w-full flex flex-wrap items-center border-b px-2 py-1 gap-1 shrink-0 bg-background/50">
+      {/* Undo / Redo */}
       <Button
         variant="ghost"
-        className="px-2"
+        size="sm"
+        className="h-7 w-7 p-0"
         onClick={() => editor.chain().focus().undo().run()}
+        title="Undo"
       >
-        <ArrowUUpLeftIcon size={24} />
+        <ArrowUUpLeftIcon size={16} />
       </Button>
       <Button
         variant="ghost"
-        className="px-2"
+        size="sm"
+        className="h-7 w-7 p-0"
         onClick={() => editor.chain().focus().redo().run()}
+        title="Redo"
       >
-        <ArrowUUpRightIcon size={24} />
+        <ArrowUUpRightIcon size={16} />
       </Button>
 
+      <Separator orientation="vertical" className="h-4 mx-0.5" />
+
+      {/* Headings dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="h-7 px-1.5 gap-0.5">
+            <div className="flex items-center gap-0.5">
+              {headings.find((h) =>
+                editor.isActive("heading", { level: h.level }),
+              )?.icon || <TextHIcon size={16} />}
+              <CaretDownIcon size={12} />
+            </div>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          {headings.map((h) => {
+            const isActive = editor.isActive("heading", { level: h.level });
+            return (
+              <DropdownMenuItem
+                key={h.level}
+                onClick={() => {
+                  if (isActive) {
+                    editor.chain().focus().setParagraph().run();
+                  } else {
+                    editor
+                      .chain()
+                      .focus()
+                      .toggleHeading({ level: h.level as 1 | 2 | 3 | 4 })
+                      .run();
+                  }
+                }}
+                className={isActive ? "bg-accent" : ""}
+              >
+                {h.label}
+              </DropdownMenuItem>
+            );
+          })}
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {/* Lists dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="h-7 px-1.5 gap-0.5">
+            {editorState.isBulletList && <ListIcon size={16} />}
+            {editorState.isOrderedList && <ListNumbersIcon size={16} />}
+            {editorState.isTaskList && <ListChecksIcon size={16} />}
+            {!editorState.isBulletList &&
+              !editorState.isOrderedList &&
+              !editorState.isTaskList && (
+                <div className="flex items-center gap-0.5">
+                  <ListIcon size={16} />
+                  <CaretDownIcon size={12} />
+                </div>
+              )}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+          >
+            <ListIcon size={16} className="mr-2" />
+            Bulleted List
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+          >
+            <ListNumbersIcon size={16} className="mr-2" />
+            Ordered List
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => editor.chain().focus().toggleTaskList().run()}
+          >
+            <ListChecksIcon size={16} className="mr-2" />
+            Task List
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {/* Blockquote & Code Block */}
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isBlockquote}
         onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}
         aria-label="Blockquote"
       >
-        <TextIndentIcon size={24} />
+        <TextIndentIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isCodeBlock}
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
         aria-label="Code Block"
       >
-        <CodeBlockIcon size={24} />
+        <CodeBlockIcon size={16} />
       </Toggle>
 
+      <Separator orientation="vertical" className="h-4 mx-0.5" />
+
+      {/* Inline styles */}
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isBold}
         onPressedChange={() => editor.chain().focus().toggleBold().run()}
         aria-label="Bold"
       >
-        <TextBIcon size={24} />
+        <TextBIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isItalic}
         onPressedChange={() => editor.chain().focus().toggleItalic().run()}
         aria-label="Italic"
       >
-        <TextItalicIcon size={24} />
+        <TextItalicIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isStrike}
         onPressedChange={() => editor.chain().focus().toggleStrike().run()}
         aria-label="Strike"
       >
-        <TextStrikethroughIcon size={24} />
+        <TextStrikethroughIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isCode}
         onPressedChange={() => editor.chain().focus().toggleCode().run()}
         aria-label="Code"
       >
-        <CodeIcon size={24} />
+        <CodeIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isUnderline}
         onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
         aria-label="Underline"
       >
-        <TextUnderlineIcon size={24} />
+        <TextUnderlineIcon size={16} />
       </Toggle>
 
+      {/* Highlighter dropdown */}
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="sm" className="h-7 w-7 p-0">
+            <HighlighterIcon size={16} />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="flex items-center gap-1.5 p-2">
+          {colors.map((color) => (
+            <DropdownMenuItem
+              key={color}
+              className="w-4 h-4 p-0 rounded-full border cursor-pointer"
+              style={{ backgroundColor: color }}
+              onClick={() => {
+                editor.chain().focus().setHighlight({ color }).run();
+              }}
+            />
+          ))}
+          <Separator orientation="vertical" className="h-4" />
+          <DropdownMenuItem
+            className="p-0.5 cursor-pointer"
+            onClick={() => editor.chain().focus().unsetHighlight().run()}
+            title="Remove Highlight"
+          >
+            <ProhibitIcon size={16} />
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {/* Link */}
+      {editorState.isLink ? (
+        <Toggle
+          size="sm"
+          className="h-7 w-7 p-0"
+          pressed
+          onPressedChange={() => editor.chain().focus().unsetLink().run()}
+        >
+          <LinkBreakIcon size={16} />
+        </Toggle>
+      ) : (
+        <LinkComponent editor={editor} />
+      )}
+
+      <Separator orientation="vertical" className="h-4 mx-0.5" />
+
+      {/* Sub / Super */}
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isSuperscript}
         onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
         aria-label="Superscript"
       >
-        <TextSuperscriptIcon size={24} />
+        <TextSuperscriptIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isSubscript}
         onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
         aria-label="Subscript"
       >
-        <TextSubscriptIcon size={24} />
+        <TextSubscriptIcon size={16} />
       </Toggle>
 
+      <Separator orientation="vertical" className="h-4 mx-0.5" />
+
+      {/* Text alignment */}
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isAlignLeft}
         onPressedChange={() => editor.chain().focus().setTextAlign("left").run()}
         aria-label="Align Left"
       >
-        <TextAlignLeftIcon size={24} />
+        <TextAlignLeftIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isAlignCenter}
         onPressedChange={() =>
           editor.chain().focus().setTextAlign("center").run()
         }
         aria-label="Align Center"
       >
-        <TextAlignCenterIcon size={24} />
+        <TextAlignCenterIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isAlignRight}
-        onPressedChange={() =>
-          editor.chain().focus().setTextAlign("right").run()
-        }
+        onPressedChange={() => editor.chain().focus().setTextAlign("right").run()}
         aria-label="Align Right"
       >
-        <TextAlignRightIcon size={24} />
+        <TextAlignRightIcon size={16} />
       </Toggle>
       <Toggle
+        size="sm"
+        className="h-7 w-7 p-0"
         pressed={editorState.isAlignJustify}
         onPressedChange={() =>
           editor.chain().focus().setTextAlign("justify").run()
         }
         aria-label="Align Justify"
       >
-        <TextAlignJustifyIcon size={24} />
+        <TextAlignJustifyIcon size={16} />
       </Toggle>
     </div>
   );
