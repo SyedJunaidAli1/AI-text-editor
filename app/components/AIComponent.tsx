@@ -155,14 +155,14 @@ const AIComponent = ({
         {Messages.map((message, index) => (
           <div
             key={index}
-            className={`max-w-[80%] rounded-2xl px-4 py-3 ${
+            className={`rounded-2xl px-4 py-3 ${
               message.role === "user"
-                ? "ml-auto bg-primary text-primary-foreground border"
-                : "border bg-muted"
+                ? "max-w-[80%] ml-auto bg-primary text-primary-foreground border"
+                : "w-full border bg-muted"
             }`}
           >
             <article
-              className={`prose prose-sm max-w-none dark:prose-invert ${
+              className={`prose prose-sm max-w-none dark:prose-invert overflow-x-auto prose-table:w-full prose-table:table-fixed prose-td:break-words prose-th:break-words ${
                 message.role === "user"
                   ? "prose-headings:text-primary-foreground prose-p:text-primary-foreground prose-strong:text-primary-foreground prose-code:text-primary-foreground"
                   : ""
