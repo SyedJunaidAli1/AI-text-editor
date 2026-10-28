@@ -59,7 +59,7 @@ export default function AppComponent({ docId }: { docId?: string }) {
         className={`
           hidden md:block
           overflow-hidden transition-all duration-300
-          ${isAIOpen ? "w-98" : "w-0"}
+          ${isAIOpen ? "w-120" : "w-0"}
         `}
       >
         {isAIOpen && (
