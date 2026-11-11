@@ -43,7 +43,7 @@
 - [x] history page dropdown for options (text)
 - [x] make ai component collapsible for terminal (for mobile)
 - [x] fix the landing page terminal ai section for mobile
-- [ ] add tiptap editor in landing page for both drag terminal and static terminal
+- [x] add tiptap editor in landing page for both drag terminal and static terminal
 - [x] add animation for qna
 - [x] ai component the responsee we get ui (is not good)
 - [x] readme for the project
@@ -57,4 +57,4 @@
 - [x] align has also some issues (fixed by clean json)
 - [x] creating new doc is broken by implemention new inputs
 - [x] found a bug that doubles que/response in ai chatbot
-- [] ai chat width of markdown is not response for biggers messages fix that
+- [x] ai chat width of markdown is not response for biggers messages fix that
